@@ -36,6 +36,14 @@ services:
         arguments:
             - "@surfnet_stepup_middleware_client.library.identity.service.audit_log"
             - "@validator"
+            -
+    Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuthorizationService:
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\AuthorizationService'
+
+    Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService:
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService'
 
     surfnet_stepup_middleware_client.identity.service.identity:
         class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService
