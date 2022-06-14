@@ -19,12 +19,18 @@
 namespace Surfnet\StepupMiddlewareClient\Tests\Identity\Service;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
+use Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService;
 
-class IdentityServiceTest extends \PHPUnit_Framework_TestCase
+class IdentityServiceTest extends TestCase
 {
-    use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    protected function tearDown(): void
+    {
+        m::close();
+    }
+
     private $mockIdentity = [
         'id' => '123',
         'name_id' => '456',
@@ -54,9 +60,6 @@ class IdentityServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedIdentity, $identity);
     }
 
-    /**
-     * @expectedException \Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException
-     */
     public function testItValidatesTheIdentity()
     {
         $libraryService = m::mock('Surfnet\StepupMiddlewareClient\Identity\Service\IdentityService')
@@ -71,6 +74,7 @@ class IdentityServiceTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $service = new IdentityService($libraryService, $validator);
+        $this->expectException(InvalidResponseException::class);
         $service->get($this->mockIdentity['id']);
     }
 }

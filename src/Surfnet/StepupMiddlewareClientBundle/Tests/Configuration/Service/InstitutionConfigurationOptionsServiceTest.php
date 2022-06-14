@@ -16,16 +16,20 @@
  * limitations under the License.
  */
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Surfnet\StepupMiddlewareClient\Configuration\Service\InstitutionConfigurationOptionsService as LibraryInstitutionConfigurationOptionsService;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\InstitutionConfigurationOptionsService;
+use Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class InstitutionConfigurationOptionsServiceTest extends TestCase
 {
-    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    protected function tearDown(): void
+    {
+        Mockery::close();
+    }
 
     /**
      * @group institution-configuration
@@ -51,6 +55,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information'  => false,
             'verify_email'                  => true,
             'self_vet'                      => true,
+            'allow_self_asserted_tokens'    => false,
             'number_of_tokens_per_identity' => 2,
             'allowed_second_factors'        => ['sms', 'yubikey'],
             'use_ra'                        => [$institution],
@@ -85,7 +90,6 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      *
      * @dataProvider nonBooleanProvider
      * @param $nonBoolean
-     * @expectedException \Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException
      */
     public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid($nonBoolean)
     {
@@ -97,6 +101,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information' => $nonBoolean,
             'verify_email'                 => true,
             'self_vet'                     => false,
+            'allow_self_asserted_tokens'   => false,
             'number_of_tokens_per_identity' => 1,
             'allowed_second_factors'       => ['sms', 'yubikey'],
             'use_ra'                        => [$institution],
@@ -125,6 +130,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             ->andReturn($violations);
 
         $service = new InstitutionConfigurationOptionsService($libraryService, $validator);
+        $this->expectException(InvalidResponseException::class);
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
@@ -133,8 +139,6 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      *
      * @dataProvider nonBooleanProvider
      * @param $nonBoolean
-     *
-     * @expectedException \Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException
      */
     public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid($nonBoolean)
     {
@@ -146,6 +150,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information' => true,
             'verify_email'                 => true,
             'self_vet'                     => false,
+            'allow_self_asserted_tokens'    => false,
             'number_of_tokens_per_identity' => 0,
             'allowed_second_factors'       => ['sms', 'yubikey'],
             'use_ra'                        => [$institution],
@@ -174,6 +179,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             ->andReturn($violations);
 
         $service = new InstitutionConfigurationOptionsService($libraryService, $validator);
+        $this->expectException(InvalidResponseException::class);
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
@@ -182,8 +188,6 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      *
      * @dataProvider nonArrayProvider
      * @param $nonArray
-     *
-     * @expectedException \Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException
      */
     public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid($nonArray)
     {
@@ -195,6 +199,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information' => true,
             'verify_email'                 => true,
             'self_vet'                     => false,
+            'allow_self_asserted_tokens'    => false,
             'number_of_tokens_per_identity' => 5,
             'allowed_second_factors'       => ['sms', 'yubikey'],
             'use_ra'                        => [$institution],
@@ -223,6 +228,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             ->andReturn($violations);
 
         $service = new InstitutionConfigurationOptionsService($libraryService, $validator);
+        $this->expectException(InvalidResponseException::class);
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
@@ -231,8 +237,6 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      *
      * @dataProvider nonStringProvider
      * @param $nonArray
-     *
-     * @expectedException \Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException
      */
     public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid($nonArray)
     {
@@ -244,6 +248,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information' => true,
             'verify_email'                 => true,
             'self_vet'                     => false,
+            'allow_self_asserted_tokens'    => false,
             'number_of_tokens_per_identity' => 1,
             'allowed_second_factors'       => ['sms', 'yubikey'],
             'use_ra'                        => [$institution],
@@ -272,6 +277,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             ->andReturn($violations);
 
         $service = new InstitutionConfigurationOptionsService($libraryService, $validator);
+        $this->expectException(InvalidResponseException::class);
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
