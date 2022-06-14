@@ -24,10 +24,10 @@
         "ramsey/uuid": "^3.4"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^2.0|3.0",
+        "matthiasnoback/symfony-config-test": "^2.0|^3.0|^4.0",
         "mockery/mockery": "^1.2",
         "phpmd/phpmd": "^2.0",
-        "phpunit/phpunit": "^4.0|^5.0|^6.0",
+        "phpunit/phpunit": "^7.0|^8.0",
         "sensiolabs/security-checker": "^5.0",
         "sebastian/phpcpd": "^2.0",
         "squizlabs/php_codesniffer": "^3.0"
