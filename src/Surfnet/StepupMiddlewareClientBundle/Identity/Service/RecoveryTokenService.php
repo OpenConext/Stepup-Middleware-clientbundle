@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Service;
 
+use Surfnet\StepupMiddlewareClient\Exception\RuntimeException;
 use Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService as LibraryRecoveryTokenService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 
@@ -36,5 +37,14 @@ class RecoveryTokenService
     public function hasRecoveryToken(Identity $identity): bool
     {
         return $this->recoveryTokenService->hasRecoveryToken($identity);
+    }
+
+    public function findAllFor(Identity $identity): array
+    {
+        try {
+            return $this->recoveryTokenService->getAll($identity);
+        } catch (RuntimeException $e) {
+            return [];
+        }
     }
 }

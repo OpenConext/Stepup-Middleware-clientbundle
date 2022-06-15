@@ -21,9 +21,12 @@ namespace Surfnet\StepupMiddlewareClient\Identity\Service;
 use Surfnet\StepupMiddlewareClient\Exception\AccessDeniedToResourceException;
 use Surfnet\StepupMiddlewareClient\Exception\MalformedResponseException;
 use Surfnet\StepupMiddlewareClient\Exception\ResourceReadException;
+use Surfnet\StepupMiddlewareClient\Exception\RuntimeException;
+use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryToken;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryTokenSearchQuery;
 use Surfnet\StepupMiddlewareClient\Service\ApiService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use function sprintf;
 
 /**
  * Recovery tokens are used in conjunction with self-asserted
@@ -53,7 +56,31 @@ class RecoveryTokenService
     {
         $query = new RecoveryTokenSearchQuery();
         $query->setIdentityId((string)$identity);
+        try {
+            $this->getAll($identity);
+            return true;
+        } catch (RuntimeException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @return RecoveryToken[]
+     */
+    public function getAll(Identity $identity): array
+    {
+
+        $query = new RecoveryTokenSearchQuery();
+        $query->setIdentityId((string)$identity);
         $results = $this->apiService->read(sprintf('recovery_tokens%s', $query->toHttpQuery()));
-        return !(!$results || empty($results['items']));
+        if (!$results || empty($results['items'])) {
+            throw new RuntimeException(sprintf('No RecoveryTokens found for Identity %s', $identity));
+        }
+
+        $collection = [];
+        foreach ($results['items'] as $item) {
+            $collection[] = RecoveryToken::from($item);
+        }
+        return $collection;
     }
 }
