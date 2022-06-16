@@ -19,7 +19,9 @@
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Service;
 
 use Surfnet\StepupMiddlewareClient\Exception\RuntimeException;
+use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryToken;
 use Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService as LibraryRecoveryTokenService;
+use Surfnet\StepupMiddlewareClientBundle\Exception\NotFoundException;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 
 class RecoveryTokenService
@@ -39,6 +41,15 @@ class RecoveryTokenService
         return $this->recoveryTokenService->hasRecoveryToken($identity);
     }
 
+    public function findOne(string $recoveryTokenId): RecoveryToken
+    {
+        try {
+            return $this->recoveryTokenService->getOne($recoveryTokenId);
+        } catch (RuntimeException $e) {
+            return new NotFoundException('Recovery Token not found ');
+        }
+    }
+
     public function findAllFor(Identity $identity): array
     {
         try {
@@ -46,5 +57,10 @@ class RecoveryTokenService
         } catch (RuntimeException $e) {
             return [];
         }
+    }
+
+    public function getAvailableRecoveryTokenTypes(): array
+    {
+        return ['sms' => 'sms', 'safe-store' => 'safe-store'];
     }
 }

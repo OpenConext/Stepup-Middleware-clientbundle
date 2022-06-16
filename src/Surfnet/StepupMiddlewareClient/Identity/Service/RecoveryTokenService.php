@@ -67,9 +67,20 @@ class RecoveryTokenService
     /**
      * @return RecoveryToken[]
      */
+    public function getOne(string $recoveryTokenId): RecoveryToken
+    {
+        $result = $this->apiService->read(sprintf('recovery_token/%s', $recoveryTokenId));
+        if (!$result || empty($result)) {
+            throw new RuntimeException(sprintf('No RecoveryToken found with recovery token id %s', $recoveryTokenId));
+        }
+        return RecoveryToken::from($result);
+    }
+
+    /**
+     * @return RecoveryToken[]
+     */
     public function getAll(Identity $identity): array
     {
-
         $query = new RecoveryTokenSearchQuery();
         $query->setIdentityId((string)$identity);
         $results = $this->apiService->read(sprintf('recovery_tokens%s', $query->toHttpQuery()));
@@ -79,7 +90,7 @@ class RecoveryTokenService
 
         $collection = [];
         foreach ($results['items'] as $item) {
-            $collection[] = RecoveryToken::from($item);
+            $collection[$item['type']] = RecoveryToken::from($item);
         }
         return $collection;
     }
