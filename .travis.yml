@@ -38,6 +38,8 @@ branches:
     - master
     - develop
 
+dist: bionic
+
 addons:
   apt:
     packages:
