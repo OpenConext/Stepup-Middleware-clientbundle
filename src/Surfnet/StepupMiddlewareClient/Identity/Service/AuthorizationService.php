@@ -23,6 +23,7 @@ use Surfnet\StepupMiddlewareClient\Exception\MalformedResponseException;
 use Surfnet\StepupMiddlewareClient\Exception\ResourceReadException;
 use Surfnet\StepupMiddlewareClient\Service\ApiService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use function array_key_exists;
 
 /**
  * Consults the authorization endpoints of the Middleware API
@@ -50,6 +51,7 @@ class AuthorizationService
      *
      * Based on two conditions:
      * - Is the Institution of the Identity configured with allowance of this feature?
+     * - Is Identity authorized to use the self-asserted token registration feature?
      * - Are the number of max allowed Recovery Tokens not yet exceeded?
      *
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
@@ -61,9 +63,6 @@ class AuthorizationService
         $response = $this->apiService->read(
             sprintf('/authorization/may-register-self-asserted-tokens/%s', $identity->id)
         );
-        if (!$response) {
-            return false;
-        }
-        return true;
+        return $response && array_key_exists('code', $response) && $response['code'] === 200;
     }
 }
