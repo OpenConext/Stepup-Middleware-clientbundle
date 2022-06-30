@@ -47,12 +47,11 @@ class AuthorizationService
     }
 
     /**
-     * Is the Identity allowed to register a Recovery Token?
+     * Is the Identity allowed to register a token using self-asserted registration?
      *
-     * Based on two conditions:
+     * Based on conditions:
      * - Is the Institution of the Identity configured with allowance of this feature?
      * - Is Identity authorized to use the self-asserted token registration feature?
-     * - Are the number of max allowed Recovery Tokens not yet exceeded?
      *
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
@@ -62,6 +61,24 @@ class AuthorizationService
     {
         $response = $this->apiService->read(
             sprintf('/authorization/may-register-self-asserted-tokens/%s', $identity->id)
+        );
+        return $response && array_key_exists('code', $response) && $response['code'] === 200;
+    }
+
+    /**
+     * Is the Identity allowed to register a Recovery Token?
+     *
+     * Based on:
+     * - Does the Identity have a self-asserted token?
+     *
+     * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
+     * @throws ResourceReadException When the server doesn't respond with the resource.
+     * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
+     */
+    public function assertRegistrationOfRecoveryTokensAreAllowed(Identity $identity)
+    {
+        $response = $this->apiService->read(
+            sprintf('/authorization/may-register-recovery-tokens/%s', $identity->id)
         );
         return $response && array_key_exists('code', $response) && $response['code'] === 200;
     }

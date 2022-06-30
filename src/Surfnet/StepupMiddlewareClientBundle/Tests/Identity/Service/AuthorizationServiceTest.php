@@ -41,7 +41,7 @@ class AuthorizationServiceTest extends TestCase
         Mockery::close();
     }
 
-    public function test_recovery_token_authorization_can_be_performed_positive_outcome()
+    public function test_self_asserted_tokens_authorization_can_be_performed_positive_outcome()
     {
         $identity = new Identity();
         $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';
@@ -51,6 +51,30 @@ class AuthorizationServiceTest extends TestCase
             ->with($identity)
             ->andReturnTrue();
         $this->assertTrue($this->service->assertRegistrationOfSelfAssertedTokensIsAllowed($identity));
+    }
+
+    public function test_self_asserted_tokens_authorization_can_be_performed_negative_outcome()
+    {
+        $identity = new Identity();
+        $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';
+        $identity->commonName = 'Evangelos Odysseas Papathanassiou';
+        $this->apiService
+            ->shouldReceive('assertRegistrationOfRecoveryTokensAreAllowed')
+            ->with($identity)
+            ->andReturnFalse();
+        $this->assertFalse($this->service->assertRegistrationOfRecoveryTokensIsAllowed($identity));
+    }
+
+    public function test_recovery_token_authorization_can_be_performed_positive_outcome()
+    {
+        $identity = new Identity();
+        $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';
+        $identity->commonName = 'Evangelos Odysseas Papathanassiou';
+        $this->apiService
+            ->shouldReceive('assertRegistrationOfRecoveryTokensAreAllowed')
+            ->with($identity)
+            ->andReturnTrue();
+        $this->assertTrue($this->service->assertRegistrationOfRecoveryTokensIsAllowed($identity));
     }
 
     public function test_recovery_token_authorization_can_be_performed_negative_outcome()
