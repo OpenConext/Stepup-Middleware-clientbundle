@@ -87,6 +87,11 @@ services:
             - "@surfnet_stepup_middleware_client.library.identity.service.ra_second_factor"
             - "@validator"
 
+    surfnet_stepup_middleware_client.identity.service.recovery_token:
+        class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService'
+
     surfnet_stepup_middleware_client.identity.service.second_factor:
         class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService
         arguments:

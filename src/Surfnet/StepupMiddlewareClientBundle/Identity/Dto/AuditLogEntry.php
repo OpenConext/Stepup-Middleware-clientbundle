@@ -71,6 +71,16 @@ final class AuditLogEntry implements Dto
     /**
      * @var string
      */
+    public $recoveryTokenIdentifier;
+
+    /**
+     * @var string
+     */
+    public $recoveryTokenType;
+
+    /**
+     * @var string
+     */
     public $action;
 
     /**
@@ -94,6 +104,8 @@ final class AuditLogEntry implements Dto
         $entry->secondFactorId         = $data['second_factor_id'];
         $entry->secondFactorType       = $data['second_factor_type'];
         $entry->secondFactorIdentifier = $data['second_factor_identifier'];
+        $entry->recoveryTokenIdentifier = $data['recovery_token_identifier'];
+        $entry->recoveryTokenType = $data['recovery_token_type'];
         $entry->action                 = $data['action'];
         $entry->recordedOn             = new DateTime($data['recorded_on']);
 

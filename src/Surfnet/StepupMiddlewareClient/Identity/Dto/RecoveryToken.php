@@ -35,12 +35,42 @@ final class RecoveryToken
      */
     public $identifier;
 
+    /**
+     * @var string
+     */
+    public $status;
+
+    /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var string
+     */
+    public $institution;
+
+    /**
+     * @var string
+     */
+    public $email;
+
+    /**
+     * @var string
+     */
+    public $identityId;
+
     public static function from(array $apiResult)
     {
         $token = new self;
         $token->recoveryTokenId = $apiResult['id'];
         $token->type = $apiResult['type'];
+        $token->status = $apiResult['status'];
         $token->identifier = $apiResult['recovery_method_identifier'];
+        $token->identityId = $apiResult['identity_id'];
+        $token->email = $apiResult['email'];
+        $token->institution = $apiResult['institution'];
+        $token->name = $apiResult['name'];
         return $token;
     }
 }

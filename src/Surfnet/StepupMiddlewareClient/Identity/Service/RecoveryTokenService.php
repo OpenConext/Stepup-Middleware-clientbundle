@@ -54,7 +54,7 @@ class RecoveryTokenService
      */
     public function hasRecoveryToken(Identity $identity): bool
     {
-        $query = new RecoveryTokenSearchQuery();
+        $query = new RecoveryTokenSearchQuery(1, $identity->id);
         $query->setIdentityId((string)$identity);
         try {
             $this->getAll($identity);
@@ -81,8 +81,9 @@ class RecoveryTokenService
      */
     public function getAll(Identity $identity): array
     {
-        $query = new RecoveryTokenSearchQuery();
+        $query = new RecoveryTokenSearchQuery(1, $identity->id);
         $query->setIdentityId((string)$identity);
+        $query->setStatus(RecoveryTokenSearchQuery::STATUS_ACTIVE);
         $results = $this->apiService->read(sprintf('recovery_tokens%s', $query->toHttpQuery()));
         if (!$results || empty($results['items'])) {
             throw new RuntimeException(sprintf('No RecoveryTokens found for Identity %s', $identity));
@@ -93,5 +94,10 @@ class RecoveryTokenService
             $collection[$item['type']] = RecoveryToken::from($item);
         }
         return $collection;
+    }
+
+    public function search(RecoveryTokenSearchQuery $query): ?array
+    {
+        return $this->apiService->read('recovery_tokens' . $query->toHttpQuery());
     }
 }
