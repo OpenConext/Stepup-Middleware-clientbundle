@@ -96,6 +96,7 @@ services:
         class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService
         arguments:
             - "@surfnet_stepup_middleware_client.library.identity.service.second_factor"
+            - "@surfnet_stepup.service.second_factor_type"
             - "@validator"
 
     surfnet_stepup_middleware_client.configuration.service.institution_configuration_options:

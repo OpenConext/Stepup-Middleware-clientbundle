@@ -57,6 +57,12 @@ class VettedSecondFactor implements Dto
      */
     public $vettingType;
 
+    /**
+     * The calculated loa level based on vetting type and seconnd factor type
+     * @var float
+     */
+    public $loaLevel;
+
     public static function fromData(array $data)
     {
         $secondFactor = new self();
@@ -64,6 +70,7 @@ class VettedSecondFactor implements Dto
         $secondFactor->type = $data['type'];
         $secondFactor->secondFactorIdentifier = $data['second_factor_identifier'];
         $secondFactor->vettingType = $data['vetting_type'];
+        $secondFactor->loaLevel = $data['loa_level'];
 
         return $secondFactor;
     }

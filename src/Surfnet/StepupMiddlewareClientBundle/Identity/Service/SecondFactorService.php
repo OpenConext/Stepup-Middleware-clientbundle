@@ -18,6 +18,9 @@
 
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Service;
 
+use Surfnet\StepupBundle\Service\SecondFactorTypeService;
+use Surfnet\StepupBundle\Value\SecondFactorType;
+use Surfnet\StepupBundle\Value\VettingType;
 use Surfnet\StepupMiddlewareClient\Exception\AccessDeniedToResourceException;
 use Surfnet\StepupMiddlewareClient\Exception\MalformedResponseException;
 use Surfnet\StepupMiddlewareClient\Exception\ResourceReadException;
@@ -45,19 +48,21 @@ class SecondFactorService
      */
     private $service;
 
+    private $loaService;
+
     /**
      * @var ValidatorInterface
      */
     private $validator;
 
-    /**
-     * @param LibrarySecondFactorService $service
-     * @param ValidatorInterface $validator
-     */
-    public function __construct(LibrarySecondFactorService $service, ValidatorInterface $validator)
-    {
+    public function __construct(
+        LibrarySecondFactorService $service,
+        SecondFactorTypeService $loaService,
+        ValidatorInterface $validator
+    ) {
         $this->service = $service;
         $this->validator = $validator;
+        $this->loaService = $loaService;
     }
 
     /**
@@ -148,6 +153,8 @@ class SecondFactorService
         if ($data === null) {
             return null;
         }
+
+        $this->setLoaOnData($data, $this->loaService);
 
         $secondFactor = VettedSecondFactor::fromData($data);
         $violations = $this->validator->validate($secondFactor);
@@ -265,6 +272,10 @@ class SecondFactorService
             return null;
         }
 
+        foreach ($data['items'] as &$tokenData) {
+            $this->setLoaOnData($tokenData, $this->loaService);
+        }
+
         $secondFactors = VettedSecondFactorCollection::fromData($data);
         $violations = $this->validator->validate($secondFactors);
 
@@ -276,5 +287,14 @@ class SecondFactorService
         }
 
         return $secondFactors;
+    }
+
+    private function setLoaOnData(array &$data, SecondFactorTypeService $loaService): void
+    {
+        $loaLevel = $loaService->getLevel(
+            new SecondFactorType($data['type']),
+            new VettingType($data['vetting_type'])
+        );
+        $data['loa_level'] = $loaLevel;
     }
 }
