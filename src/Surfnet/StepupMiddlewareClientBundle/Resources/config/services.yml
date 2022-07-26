@@ -45,6 +45,10 @@ services:
         arguments:
             - '@Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService'
 
+    Surfnet\StepupMiddlewareClientBundle\Identity\Service\VettingTypeHintService:
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\VettingTypeHintService'
+
     surfnet_stepup_middleware_client.identity.service.identity:
         class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService
         arguments:
@@ -91,6 +95,11 @@ services:
         class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService
         arguments:
             - '@Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService'
+
+    surfnet_stepup_middleware_client.identity.service.vetting_type_hint:
+        class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\VettingTypeHintService
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\VettingTypeHintService'
 
     surfnet_stepup_middleware_client.identity.service.second_factor:
         class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService

@@ -94,6 +94,10 @@ services:
         arguments:
             - "@surfnet_stepup_middleware_client.library.service.api"
 
+    Surfnet\StepupMiddlewareClient\Identity\Service\VettingTypeHintService:
+        arguments:
+            - "@surfnet_stepup_middleware_client.library.service.api"
+
     # Client Services
     surfnet_stepup_middleware_client.guzzle.commands:
         public: false
