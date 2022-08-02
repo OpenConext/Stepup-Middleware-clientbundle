@@ -1,4 +1,7 @@
 ## Next release
+## 4.1.4
+* Support for self-asserted token registration
+
 ## 3.0.20
 * Provide support for self vetting
 
