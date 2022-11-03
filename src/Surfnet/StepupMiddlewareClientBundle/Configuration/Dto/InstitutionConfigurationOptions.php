@@ -44,6 +44,11 @@ class InstitutionConfigurationOptions implements Dto
     public $selfVet;
 
     /**
+     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.sso_on_2fa.must_be_boolean")
+     */
+    public $ssoOn2fa;
+
+    /**
      * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.allow_self_asserted_tokens.must_be_boolean")
      */
     public $allowSelfAssertedTokens;
@@ -74,6 +79,7 @@ class InstitutionConfigurationOptions implements Dto
         $institutionConfigurationOptions->useRaLocations            = $data['use_ra_locations'];
         $institutionConfigurationOptions->showRaaContactInformation = $data['show_raa_contact_information'];
         $institutionConfigurationOptions->verifyEmail               = $data['verify_email'];
+        $institutionConfigurationOptions->ssoOn2fa                  = $data['sso_on_2fa'];
         $institutionConfigurationOptions->selfVet                   = $data['self_vet'];
         $institutionConfigurationOptions->allowSelfAssertedTokens = $data['allow_self_asserted_tokens'];
         $institutionConfigurationOptions->allowedSecondFactors      = $data['allowed_second_factors'];
