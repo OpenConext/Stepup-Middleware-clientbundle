@@ -86,6 +86,11 @@ abstract class CollectionDto implements Dto
         );
     }
 
+    public static function empty()
+    {
+        return new static([], 0, 1, 1);
+    }
+
     /**
      * Load the element in the collection based on the data given
      *

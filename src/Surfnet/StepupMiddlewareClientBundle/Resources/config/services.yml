@@ -36,6 +36,18 @@ services:
         arguments:
             - "@surfnet_stepup_middleware_client.library.identity.service.audit_log"
             - "@validator"
+            -
+    Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuthorizationService:
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\AuthorizationService'
+
+    Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService:
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService'
+
+    Surfnet\StepupMiddlewareClientBundle\Identity\Service\VettingTypeHintService:
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\VettingTypeHintService'
 
     surfnet_stepup_middleware_client.identity.service.identity:
         class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService
@@ -79,10 +91,21 @@ services:
             - "@surfnet_stepup_middleware_client.library.identity.service.ra_second_factor"
             - "@validator"
 
+    surfnet_stepup_middleware_client.identity.service.recovery_token:
+        class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService'
+
+    surfnet_stepup_middleware_client.identity.service.vetting_type_hint:
+        class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\VettingTypeHintService
+        arguments:
+            - '@Surfnet\StepupMiddlewareClient\Identity\Service\VettingTypeHintService'
+
     surfnet_stepup_middleware_client.identity.service.second_factor:
         class: Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService
         arguments:
             - "@surfnet_stepup_middleware_client.library.identity.service.second_factor"
+            - "@surfnet_stepup.service.second_factor_type"
             - "@validator"
 
     surfnet_stepup_middleware_client.configuration.service.institution_configuration_options:

@@ -44,6 +44,11 @@ class InstitutionConfigurationOptions implements Dto
     public $selfVet;
 
     /**
+     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.allow_self_asserted_tokens.must_be_boolean")
+     */
+    public $allowSelfAssertedTokens;
+
+    /**
      * @Assert\Type(type="integer", message="middleware_client.dto.configuration.number_of_tokens_per_identity.must_be_integer")
      */
     public $numberOfTokensPerIdentity;
@@ -70,6 +75,7 @@ class InstitutionConfigurationOptions implements Dto
         $institutionConfigurationOptions->showRaaContactInformation = $data['show_raa_contact_information'];
         $institutionConfigurationOptions->verifyEmail               = $data['verify_email'];
         $institutionConfigurationOptions->selfVet                   = $data['self_vet'];
+        $institutionConfigurationOptions->allowSelfAssertedTokens = $data['allow_self_asserted_tokens'];
         $institutionConfigurationOptions->allowedSecondFactors      = $data['allowed_second_factors'];
         $institutionConfigurationOptions->numberOfTokensPerIdentity = $data['number_of_tokens_per_identity'];
         $institutionConfigurationOptions->useRa                     = $data['use_ra'];

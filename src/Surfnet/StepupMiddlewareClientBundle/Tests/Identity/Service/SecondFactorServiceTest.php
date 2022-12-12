@@ -20,15 +20,19 @@ namespace Surfnet\StepupMiddlewareClient\Tests\Identity\Service;
 
 use DateTime;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\UnverifiedSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\VerifiedSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\UnverifiedSecondFactor;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService;
 
-class SecondFactorServiceTest extends \PHPUnit_Framework_TestCase
+class SecondFactorServiceTest extends TestCase
 {
-    use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    protected function tearDown(): void
+    {
+        m::close();
+    }
 
     public function testItSearchesUnverifiedSecondFactorsByIdentity()
     {

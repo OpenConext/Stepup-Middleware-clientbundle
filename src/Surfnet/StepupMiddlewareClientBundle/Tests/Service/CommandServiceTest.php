@@ -19,15 +19,20 @@
 namespace Surfnet\StepupMiddlewareClientBundle\Tests\Service;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Surfnet\StepupMiddlewareClientBundle\Command\Command;
 use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupMiddlewareClientBundle\Tests\Service\Fixtures\Root\Command\CauseCommand;
 use Surfnet\StepupMiddlewareClientBundle\Tests\Service\Fixtures\Root\Command\Name\Spaced\ZigCommand;
 
-class CommandServiceTest extends \PHPUnit_Framework_TestCase
+class CommandServiceTest extends TestCase
 {
-    use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    protected function tearDown(): void
+    {
+        m::close();
+    }
+
     /**
      * @dataProvider commands
      * @param string $expectedCommandName
@@ -56,7 +61,7 @@ class CommandServiceTest extends \PHPUnit_Framework_TestCase
         $service->execute($command, $metadata);
 
         $this->assertNotEmpty($command->getUuid(), 'UUID wasn\'t set during command execution');
-        $this->assertInternalType('string', $command->getUuid(), 'UUID set is not a string');
+        $this->assertIsString($command->getUuid(), 'UUID set is not a string');
         $this->assertEquals($sentUuid, $command->getUuid(), 'UUID set doesn\'t match the UUID sent');
     }
 

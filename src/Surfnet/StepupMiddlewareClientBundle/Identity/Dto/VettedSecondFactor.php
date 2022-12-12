@@ -47,12 +47,30 @@ class VettedSecondFactor implements Dto
      */
     public $secondFactorIdentifier;
 
+    /**
+     * @Assert\NotBlank(message="middleware_client.dto.vetted_second_factor.vetting_typ.must_not_be_blank")
+     * @Assert\Type(
+     *     type="string",
+     *     message="middleware_client.dto.vetted_second_factor.veting_type.must_be_string"
+     * )
+     * @var string
+     */
+    public $vettingType;
+
+    /**
+     * The calculated loa level based on vetting type and seconnd factor type
+     * @var float
+     */
+    public $loaLevel;
+
     public static function fromData(array $data)
     {
         $secondFactor = new self();
         $secondFactor->id = $data['id'];
         $secondFactor->type = $data['type'];
         $secondFactor->secondFactorIdentifier = $data['second_factor_identifier'];
+        $secondFactor->vettingType = $data['vetting_type'];
+        $secondFactor->loaLevel = $data['loa_level'];
 
         return $secondFactor;
     }

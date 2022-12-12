@@ -19,11 +19,17 @@
 namespace Surfnet\StepupMiddlewareClient\Tests\Service;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
+use Surfnet\StepupMiddlewareClient\Exception\CommandExecutionFailedException;
 use Surfnet\StepupMiddlewareClient\Service\CommandService;
 
-class CommandServiceTest extends \PHPUnit_Framework_TestCase
+class CommandServiceTest extends TestCase
 {
-    use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    protected function tearDown(): void
+    {
+        m::close();
+    }
+
     /**
      * @dataProvider commandMetadata
      * @param bool $shouldHaveMeta
@@ -108,9 +114,6 @@ class CommandServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(3, $command->getErrors());
     }
 
-    /**
-     * @expectedException \Surfnet\StepupMiddlewareClient\Exception\CommandExecutionFailedException
-     */
     public function testItThrowsWhenMalformedJsonIsReturned()
     {
         $malformedJson = "Malformed JSON";
@@ -127,6 +130,8 @@ class CommandServiceTest extends \PHPUnit_Framework_TestCase
         $commandName = 'Root:Cause';
         $uuid = 'abcdef';
         $payload = [1];
+
+        $this->expectException(CommandExecutionFailedException::class);
         $service->execute($commandName, $uuid, $payload);
     }
 
@@ -134,7 +139,6 @@ class CommandServiceTest extends \PHPUnit_Framework_TestCase
      * @dataProvider invalidResponses
      * @param int $statusCode
      * @param array $response
-     * @expectedException \Surfnet\StepupMiddlewareClient\Exception\CommandExecutionFailedException
      */
     public function testItThrowsWhenInvalidResponseIsReturned($statusCode, $response)
     {
@@ -153,6 +157,7 @@ class CommandServiceTest extends \PHPUnit_Framework_TestCase
         $commandName = 'Root:Cause';
         $uuid = '1283-e93';
         $payload = [1];
+        $this->expectException(CommandExecutionFailedException::class);
         $service->execute($commandName, $uuid, $payload);
     }
 

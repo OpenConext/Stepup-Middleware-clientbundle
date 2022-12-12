@@ -1,4 +1,17 @@
-## Next release
+# Changelog
+
+## 4.1.5
+- Add SendSecondFactorRegistrationEmailCommand #96
+
+## 4.1.4
+- Support for self-asserted token registration
+
+## 4.1.0..4.1.3
+- NO changelog entries for these releases. Please consult the Github PR's for details
+
+## 4.1.4
+* Support for self-asserted token registration
+
 ## 3.0.20
 * Provide support for self vetting
 

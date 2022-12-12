@@ -22,11 +22,17 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
+use Surfnet\StepupMiddlewareClient\Exception\AccessDeniedToResourceException;
+use Surfnet\StepupMiddlewareClient\Exception\MalformedResponseException;
 use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
-class ApiModelServiceTest extends \PHPUnit_Framework_TestCase
+class ApiModelServiceTest extends TestCase
 {
-    use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    protected function tearDown(): void
+    {
+        m::close();
+    }
 
     public function testItResources()
     {
@@ -55,13 +61,10 @@ class ApiModelServiceTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $service = new ApiService($guzzle);
-        $service->read('/resource/%s', ['John/Doe']);
+        $response = $service->read('/resource/%s', ['John/Doe']);
+        $this->assertIsArray($response);
     }
 
-    /**
-     * @expectedException \Surfnet\StepupMiddlewareClient\Exception\MalformedResponseException
-     * @expectedExceptionMessage malformed JSON
-     */
     public function testItThrowsWhenMalformedJsonIsReturned()
     {
         $malformedJson = 'This is some malformed JSON';
@@ -71,6 +74,8 @@ class ApiModelServiceTest extends \PHPUnit_Framework_TestCase
         $client  = new Client(['handler' => $handler]);
         $service = new ApiService($client);
 
+        $this->expectExceptionMessage("malformed JSON");
+        $this->expectException(MalformedResponseException::class);
         $service->read('/resource');
     }
 
@@ -88,9 +93,6 @@ class ApiModelServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($responseData, "Resource doesn't exist, yet a non-null value was returned");
     }
 
-    /**
-     * @expectedException \Surfnet\StepupMiddlewareClient\Exception\AccessDeniedToResourceException
-     */
     public function testItThrowsWhenTheConsumerIsntAuthorisedToAccessTheResource()
     {
         $data     = ['errors' => ['You are not authorised to access this identity']];
@@ -100,6 +102,7 @@ class ApiModelServiceTest extends \PHPUnit_Framework_TestCase
         $client  = new Client(['handler' => $handler]);
         $service = new ApiService($client);
 
+        $this->expectException(AccessDeniedToResourceException::class);
         $service->read('/identity/abc');
     }
 }

@@ -1,3 +1,4 @@
 /vendor/
 composer.lock
 /cache.properties
+/.phpunit.result.cache

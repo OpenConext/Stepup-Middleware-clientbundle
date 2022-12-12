@@ -20,14 +20,18 @@ namespace Surfnet\StepupMiddlewareClient\Tests\Identity\Service;
 
 use DateTime;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\SecondFactorAuditLogSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\AuditLog;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\AuditLogEntry;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuditLogService;
 
-class AuditLogServiceTest extends \PHPUnit_Framework_TestCase
+class AuditLogServiceTest extends TestCase
 {
-    use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    protected function tearDown(): void
+    {
+        m::close();
+    }
 
     private $mockAuditLog = <<<'JSON'
 {
