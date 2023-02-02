@@ -55,8 +55,12 @@ class SelfVetSecondFactorCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $authoringSecondFactorIdentifier;
+    public $authoringSecondFactorLoa;
 
+    /**
+     * @var string
+     */
+    public $authoringSecondFactorId;
 
     public function serialise()
     {
@@ -67,7 +71,8 @@ class SelfVetSecondFactorCommand extends AbstractCommand
             'second_factor_type' => $this->secondFactorType,
             'registration_code' => $this->registrationCode,
             'second_factor_identifier' => $this->secondFactorIdentifier,
-            'authoring_second_factor_identifier' => $this->authoringSecondFactorIdentifier,
+            'authoring_second_factor_loa' => $this->authoringSecondFactorLoa,
+            'authoring_second_factor_id' => $this->authoringSecondFactorId,
         ];
     }
 }
