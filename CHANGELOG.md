@@ -1,4 +1,6 @@
 # Changelog
+## 4.1.7
+- Add SSO on 2FA field to the institution configuration
 
 ## 4.1.5
 - Add SendSecondFactorRegistrationEmailCommand #96
