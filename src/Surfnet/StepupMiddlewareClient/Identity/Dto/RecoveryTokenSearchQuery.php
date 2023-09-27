@@ -144,6 +144,10 @@ final class RecoveryTokenSearchQuery implements HttpQuery
         $this->orderDirection = $orderDirection ?: null;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     */
     public function toHttpQuery(): string
     {
         $fields = [];

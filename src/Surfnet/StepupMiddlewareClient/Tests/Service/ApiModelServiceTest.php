@@ -23,9 +23,12 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 use Surfnet\StepupMiddlewareClient\Exception\AccessDeniedToResourceException;
 use Surfnet\StepupMiddlewareClient\Exception\MalformedResponseException;
 use Surfnet\StepupMiddlewareClient\Service\ApiService;
+use function json_encode;
 
 class ApiModelServiceTest extends TestCase
 {
@@ -52,9 +55,11 @@ class ApiModelServiceTest extends TestCase
     {
         $data        = ['data' => 'My first resource'];
         $expectedUri = '/resource/John%2FDoe';
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn(json_encode($data));
 
-        $response = m::mock('GuzzleHttp\Message\ResponseInterface');
-        $response->shouldReceive('getBody')->andReturn(json_encode($data));
+        $response = m::mock(ResponseInterface::class);
+        $response->shouldReceive('getBody')->andReturn($body);
         $response->shouldReceive('getStatusCode')->andReturn('200');
         $guzzle      = m::mock('GuzzleHttp\Client')
             ->shouldReceive('get')->with($expectedUri, m::any())->once()->andReturn($response)

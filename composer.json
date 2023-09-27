@@ -37,10 +37,10 @@
         "check": [
             "@composer-validate",
             "@phplint",
+            "@phpcpd",
             "@phpcs",
             "@phpmd",
-            "@test",
-            "@phpcpd"
+            "@test"
         ],
         "composer-validate": "./ci/qa/validate",
         "phplint": "./ci/qa/phplint",

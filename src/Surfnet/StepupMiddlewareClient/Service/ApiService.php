@@ -63,7 +63,7 @@ class ApiService
         $statusCode = $response->getStatusCode();
 
         try {
-            $body = (string)$response->getBody();
+            $body = $response->getBody()->getContents();
             $data = JsonHelper::decode($body);
             $errors = isset($data['errors']) && is_array($data['errors']) ? $data['errors'] : [];
         } catch (\RuntimeException $e) {

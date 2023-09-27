@@ -21,6 +21,7 @@ namespace Surfnet\StepupMiddlewareClient\Tests\Identity\Service;
 use DateTime;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\UnverifiedSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\VerifiedSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
@@ -61,7 +62,8 @@ class SecondFactorServiceTest extends TestCase
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
 
-        $service = new SecondFactorService($libraryService, $validator);
+        $typeService = m::mock(SecondFactorTypeService::class);
+        $service = new SecondFactorService($libraryService, $typeService, $validator);
         $secondFactors = $service->searchUnverified($query);
 
         $expectedSecondFactor = new UnverifiedSecondFactor();
@@ -103,8 +105,8 @@ class SecondFactorServiceTest extends TestCase
         $validator = m::mock('Symfony\Component\Validator\Validator\ValidatorInterface')
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
-
-        $service = new SecondFactorService($libraryService, $validator);
+        $typeService = m::mock(SecondFactorTypeService::class);
+        $service = new SecondFactorService($libraryService, $typeService, $validator);
         $secondFactors = $service->searchVerified($query);
 
         $expectedSecondFactor = new VerifiedSecondFactor();

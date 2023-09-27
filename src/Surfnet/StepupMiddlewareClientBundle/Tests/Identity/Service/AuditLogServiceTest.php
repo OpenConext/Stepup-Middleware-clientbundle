@@ -51,6 +51,8 @@ class AuditLogServiceTest extends TestCase
       "second_factor_id":"1d645ab2-e523-4462-b85e-44f194f80bd6",
       "second_factor_type":"yubikey",
       "second_factor_identifier":"ccccvfeghijk",
+      "recovery_token_identifier":"rt-identifier-id-1",
+      "recovery_token_type":"safe-store",
       "action":"email_verified",
       "recorded_on":"2015-03-31T12:07:28+02:00"
     },
@@ -64,6 +66,8 @@ class AuditLogServiceTest extends TestCase
       "second_factor_id":"1d645ab2-e523-4462-b85e-44f194f80bd6",
       "second_factor_type":"yubikey",
       "second_factor_identifier":"ccccvfeghijk",
+      "recovery_token_identifier":"rt-identifier-id-1",
+      "recovery_token_type":"sms",
       "action":"possession_proven",
       "recorded_on":"2015-03-31T12:07:12+02:00"
     }

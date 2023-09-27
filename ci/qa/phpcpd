@@ -4,4 +4,7 @@ cd $(dirname $0)/../../
 
 # https://github.com/sebastianbergmann/phpcpd
 ./vendor/bin/phpcpd \
+    --exclude src/Surfnet/StepupMiddlewareClient/Identity/Dto/ \
+    --exclude src/Surfnet/StepupMiddlewareClient/Tests/ \
+    --exclude src/Surfnet/StepupMiddlewareClientBundle/Tests/ \
     ./src $1

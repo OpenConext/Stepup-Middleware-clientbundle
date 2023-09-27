@@ -20,6 +20,7 @@ namespace Surfnet\StepupMiddlewareClient\Tests\Service;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\StreamInterface;
 use Surfnet\StepupMiddlewareClient\Exception\CommandExecutionFailedException;
 use Surfnet\StepupMiddlewareClient\Service\CommandService;
 
@@ -40,9 +41,11 @@ class CommandServiceTest extends TestCase
         $uuid = 'uu-id';
         $processedBy = 'server-1';
         $json = json_encode(['command' => $uuid, 'processed_by' => $processedBy]);
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn($json);
 
         $responseStub = m::mock('Psr\Http\Message\ResponseInterface');
-        $responseStub->shouldReceive('getBody')->once()->andReturn($json);
+        $responseStub->shouldReceive('getBody')->once()->andReturn($body);
         $responseStub->shouldReceive('getStatusCode')->once()->andReturn('200');
         $guzzleClient = m::mock('GuzzleHttp\Client')
             ->shouldReceive('post')->once()->with(null, self::spy($options))->andReturn($responseStub)
@@ -86,8 +89,11 @@ class CommandServiceTest extends TestCase
         $errors = ['Field X is fine', 'Field Y is durable', 'Field Z is zepto'];
         $json = json_encode(['errors' => $errors]);
 
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn($json);
+
         $responseStub = m::mock('Psr\Http\Message\ResponseInterface');
-        $responseStub->shouldReceive('getBody')->once()->andReturn($json);
+        $responseStub->shouldReceive('getBody')->once()->andReturn($body);
         $responseStub->shouldReceive('getStatusCode')->once()->andReturn('400');
 
         $guzzleClient = m::mock('GuzzleHttp\Client')
@@ -117,9 +123,11 @@ class CommandServiceTest extends TestCase
     public function testItThrowsWhenMalformedJsonIsReturned()
     {
         $malformedJson = "Malformed JSON";
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn($malformedJson);
 
         $responseStub = m::mock('Psr\Http\Message\ResponseInterface')
-            ->shouldReceive('getBody')->andReturn($malformedJson)
+            ->shouldReceive('getBody')->andReturn($body)
             ->getMock();
         $guzzleClient = m::mock('GuzzleHttp\Client')
             ->shouldReceive('post')->once()->with(null, m::type('array'))->andReturn($responseStub)
@@ -143,9 +151,10 @@ class CommandServiceTest extends TestCase
     public function testItThrowsWhenInvalidResponseIsReturned($statusCode, $response)
     {
         $json = json_encode($response);
-
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn($json);
         $responseStub = m::mock('Psr\Http\Message\ResponseInterface')
-            ->shouldReceive('getBody')->once()->andReturn($json)
+            ->shouldReceive('getBody')->once()->andReturn($body)
             ->shouldReceive('getStatusCode')->once()->andReturn((string) $statusCode)
             ->getMock();
         $guzzleClient = m::mock('GuzzleHttp\Client')
