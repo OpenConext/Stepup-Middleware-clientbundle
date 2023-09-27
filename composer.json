@@ -34,5 +34,20 @@
         "symfony/phpunit-bridge": "^5.4|^6.3"
     },
     "scripts": {
+        "check": [
+            "@composer-validate",
+            "@phplint",
+            "@phpcs",
+            "@phpmd",
+            "@test",
+            "@phpcpd"
+        ],
+        "composer-validate": "./ci/qa/validate",
+        "phplint": "./ci/qa/phplint",
+        "phpcs": "./ci/qa/phpcs",
+        "phpcpd": "./ci/qa/phpcpd",
+        "phpmd": "./ci/qa/phpmd",
+        "test": "./ci/qa/phpunit",
+        "phpcbf": "./ci/qa/phpcbf"
     }
 }
