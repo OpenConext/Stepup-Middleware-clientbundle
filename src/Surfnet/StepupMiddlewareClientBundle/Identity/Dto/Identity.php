@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,14 +24,13 @@ use Serializable;
 use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Identity implements Dto, Serializable
+class Identity implements Dto, Serializable, \Stringable
 {
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.id.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.id.must_be_string")
-     * @var string
      */
-    public $id;
+    public ?string $id = null;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.name_id.must_not_be_blank")
@@ -66,7 +67,7 @@ class Identity implements Dto, Serializable
      */
     public $preferredLocale;
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $identity = new self();
         $identity->id = $data['id'];
@@ -105,16 +106,9 @@ class Identity implements Dto, Serializable
      *
      * @param string $serialized
      */
-    public function unserialize($serialized)
+    public function unserialize($serialized): void
     {
-        list (
-            $this->id,
-            $this->nameId,
-            $this->institution,
-            $this->email,
-            $this->commonName,
-            $this->preferredLocale
-        ) = unserialize($serialized);
+        [$this->id, $this->nameId, $this->institution, $this->email, $this->commonName, $this->preferredLocale] = unserialize($serialized);
     }
 
     /**
@@ -123,7 +117,7 @@ class Identity implements Dto, Serializable
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->id;
     }

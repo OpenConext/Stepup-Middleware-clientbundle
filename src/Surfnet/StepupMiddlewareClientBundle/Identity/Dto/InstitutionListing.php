@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -35,7 +37,7 @@ class InstitutionListing implements Dto
      * @param array $data
      * @return static
      */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $institutionListing              = new self();
         $institutionListing->institution = $data['name'];

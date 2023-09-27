@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2019 SURFnet B.V.
  *
@@ -22,7 +24,7 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RaCandidateInstitutionCollection extends CollectionDto
 {
-    public static function fromData(array $data)
+    public static function fromData(array $data): static
     {
         $elements = [];
         foreach ($data as $item) {
@@ -37,7 +39,7 @@ class RaCandidateInstitutionCollection extends CollectionDto
         );
     }
 
-    protected static function createElementFromData(array $item)
+    protected static function createElementFromData(array $item): \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution
     {
         return RaCandidateInstitution::fromData($item);
     }

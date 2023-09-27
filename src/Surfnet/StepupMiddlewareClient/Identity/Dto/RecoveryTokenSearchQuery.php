@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -23,60 +25,30 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 final class RecoveryTokenSearchQuery implements HttpQuery
 {
-    const STATUS_ACTIVE = 'active';
-    const STATUS_REVOKED = 'revoked';
-    const STATUS_FORGOTTEN = 'forgotten';
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_REVOKED = 'revoked';
+    public const STATUS_FORGOTTEN = 'forgotten';
 
-    public function __construct(int $pageNumber, string $actorId)
+    public function __construct(private int $pageNumber, private string $actorId)
     {
-        $this->actorId = $actorId;
-        $this->pageNumber = $pageNumber;
     }
 
-    /**
-     * @var string
-     */
-    private $actorId;
+    private ?string $identityId = null;
 
-    /**
-     * @var string
-     */
-    private $identityId;
+    private ?string $type = null;
 
-    /**
-     * @var string
-     */
-    private $type;
+    private ?string $name = null;
 
-    /**
-     * @var string
-     */
-    private $name;
+    private ?string $email = null;
 
-    /**
-     * @var string
-     */
-    private $email;
-
-    /**
-     * @var string
-     */
-    private $institution;
-
-    /**
-     * @var int
-     */
-    private $pageNumber;
+    private ?string $institution = null;
 
     /**
      * @var string|null One of the STATUS_* constants.
      */
-    private $status;
+    private ?string $status = null;
 
-    /**
-     * @var string
-     */
-    private $orderBy;
+    private ?string $orderBy = null;
 
     /**
      * @var string|null
@@ -134,12 +106,12 @@ final class RecoveryTokenSearchQuery implements HttpQuery
         $this->status = $status ?: null;
     }
 
-    public function setOrderBy(string $orderBy)
+    public function setOrderBy(string $orderBy): void
     {
         $this->orderBy = $orderBy;
     }
 
-    public function setOrderDirection(string $orderDirection)
+    public function setOrderDirection(string $orderDirection): void
     {
         $this->orderDirection = $orderDirection ?: null;
     }
@@ -152,7 +124,7 @@ final class RecoveryTokenSearchQuery implements HttpQuery
     {
         $fields = [];
 
-        if ($this->actorId) {
+        if ($this->actorId !== '' && $this->actorId !== '0') {
             $fields['actorId'] = $this->actorId;
         }
 
@@ -188,7 +160,7 @@ final class RecoveryTokenSearchQuery implements HttpQuery
             $fields['orderDirection'] = $this->orderDirection;
         }
 
-        if ($this->pageNumber) {
+        if ($this->pageNumber !== 0) {
             $fields['p'] = $this->pageNumber;
         }
 

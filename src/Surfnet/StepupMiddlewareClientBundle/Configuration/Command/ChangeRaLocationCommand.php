@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -63,7 +65,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      */
     public $contactInformation;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'ra_location_id' => $this->id,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -32,16 +34,10 @@ use Surfnet\StepupMiddlewareClient\Helper\JsonHelper;
 class ApiService
 {
     /**
-     * @var Client
-     */
-    private $guzzleClient;
-
-    /**
      * @param Client $guzzleClient A Guzzle client preconfigured with base URL and proper authentication.
      */
-    public function __construct(Client $guzzleClient)
+    public function __construct(private readonly Client $guzzleClient)
     {
-        $this->guzzleClient = $guzzleClient;
     }
 
     /**
@@ -55,7 +51,7 @@ class ApiService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function read($path, array $parameters = [], HttpQuery $httpQuery = null)
+    public function read($path, array $parameters = [], HttpQuery $httpQuery = null): ?array
     {
         $resource = $this->buildResourcePath($path, $parameters, $httpQuery);
 
@@ -66,7 +62,7 @@ class ApiService
             $body = $response->getBody()->getContents();
             $data = JsonHelper::decode($body);
             $errors = isset($data['errors']) && is_array($data['errors']) ? $data['errors'] : [];
-        } catch (\RuntimeException $e) {
+        } catch (\RuntimeException) {
             // Malformed JSON body
             throw new MalformedResponseException('Cannot read resource: Middleware returned malformed JSON');
         }
@@ -92,17 +88,12 @@ class ApiService
 
     /**
      * @param string $path
-     * @param array $parameters
      * @param HttpQuery|null $httpQuery
      * @return string
      */
     private function buildResourcePath($path, array $parameters, HttpQuery $httpQuery = null)
     {
-        if (count($parameters) > 0) {
-            $resource = vsprintf($path, array_map('urlencode', $parameters));
-        } else {
-            $resource = $path;
-        }
+        $resource = $parameters !== [] ? vsprintf($path, array_map('urlencode', $parameters)) : $path;
 
         if (empty($resource)) {
             throw new RuntimeException(
@@ -110,12 +101,12 @@ class ApiService
                     'Could not construct resource path from path "%s", parameters "%s" and search query "%s"',
                     $path,
                     implode('","', $parameters),
-                    $httpQuery ? $httpQuery->toHttpQuery() : ''
+                    $httpQuery instanceof \Surfnet\StepupMiddlewareClient\Dto\HttpQuery ? $httpQuery->toHttpQuery() : ''
                 )
             );
         }
 
-        if ($httpQuery !== null) {
+        if ($httpQuery instanceof \Surfnet\StepupMiddlewareClient\Dto\HttpQuery) {
             $resource .= $httpQuery->toHttpQuery();
         }
 

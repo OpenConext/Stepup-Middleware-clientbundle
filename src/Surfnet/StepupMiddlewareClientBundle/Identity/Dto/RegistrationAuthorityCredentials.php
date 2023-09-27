@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -85,7 +87,7 @@ class RegistrationAuthorityCredentials implements Dto
      */
     public $isSraa;
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $credentials = new self();
         $credentials->identityId = $data['id'];
@@ -100,10 +102,9 @@ class RegistrationAuthorityCredentials implements Dto
     }
 
     /**
-     * @param mixed $value
      * @return bool
      */
-    public function assertNullOrString($value)
+    public function assertNullOrString(mixed $value): bool
     {
         return is_null($value) || is_string($value);
     }

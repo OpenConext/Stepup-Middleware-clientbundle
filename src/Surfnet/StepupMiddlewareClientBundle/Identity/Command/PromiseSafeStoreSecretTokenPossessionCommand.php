@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -43,7 +45,7 @@ class PromiseSafeStoreSecretTokenPossessionCommand extends AbstractCommand
      */
     public $secret;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id'      => $this->identityId,

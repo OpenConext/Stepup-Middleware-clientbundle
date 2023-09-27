@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2019 SURFnet B.V.
  *
@@ -76,7 +78,7 @@ class Profile implements Dto
     public $authorizations;
 
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $identity = new self();
         $identity->id = $data['id'];
@@ -95,7 +97,7 @@ class Profile implements Dto
     /**
      * @return array List with institutions
      */
-    public function getRaaInstitutions()
+    public function getRaaInstitutions(): array
     {
         $choices = [];
         foreach ($this->authorizations as $institution => $role) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,10 +25,10 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 final class RaSecondFactorSearchQuery implements HttpQuery
 {
-    const STATUS_UNVERIFIED = 'unverified';
-    const STATUS_VERIFIED = 'verified';
-    const STATUS_VETTED = 'vetted';
-    const STATUS_REVOKED = 'revoked';
+    public const STATUS_UNVERIFIED = 'unverified';
+    public const STATUS_VERIFIED = 'verified';
+    public const STATUS_VETTED = 'vetted';
+    public const STATUS_REVOKED = 'revoked';
 
     /**
      * @var string|null
@@ -74,21 +76,14 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     private $pageNumber;
 
     /**
-     * @var string
-     */
-    private $actorId;
-
-    /**
      * @param int $pageNumber
      * @param  string $actorId
      */
-    public function __construct($pageNumber, $actorId)
+    public function __construct($pageNumber, private $actorId)
     {
         Assert\that($pageNumber)
             ->integer('Page number must be an integer')
             ->min(1, 'Page number must be greater than or equal to 1');
-
-        $this->actorId = $actorId;
         $this->pageNumber = $pageNumber;
     }
 
@@ -96,7 +91,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
      * @param string $actorId
      * @return VerifiedSecondFactorSearchQuery
      */
-    public function setActorId($actorId)
+    public function setActorId($actorId): self
     {
         $this->assertNonEmptyString($actorId, 'actorId');
 
@@ -116,7 +111,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @param null|string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->assertNonEmptyString($name, 'name');
 
@@ -134,7 +129,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @param null|string $type
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->assertNonEmptyString($type, 'type');
 
@@ -152,7 +147,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @param null|string $secondFactorId
      */
-    public function setSecondFactorId($secondFactorId)
+    public function setSecondFactorId($secondFactorId): void
     {
         $this->assertNonEmptyString($secondFactorId, 'secondFactorId');
 
@@ -170,7 +165,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @param null|string $email
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->assertNonEmptyString($email, 'email');
 
@@ -188,7 +183,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @param string $status
      */
-    public function setStatus($status)
+    public function setStatus($status): void
     {
         Assert\that($status)->choice(
             [self::STATUS_UNVERIFIED, self::STATUS_VERIFIED, self::STATUS_VETTED, self::STATUS_REVOKED, ''],
@@ -209,7 +204,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @param null|string $institution
      */
-    public function setInstitution($institution)
+    public function setInstitution($institution): void
     {
         $this->institution = $institution;
     }
@@ -217,7 +212,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @param string $orderBy
      */
-    public function setOrderBy($orderBy)
+    public function setOrderBy($orderBy): void
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
@@ -227,7 +222,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @param string|null $orderDirection
      */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection($orderDirection): void
     {
         Assert\that($orderDirection)->choice(
             ['asc', 'desc', '', null],
@@ -237,12 +232,12 @@ final class RaSecondFactorSearchQuery implements HttpQuery
         $this->orderDirection = $orderDirection ?: null;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString($value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
         Assert\that($value)->string($message)->notEmpty($message);
@@ -253,7 +248,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
      *
      * @return string
      */
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         return '?' . http_build_query(
             array_filter(
@@ -269,9 +264,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
                     'orderDirection'   => $this->orderDirection,
                     'p'                => $this->pageNumber,
                 ],
-                function ($value) {
-                    return !is_null($value);
-                }
+                fn($value): bool => !is_null($value)
             )
         );
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -24,20 +26,14 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
 class VettingTypeHintService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     public function getOne(string $institution): VettingTypeHint
     {
         $result = $this->apiService->read(sprintf('vetting-type-hint/%s', $institution));
-        if (!$result || empty($result)) {
+        if (!$result || $result === []) {
             throw new RuntimeException(sprintf('No vetting type hint found for institution %s', $institution));
         }
         return VettingTypeHint::from($result);

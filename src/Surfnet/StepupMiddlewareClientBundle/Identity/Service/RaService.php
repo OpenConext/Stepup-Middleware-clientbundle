@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -28,24 +30,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class RaService
 {
-    /**
-     * @var LibraryRaService
-     */
-    private $service;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @param LibraryRaService $service
-     * @param ValidatorInterface $validator
-     */
-    public function __construct(LibraryRaService $service, ValidatorInterface $validator)
+    public function __construct(private readonly LibraryRaService $service, private readonly ValidatorInterface $validator)
     {
-        $this->service = $service;
-        $this->validator = $validator;
     }
 
     /**
@@ -67,7 +53,7 @@ class RaService
      * @param object      $value
      * @param null|string $message
      */
-    private function assertIsValid($value, $message = null)
+    private function assertIsValid(mixed $value, $message = null): void
     {
         $violations = $this->validator->validate($value);
 

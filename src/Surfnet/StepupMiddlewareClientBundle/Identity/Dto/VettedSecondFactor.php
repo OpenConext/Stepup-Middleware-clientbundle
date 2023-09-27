@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -63,7 +65,7 @@ class VettedSecondFactor implements Dto
      */
     public $loaLevel;
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $secondFactor = new self();
         $secondFactor->id = $data['id'];

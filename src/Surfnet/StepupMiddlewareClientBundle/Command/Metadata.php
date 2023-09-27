@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,15 +24,9 @@ use Surfnet\StepupMiddlewareClientBundle\Exception\InvalidArgumentException;
 
 final class Metadata
 {
-    /**
-     * @var string|null
-     */
-    private $actorId;
+    private ?string $actorId = null;
 
-    /**
-     * @var string|null
-     */
-    private $actorInstitution;
+    private ?string $actorInstitution = null;
 
     /**
      * @param string|null $actorId
@@ -53,7 +49,7 @@ final class Metadata
     /**
      * @return array
      */
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'actor_id' => $this->actorId,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -39,7 +41,7 @@ final class VettingTypeHint
      */
     public $identityId;
 
-    public static function from(array $apiResult)
+    public static function from(array $apiResult): self
     {
         $vettingTypeHint = new self;
         $vettingTypeHint->institution = $apiResult['institution'];

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -26,7 +28,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuthorizationService;
 
 class AuthorizationServiceTest extends TestCase
 {
-    private $service;
+    private \Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuthorizationService $service;
 
     private $apiService;
 
@@ -41,7 +43,7 @@ class AuthorizationServiceTest extends TestCase
         Mockery::close();
     }
 
-    public function test_self_asserted_tokens_authorization_can_be_performed_positive_outcome()
+    public function test_self_asserted_tokens_authorization_can_be_performed_positive_outcome(): void
     {
         $identity = new Identity();
         $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';
@@ -53,7 +55,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($this->service->assertRegistrationOfSelfAssertedTokensIsAllowed($identity));
     }
 
-    public function test_self_asserted_tokens_authorization_can_be_performed_negative_outcome()
+    public function test_self_asserted_tokens_authorization_can_be_performed_negative_outcome(): void
     {
         $identity = new Identity();
         $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';
@@ -65,7 +67,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertFalse($this->service->assertRegistrationOfRecoveryTokensIsAllowed($identity));
     }
 
-    public function test_recovery_token_authorization_can_be_performed_positive_outcome()
+    public function test_recovery_token_authorization_can_be_performed_positive_outcome(): void
     {
         $identity = new Identity();
         $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';
@@ -77,7 +79,7 @@ class AuthorizationServiceTest extends TestCase
         $this->assertTrue($this->service->assertRegistrationOfRecoveryTokensIsAllowed($identity));
     }
 
-    public function test_recovery_token_authorization_can_be_performed_negative_outcome()
+    public function test_recovery_token_authorization_can_be_performed_negative_outcome(): void
     {
         $identity = new Identity();
         $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';

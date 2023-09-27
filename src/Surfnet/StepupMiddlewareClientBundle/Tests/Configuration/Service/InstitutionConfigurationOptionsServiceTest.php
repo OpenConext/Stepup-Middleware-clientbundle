@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2016 SURFnet B.V.
  *
@@ -34,7 +36,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
     /**
      * @group institution-configuration
      */
-    public function testQueriedInstitutionConfigurationOptionsAreConvertedToADtoCorrectly()
+    public function testQueriedInstitutionConfigurationOptionsAreConvertedToADtoCorrectly(): void
     {
         $institution = 'surfnet.nl';
 
@@ -92,7 +94,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @dataProvider nonBooleanProvider
      * @param $nonBoolean
      */
-    public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid($nonBoolean)
+    public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid(null|array|string|int|float|\stdClass $nonBoolean): void
     {
         $institution = 'surfnet.nl';
 
@@ -142,7 +144,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @dataProvider nonBooleanProvider
      * @param $nonBoolean
      */
-    public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid($nonBoolean)
+    public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid(null|array|string|int|float|\stdClass $nonBoolean): void
     {
         $institution = 'surfnet.nl';
 
@@ -192,7 +194,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @dataProvider nonArrayProvider
      * @param $nonArray
      */
-    public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid($nonArray)
+    public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid(null|bool|string|int|float|\stdClass $nonArray): void
     {
         $institution = 'surfnet.nl';
 
@@ -242,7 +244,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @dataProvider nonStringProvider
      * @param $nonArray
      */
-    public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid($nonArray)
+    public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid(null|bool|array|int|float|\stdClass $nonArray): void
     {
         $institution = 'surfnet.nl';
 
@@ -286,7 +288,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
-    public function nonBooleanProvider()
+    public function nonBooleanProvider(): array
     {
         return [
             'null'    => [null],
@@ -298,7 +300,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         ];
     }
 
-    public function nonArrayProvider()
+    public function nonArrayProvider(): array
     {
         return [
             'null'    => [null],
@@ -310,7 +312,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         ];
     }
 
-    public function nonStringProvider()
+    public function nonStringProvider(): array
     {
         return [
             'null'    => [null],

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -29,28 +31,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuditLogService
 {
-    /**
-     * @var LibraryAuditLogService
-     */
-    private $service;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @param LibraryAuditLogService $service
-     * @param ValidatorInterface $validator
-     */
-    public function __construct(LibraryAuditLogService $service, ValidatorInterface $validator)
+    public function __construct(private readonly LibraryAuditLogService $service, private readonly ValidatorInterface $validator)
     {
-        $this->service = $service;
-        $this->validator = $validator;
     }
 
     /**
-     * @param SecondFactorAuditLogSearchQuery $query
      * @return AuditLog
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.

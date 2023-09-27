@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -60,7 +62,7 @@ final class RecoveryToken
      */
     public $identityId;
 
-    public static function from(array $apiResult)
+    public static function from(array $apiResult): self
     {
         $token = new self;
         $token->recoveryTokenId = $apiResult['id'];

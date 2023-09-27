@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -46,9 +48,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('api')
                             ->isRequired()
                             ->validate()
-                                ->ifTrue(function ($url) {
-                                    return !preg_match('~/$~', $url);
-                                })
+                                ->ifTrue(fn($url): bool => !preg_match('~/$~', (string) $url))
                                 ->thenInvalid("API URL must end with a forward slash, got '%s'")
                             ->end()
                         ->end()

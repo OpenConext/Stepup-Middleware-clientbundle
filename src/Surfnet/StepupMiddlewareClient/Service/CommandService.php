@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -26,27 +28,16 @@ use Surfnet\StepupMiddlewareClient\Helper\JsonHelper;
 
 class CommandService
 {
-    /**
-     * @var Client
-     */
-    private $guzzleClient;
+    private readonly string $username;
 
-    /**
-     * @var string
-     */
-    private $username;
-
-    /**
-     * @var string
-     */
-    private $password;
+    private readonly string $password;
 
     /**
      * @param Client $guzzleClient A Guzzle client preconfigured with the command URL.
      * @param string $username
      * @param string $password
      */
-    public function __construct(Client $guzzleClient, $username, $password)
+    public function __construct(private readonly Client $guzzleClient, $username, $password)
     {
         if (!is_string($username)) {
             throw InvalidArgumentException::invalidType('string', 'username', $username);
@@ -55,8 +46,6 @@ class CommandService
         if (!is_string($password)) {
             throw InvalidArgumentException::invalidType('string', 'password', $password);
         }
-
-        $this->guzzleClient = $guzzleClient;
         $this->username = $username;
         $this->password = $password;
     }
@@ -64,12 +53,10 @@ class CommandService
     /**
      * @param string $commandName
      * @param string $uuid
-     * @param array $payload
-     * @param array $metadata
      * @return ExecutionResult
      * @throws CommandExecutionFailedException
      */
-    public function execute($commandName, $uuid, array $payload, array $metadata = [])
+    public function execute(mixed $commandName, $uuid, array $payload, array $metadata = []): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
     {
         $this->assertIsValidCommandName($commandName);
         if (!is_string($uuid)) {
@@ -84,7 +71,7 @@ class CommandService
 
         $body = ['command' => $command];
 
-        if (count($metadata) > 0) {
+        if ($metadata !== []) {
             $body['meta'] = $metadata;
         }
 
@@ -112,16 +99,15 @@ class CommandService
     }
 
     /**
-     * @param mixed $commandName
      * @throws InvalidArgumentException
      */
-    private function assertIsValidCommandName($commandName)
+    private function assertIsValidCommandName(mixed $commandName): void
     {
         if (!is_string($commandName)) {
             InvalidArgumentException::invalidType('string', 'command', $commandName);
         }
 
-        if (!preg_match('~^[a-z0-9_]+:([a-z0-9_].)*[a-z0-9_]+$~i', $commandName)) {
+        if (!preg_match('~^[a-z0-9_]+:([a-z0-9_].)*[a-z0-9_]+$~i', (string) $commandName)) {
             throw new InvalidArgumentException(
                 'Command must be formatted AggregateRoot:Command or AggregateRoot:Name.Space.Command'
             );
@@ -129,11 +115,9 @@ class CommandService
     }
 
     /**
-     * @param string $uuid
-     * @param mixed $response
      * @return ExecutionResult
      */
-    private function processOkResponse($uuid, $response)
+    private function processOkResponse(string $uuid, mixed $response): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
     {
         if (!isset($response['command'])) {
             throw new CommandExecutionFailedException('Unexpected response format: command key missing.');
@@ -162,11 +146,9 @@ class CommandService
     }
 
     /**
-     * @param string $uuid
-     * @param mixed $response
      * @return ExecutionResult
      */
-    private function processErrorResponse($uuid, $response)
+    private function processErrorResponse(string $uuid, mixed $response): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
     {
         if (!isset($response['errors'])) {
             throw new CommandExecutionFailedException('Unexpected response format: errors key missing.');

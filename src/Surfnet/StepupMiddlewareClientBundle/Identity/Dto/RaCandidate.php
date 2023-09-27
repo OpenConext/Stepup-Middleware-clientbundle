@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -67,7 +69,7 @@ class RaCandidate implements Dto
      * @param array $data
      * @return static
      */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $raCandidate              = new self();
         $raCandidate->identityId  = $data['identity_id'];

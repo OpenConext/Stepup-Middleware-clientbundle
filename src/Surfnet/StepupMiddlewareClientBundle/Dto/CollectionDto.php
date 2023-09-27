@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,47 +25,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class CollectionDto implements Dto
 {
-    /**
-     * @Assert\Valid
-     *
-     * @var array
-     */
-    protected $elements;
+    protected int $totalItems;
+
+    protected int $currentPage;
+
+    protected int $itemsPerPage;
 
     /**
-     * @var int
-     */
-    protected $totalItems;
-
-    /**
-     * @var int
-     */
-    protected $currentPage;
-
-    /**
-     * @var int
-     */
-    protected $itemsPerPage;
-
-    /**
-     * @var array
-     */
-    private $filterOptions;
-
-    /**
-     * @param array $elements
      * @param int   $totalItems
      * @param int   $currentPage
      * @param int   $itemsPerPage
      * @param array $filterOptions
      */
-    public function __construct(array $elements, $totalItems, $currentPage, $itemsPerPage, $filterOptions = array())
-    {
-        $this->elements = $elements;
+    public function __construct(/**
+         * @Assert\Valid
+         */
+        protected array $elements,
+        $totalItems,
+        $currentPage,
+        $itemsPerPage,
+        private $filterOptions = []
+    ) {
         $this->totalItems = (int) $totalItems;
         $this->currentPage = (int) $currentPage;
         $this->itemsPerPage = (int) $itemsPerPage;
-        $this->filterOptions = $filterOptions;
     }
 
     /**
@@ -99,9 +84,7 @@ abstract class CollectionDto implements Dto
      */
     protected static function createElementFromData(array $item)
     {
-        throw new LogicException(sprintf(
-            'The method "%s::createElementFromData must be implemented to load the Collection Element"'
-        ));
+        throw new LogicException('The method "%s::createElementFromData must be implemented to load the Collection Element"');
     }
 
     /**

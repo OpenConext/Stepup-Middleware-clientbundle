@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2016 SURFnet bv
  *
@@ -36,7 +38,7 @@ class RemoveRaLocationCommand extends AbstractCommand
     /**
      * @return array
      */
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'institution'      => $this->institution,

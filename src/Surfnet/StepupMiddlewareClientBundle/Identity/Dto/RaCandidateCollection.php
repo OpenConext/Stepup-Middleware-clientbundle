@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,7 +24,7 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RaCandidateCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $item)
+    protected static function createElementFromData(array $item): \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidate
     {
         return RaCandidate::fromData($item);
     }

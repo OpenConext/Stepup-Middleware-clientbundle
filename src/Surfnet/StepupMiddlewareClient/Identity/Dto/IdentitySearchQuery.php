@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,31 +25,15 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class IdentitySearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private $nameId;
+    private string $nameId;
 
-    /**
-     * @var string
-     */
-    private $institution;
+    private string $institution;
 
-    /**
-     * @var string
-     */
-    private $email;
+    private string $email;
 
-    /**
-     * @var string
-     */
-    private $commonName;
+    private string $commonName;
 
-    /**
-     * @param string $institution
-     * @return IdentitySearchQuery
-     */
-    public function setInstitution($institution)
+    public function setInstitution(string $institution): self
     {
         $this->assertNonEmptyString($institution, 'institution');
 
@@ -56,11 +42,7 @@ class IdentitySearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $commonName
-     * @return IdentitySearchQuery
-     */
-    public function setCommonName($commonName)
+    public function setCommonName(string $commonName): self
     {
         $this->assertNonEmptyString($commonName, 'commonName');
 
@@ -69,11 +51,7 @@ class IdentitySearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $email
-     * @return IdentitySearchQuery
-     */
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->assertNonEmptyString($email, 'email');
 
@@ -82,11 +60,7 @@ class IdentitySearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $nameId
-     * @return IdentitySearchQuery
-     */
-    public function setNameId($nameId)
+    public function setNameId(string $nameId): self
     {
         $this->assertNonEmptyString($nameId, 'nameId');
 
@@ -95,35 +69,33 @@ class IdentitySearchQuery implements HttpQuery
         return $this;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
         Assert\that($value)->string($message)->notEmpty($message);
     }
 
-    /**
-     * @return string
-     */
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
-        if ($this->institution) {
+        $fields = '';
+        if ($this->institution !== '' && $this->institution !== '0') {
             $fields = ['institution' => $this->institution];
         }
 
-        if ($this->commonName) {
+        if ($this->commonName !== '' && $this->commonName !== '0') {
             $fields['commonName'] = $this->commonName;
         }
 
-        if ($this->email) {
+        if ($this->email !== '' && $this->email !== '0') {
             $fields['email'] = $this->email;
         }
 
-        if ($this->nameId) {
+        if ($this->nameId !== '' && $this->nameId !== '0') {
             $fields['NameID'] = $this->nameId;
         }
 

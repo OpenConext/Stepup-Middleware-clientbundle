@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2019 SURFnet B.V.
  *
@@ -23,39 +25,16 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class ProfileSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private $identityId;
-
-    /**
-     * @var string
-     */
-    private $actorId;
-
-    /**
-     * @param string $identityId
-     * @param string $actorId
-     */
-    public function __construct($identityId, $actorId)
+    public function __construct(private string $identityId, private string $actorId)
     {
-        $this->identityId = $identityId;
-        $this->actorId = $actorId;
     }
 
-    /**
-     * @return string
-     */
-    public function getIdentityId()
+    public function getIdentityId(): string
     {
         return $this->identityId;
     }
 
-    /**
-     * @param string $actorId
-     * @return ProfileSearchQuery
-     */
-    public function setActorId($actorId)
+    public function setActorId(string $actorId): self
     {
         $this->assertNonEmptyString($actorId, 'institution');
 
@@ -64,11 +43,7 @@ class ProfileSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $identityId
-     * @return ProfileSearchQuery
-     */
-    public function setIdentityId($identityId)
+    public function setIdentityId(string $identityId): self
     {
         $this->assertNonEmptyString($identityId, 'institutionId');
 
@@ -77,23 +52,20 @@ class ProfileSearchQuery implements HttpQuery
         return $this;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
         Assert\that($value)->string($message)->notEmpty($message);
     }
 
-    /**
-     * @return string
-     */
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
-        if ($this->actorId) {
+        if ($this->actorId !== '' && $this->actorId !== '0') {
             $fields = ['actorId' => $this->actorId];
         }
 

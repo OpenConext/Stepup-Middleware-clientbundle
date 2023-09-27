@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2017 SURFnet B.V.
  *
@@ -23,7 +25,7 @@ use Surfnet\StepupMiddlewareClient\Exception\JsonException;
 
 final class JsonHelper
 {
-    private static $jsonErrors = [
+    private static array $jsonErrors = [
         JSON_ERROR_DEPTH          => 'JSON_ERROR_DEPTH - Maximum stack depth exceeded',
         JSON_ERROR_STATE_MISMATCH => 'JSON_ERROR_STATE_MISMATCH - Underflow or the modes mismatch',
         JSON_ERROR_CTRL_CHAR      => 'JSON_ERROR_CTRL_CHAR - Unexpected control character found',
@@ -31,12 +33,8 @@ final class JsonHelper
         JSON_ERROR_UTF8           => 'JSON_ERROR_UTF8 - Malformed UTF-8 characters, possibly incorrectly encoded',
     ];
 
-    public static function decode($json)
+    public static function decode(string $json): array
     {
-        if (!is_string($json)) {
-            throw InvalidArgumentException::invalidType('string', 'json', $json);
-        }
-
         $data = json_decode($json, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {

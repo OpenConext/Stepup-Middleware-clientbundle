@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -28,10 +30,10 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
  */
 final class RaSecondFactor implements Dto
 {
-    const STATUS_UNVERIFIED = 'unverified';
-    const STATUS_VERIFIED = 'verified';
-    const STATUS_VETTED = 'vetted';
-    const STATUS_REVOKED = 'revoked';
+    public const STATUS_UNVERIFIED = 'unverified';
+    public const STATUS_VERIFIED = 'verified';
+    public const STATUS_VETTED = 'vetted';
+    public const STATUS_REVOKED = 'revoked';
 
     /**
      * @var string The second factor's ID (UUID).
@@ -88,7 +90,7 @@ final class RaSecondFactor implements Dto
      * @param array $data
      * @return static
      */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $secondFactor = new self();
         $secondFactor->id = $data['id'];

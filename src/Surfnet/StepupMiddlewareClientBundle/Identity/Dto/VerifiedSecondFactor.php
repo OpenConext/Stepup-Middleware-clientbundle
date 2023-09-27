@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -96,7 +98,7 @@ class VerifiedSecondFactor implements Dto
      */
     public $commonName;
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $secondFactor = new self();
         $secondFactor->id = $data['id'];

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -29,17 +31,8 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
  */
 class IdentityService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    /**
-     * @param ApiService $apiService
-     */
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     /**
@@ -49,16 +42,15 @@ class IdentityService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function get($id)
+    public function get($id): ?array
     {
         return $this->apiService->read('identity/%s', [$id]);
     }
 
     /**
-     * @param IdentitySearchQuery $searchQuery
      * @return array|null
      */
-    public function search(IdentitySearchQuery $searchQuery)
+    public function search(IdentitySearchQuery $searchQuery): ?array
     {
         return $this->apiService->read('identity', [], $searchQuery);
     }
@@ -67,7 +59,7 @@ class IdentityService
      * @param string $identityId
      * @return array|null
      */
-    public function getRegistrationAuthorityCredentials($identityId)
+    public function getRegistrationAuthorityCredentials($identityId): ?array
     {
         return $this->apiService->read('registration-authority/%s', [$identityId]);
     }

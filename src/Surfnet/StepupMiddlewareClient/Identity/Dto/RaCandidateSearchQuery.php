@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -26,53 +28,46 @@ class RaCandidateSearchQuery implements HttpQuery
     /**
      * @var string
      */
-    private $actorId;
+    private readonly string $actorId;
 
     /**
      * @var string
      */
-    private $institution;
+    private string $institution;
 
     /**
      * @var string
      */
-    private $commonName;
+    private string $commonName;
 
     /**
      * @var string
      */
-    private $email;
+    private string $email;
 
     /**
      * @var string
      */
-    private $raInstitution;
+    private string $raInstitution;
 
-    /**
-     * @var int
-     */
-    private $pageNumber = 1;
+    private readonly int $pageNumber;
 
     /**
      * @var string
      */
-    private $orderBy;
+    private string $orderBy;
 
     /**
      * @var string
      */
-    private $orderDirection;
+    private string $orderDirection;
 
     /**
      * @var string[]
      */
-    private $secondFactorTypes = [];
+    private array $secondFactorTypes = [];
 
-    /**
-     * @param string $actorId
-     * @param int $pageNumber
-     */
-    public function __construct($actorId, $pageNumber)
+    public function __construct(string $actorId, int $pageNumber)
     {
         $this->assertNonEmptyString($actorId, 'actorId');
         Assert\that($pageNumber)
@@ -83,11 +78,7 @@ class RaCandidateSearchQuery implements HttpQuery
         $this->pageNumber  = $pageNumber;
     }
 
-    /**
-     * @param string $commonName
-     * @return $this
-     */
-    public function setCommonName($commonName)
+    public function setCommonName(string $commonName): self
     {
         $this->assertNonEmptyString($commonName, 'commonName');
 
@@ -96,11 +87,7 @@ class RaCandidateSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $email
-     * @return $this
-     */
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->assertNonEmptyString($email, 'email');
 
@@ -109,11 +96,7 @@ class RaCandidateSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $institution
-     * @return $this
-     */
-    public function setInstitution($institution)
+    public function setInstitution(string $institution): self
     {
         $this->assertNonEmptyString($institution, 'institution');
 
@@ -122,44 +105,26 @@ class RaCandidateSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $raInstitution
-     */
-    public function setRaInstitution($raInstitution)
+    public function setRaInstitution(string $raInstitution): self
     {
         $this->raInstitution = $raInstitution;
-    }
-
-    /**
-     * @param string $role
-     * @return $this
-     */
-    public function setRole($role)
-    {
-        $this->assertNonEmptyString($role, 'role');
-
-        $this->role = $role;
-
         return $this;
     }
 
-    /**
-     * @param array $secondFactorTypes
-     *
-     * @return void
-     */
-    public function setSecondFactorTypes(array $secondFactorTypes)
+    public function setSecondFactorTypes(array $secondFactorTypes): void
     {
-        $this->assertAllNonEmptyString($secondFactorTypes, 'secondFactorTypes');
+        foreach ($secondFactorTypes as $value) {
+            $this->assertNonEmptyString(
+                $value,
+                'secondFactorTypes',
+                'Elements of "%s" must be non-empty strings, element of type "%s" given'
+            );
+        }
 
         $this->secondFactorTypes = $secondFactorTypes;
     }
 
-    /**
-     * @param string $orderBy
-     * @return $this
-     */
-    public function setOrderBy($orderBy)
+    public function setOrderBy(string $orderBy): self
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
@@ -168,11 +133,7 @@ class RaCandidateSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $orderDirection
-     * @return $this
-     */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection(string $orderDirection): self
     {
         $this->assertNonEmptyString($orderDirection, 'orderDirection');
         Assert\that($orderDirection)->choice(
@@ -185,7 +146,7 @@ class RaCandidateSearchQuery implements HttpQuery
         return $this;
     }
 
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         return '?' . http_build_query(
             array_filter(
@@ -200,43 +161,19 @@ class RaCandidateSearchQuery implements HttpQuery
                     'orderDirection'    => $this->orderDirection,
                     'p'                 => $this->pageNumber,
                 ],
-                function ($value) {
-                    return !is_null($value);
-                }
+                fn($value): bool => !is_null($value)
             )
         );
     }
 
-    /**
-     * @param mixed       $value
-     * @param string      $parameterName
-     * @param string|null $message
-     */
-    private function assertNonEmptyString($value, $parameterName, $message = null)
+    private function assertNonEmptyString(mixed $value, string $parameterName, string $message = null): void
     {
         $message = sprintf(
             $message ?: '"%s" must be a non-empty string, "%s" given',
             $parameterName,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
         Assert\that($value)->string($message)->notEmpty($message);
-    }
-
-    /**
-     * @param array $values
-     * @param string $parameterName
-     *
-     * @return void
-     */
-    private function assertAllNonEmptyString(array $values, $parameterName)
-    {
-        foreach ($values as $value) {
-            $this->assertNonEmptyString(
-                $value,
-                $parameterName,
-                'Elements of "%s" must be non-empty strings, element of type "%s" given'
-            );
-        }
     }
 }

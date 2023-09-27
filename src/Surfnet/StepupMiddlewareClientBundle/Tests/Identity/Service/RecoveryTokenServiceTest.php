@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -26,13 +28,13 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService;
 
 class RecoveryTokenServiceTest extends TestCase
 {
-    private $service;
+    private \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService $service;
 
     private $apiService;
 
-    private $vangelis;
+    private \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity $vangelis;
 
-    private $eno;
+    private \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity $eno;
 
     protected function setUp(): void
     {
@@ -63,10 +65,9 @@ class RecoveryTokenServiceTest extends TestCase
         Mockery::close();
     }
 
-    public function test_assert_recovery_token()
+    public function test_assert_recovery_token(): void
     {
         $this->assertTrue($this->service->hasRecoveryToken($this->vangelis));
         $this->assertFalse($this->service->hasRecoveryToken($this->eno));
     }
-
 }

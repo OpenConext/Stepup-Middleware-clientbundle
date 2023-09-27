@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -32,7 +34,7 @@ class VettedSecondFactorSearchQuery implements HttpQuery
      * @param string $identityId
      * @return self
      */
-    public function setIdentityId($identityId)
+    public function setIdentityId($identityId): static
     {
         $this->assertNonEmptyString($identityId, 'identityId');
 
@@ -41,22 +43,22 @@ class VettedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString($value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
         Assert\that($value)->string($message)->notEmpty($message);
     }
 
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         $fields = [];
 
-        if ($this->identityId) {
+        if ($this->identityId !== '' && $this->identityId !== '0') {
             $fields['identityId'] = $this->identityId;
         }
 

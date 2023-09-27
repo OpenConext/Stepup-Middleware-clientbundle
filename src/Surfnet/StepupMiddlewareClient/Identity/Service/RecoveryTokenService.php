@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -35,14 +37,8 @@ use function sprintf;
  */
 class RecoveryTokenService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     /**
@@ -59,7 +55,7 @@ class RecoveryTokenService
         try {
             $this->getAll($identity);
             return true;
-        } catch (RuntimeException $e) {
+        } catch (RuntimeException) {
             return false;
         }
     }
@@ -70,7 +66,7 @@ class RecoveryTokenService
     public function getOne(string $recoveryTokenId): RecoveryToken
     {
         $result = $this->apiService->read(sprintf('recovery_token/%s', $recoveryTokenId));
-        if (!$result || empty($result)) {
+        if (!$result || $result === []) {
             throw new RuntimeException(sprintf('No RecoveryToken found with recovery token id %s', $recoveryTokenId));
         }
         return RecoveryToken::from($result);

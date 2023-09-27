@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -92,7 +94,7 @@ final class AuditLogEntry implements Dto
      * @param array $data
      * @return static
      */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $entry                         = new self();
         $entry->actorId                = $data['actor_id'];

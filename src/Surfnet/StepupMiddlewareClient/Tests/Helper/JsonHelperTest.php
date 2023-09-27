@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2017 SURFnet B.V.
  *
@@ -27,21 +29,8 @@ class JsonHelperTest extends TestCase
     /**
      * @test
      * @group json
-     *
-     * @dataProvider nonStringProvider
-     * @param $nonString
      */
-    public function jsonHelperCanOnlyDecodeStrings($nonString)
-    {
-        $this->expectException(InvalidArgumentException::class);
-        JsonHelper::decode($nonString);
-    }
-
-    /**
-     * @test
-     * @group json
-     */
-    public function jsonHelperDecodesStringsToArrays()
+    public function jsonHelperDecodesStringsToArrays(): void
     {
         $expectedDecodedResult = ['hello' => 'world'];
         $json                  = '{ "hello" : "world" }';
@@ -53,7 +42,7 @@ class JsonHelperTest extends TestCase
      * @test
      * @group json
      */
-    public function jsonHelperThrowsAnExceptionWhenThereIsASyntaxError()
+    public function jsonHelperThrowsAnExceptionWhenThereIsASyntaxError(): void
     {
         $this->expectExceptionMessage("Syntax error");
         $this->expectException(\Surfnet\StepupMiddlewareClient\Exception\JsonException::class);
@@ -61,7 +50,7 @@ class JsonHelperTest extends TestCase
         JsonHelper::decode($jsonWithMissingDoubleQuotes);
     }
 
-    public function nonStringProvider()
+    public function nonStringProvider(): array
     {
         return [
             'null'    => [null],

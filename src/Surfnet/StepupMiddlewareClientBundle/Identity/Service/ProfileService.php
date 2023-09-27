@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2019 SURFnet B.V.
  *
@@ -26,30 +28,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProfileService
 {
-    /**
-     * @var LibraryProfileService
-     */
-    private $service;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @param LibraryProfileService $service
-     * @param ValidatorInterface $validator
-     */
-    public function __construct(LibraryProfileService $service, ValidatorInterface $validator)
+    public function __construct(private readonly LibraryProfileService $service, private readonly ValidatorInterface $validator)
     {
-        $this->service = $service;
-        $this->validator = $validator;
     }
     /**
      * @param string $identityId
      * @return null|Profile
      */
-    public function get($identityId)
+    public function get($identityId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Profile
     {
         $query = new ProfileSearchQuery($identityId, $identityId);
         $data = $this->service->get($query);
@@ -70,7 +56,7 @@ class ProfileService
      * @param object      $value
      * @param null|string $message
      */
-    private function assertIsValid($value, $message = null)
+    private function assertIsValid(mixed $value, $message = null): void
     {
         $violations = $this->validator->validate($value);
 

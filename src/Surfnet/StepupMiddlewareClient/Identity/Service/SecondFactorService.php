@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -32,17 +34,8 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
  */
 class SecondFactorService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    /**
-     * @param ApiService $apiService
-     */
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     /**
@@ -52,7 +45,7 @@ class SecondFactorService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function getUnverified($secondFactorId)
+    public function getUnverified($secondFactorId): ?array
     {
         return $this->apiService->read('unverified-second-factor/%s', [$secondFactorId]);
     }
@@ -64,7 +57,7 @@ class SecondFactorService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function getVerified($secondFactorId)
+    public function getVerified($secondFactorId): ?array
     {
         return $this->apiService->read('verified-second-factor/%s', [$secondFactorId]);
     }
@@ -77,7 +70,7 @@ class SecondFactorService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function getVerifiedCanSkipProvePossession($secondFactorId)
+    public function getVerifiedCanSkipProvePossession($secondFactorId): ?array
     {
         return $this->apiService->read('verified-second-factor/%s/skip-prove-possession', [$secondFactorId]);
     }
@@ -89,55 +82,51 @@ class SecondFactorService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function getVetted($secondFactorId)
+    public function getVetted($secondFactorId): ?array
     {
         return $this->apiService->read('vetted-second-factor/%s', [$secondFactorId]);
     }
 
     /**
-     * @param UnverifiedSecondFactorSearchQuery $query
      * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function searchUnverified(UnverifiedSecondFactorSearchQuery $query)
+    public function searchUnverified(UnverifiedSecondFactorSearchQuery $query): ?array
     {
         return $this->apiService->read('unverified-second-factors' . $query->toHttpQuery());
     }
 
     /**
-     * @param VerifiedSecondFactorSearchQuery $query
      * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function searchVerified(VerifiedSecondFactorSearchQuery $query)
+    public function searchVerified(VerifiedSecondFactorSearchQuery $query): ?array
     {
         return $this->apiService->read('verified-second-factors' . $query->toHttpQuery());
     }
 
     /**
-     * @param VerifiedSecondFactorOfIdentitySearchQuery $query
      * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function searchOwnVerified(VerifiedSecondFactorOfIdentitySearchQuery $query)
+    public function searchOwnVerified(VerifiedSecondFactorOfIdentitySearchQuery $query): ?array
     {
         return $this->apiService->read('verified-second-factors-of-identity' . $query->toHttpQuery());
     }
 
     /**
-     * @param VettedSecondFactorSearchQuery $query
      * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function searchVetted(VettedSecondFactorSearchQuery $query)
+    public function searchVetted(VettedSecondFactorSearchQuery $query): ?array
     {
         return $this->apiService->read('vetted-second-factors' . $query->toHttpQuery());
     }

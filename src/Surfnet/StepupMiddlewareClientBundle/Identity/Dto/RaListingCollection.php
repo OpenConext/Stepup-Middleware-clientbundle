@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,7 +24,7 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RaListingCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $raListing)
+    protected static function createElementFromData(array $raListing): \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing
     {
         return RaListing::fromData($raListing);
     }
@@ -32,7 +34,7 @@ class RaListingCollection extends CollectionDto
      * @param $institution
      * @return bool
      */
-    public function isListed($institution)
+    public function isListed($institution): bool
     {
         /** @var RaListing $raListing */
         foreach ($this->getElements() as $raListing) {

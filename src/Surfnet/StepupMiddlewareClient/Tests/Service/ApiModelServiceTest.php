@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -37,7 +39,7 @@ class ApiModelServiceTest extends TestCase
         m::close();
     }
 
-    public function testItResources()
+    public function testItResources(): void
     {
         $data     = ['data' => 'My first resource'];
         $response = new Response(200, [], json_encode($data));
@@ -51,7 +53,7 @@ class ApiModelServiceTest extends TestCase
         $this->assertSame($data, $responseData);
     }
 
-    public function testItFormatsResourceParameters()
+    public function testItFormatsResourceParameters(): void
     {
         $data        = ['data' => 'My first resource'];
         $expectedUri = '/resource/John%2FDoe';
@@ -61,7 +63,7 @@ class ApiModelServiceTest extends TestCase
         $response = m::mock(ResponseInterface::class);
         $response->shouldReceive('getBody')->andReturn($body);
         $response->shouldReceive('getStatusCode')->andReturn('200');
-        $guzzle      = m::mock('GuzzleHttp\Client')
+        $guzzle      = m::mock(\GuzzleHttp\Client::class)
             ->shouldReceive('get')->with($expectedUri, m::any())->once()->andReturn($response)
             ->getMock();
 
@@ -70,7 +72,7 @@ class ApiModelServiceTest extends TestCase
         $this->assertIsArray($response);
     }
 
-    public function testItThrowsWhenMalformedJsonIsReturned()
+    public function testItThrowsWhenMalformedJsonIsReturned(): void
     {
         $malformedJson = 'This is some malformed JSON';
         $response      = new Response(200, [], $malformedJson);
@@ -84,7 +86,7 @@ class ApiModelServiceTest extends TestCase
         $service->read('/resource');
     }
 
-    public function testItReturnsNullWhenTheResourceDoesntExist()
+    public function testItReturnsNullWhenTheResourceDoesntExist(): void
     {
         $data     = ['errors' => ["Requested identity doesn't exist"]];
         $response = new Response(404, [], json_encode($data));
@@ -98,7 +100,7 @@ class ApiModelServiceTest extends TestCase
         $this->assertNull($responseData, "Resource doesn't exist, yet a non-null value was returned");
     }
 
-    public function testItThrowsWhenTheConsumerIsntAuthorisedToAccessTheResource()
+    public function testItThrowsWhenTheConsumerIsntAuthorisedToAccessTheResource(): void
     {
         $data     = ['errors' => ['You are not authorised to access this identity']];
         $response = new Response(403, [], json_encode($data));

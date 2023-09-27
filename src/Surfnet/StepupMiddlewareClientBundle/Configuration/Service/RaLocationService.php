@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -30,31 +32,15 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class RaLocationService
 {
-    /**
-     * @var LibraryRaLocationService
-     */
-    private $service;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @param LibraryRaLocationService $service
-     * @param ValidatorInterface      $validator
-     */
-    public function __construct(LibraryRaLocationService $service, ValidatorInterface $validator)
+    public function __construct(private readonly LibraryRaLocationService $service, private readonly ValidatorInterface $validator)
     {
-        $this->service   = $service;
-        $this->validator = $validator;
     }
 
     /**
      * @param string $id
      * @return null|RaLocation
      */
-    public function get($id)
+    public function get($id): ?\Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation
     {
         $data = $this->service->get($id);
 
@@ -70,7 +56,6 @@ class RaLocationService
     }
 
     /**
-     * @param RaLocationSearchQuery $searchQuery
      * @return RaLocationCollection
      */
     public function search(RaLocationSearchQuery $searchQuery)
@@ -97,7 +82,7 @@ class RaLocationService
      * @param object      $value
      * @param null|string $message
      */
-    private function assertIsValid($value, $message = null)
+    private function assertIsValid(mixed $value, $message = null): void
     {
         $violations = $this->validator->validate($value);
 

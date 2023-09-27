@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -24,10 +26,9 @@ class InvalidResponseException extends RuntimeException
 {
     /**
      * @param string $message
-     * @param ConstraintViolationListInterface $violations
      * @return self
      */
-    public static function withViolations($message, ConstraintViolationListInterface $violations)
+    public static function withViolations($message, ConstraintViolationListInterface $violations): self
     {
         $message = sprintf('%s (%s)', $message, self::convertViolationsToString($violations));
 
@@ -35,10 +36,9 @@ class InvalidResponseException extends RuntimeException
     }
 
     /**
-     * @param ConstraintViolationListInterface $violations
      * @return string
      */
-    private static function convertViolationsToString(ConstraintViolationListInterface $violations)
+    private static function convertViolationsToString(ConstraintViolationListInterface $violations): string
     {
         $violationStrings = [];
 
@@ -47,6 +47,6 @@ class InvalidResponseException extends RuntimeException
             $violationStrings[] = sprintf('%s: %s', $violation->getPropertyPath(), $violation->getMessage());
         }
 
-        return join('; ', $violationStrings);
+        return implode('; ', $violationStrings);
     }
 }

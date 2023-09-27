@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -23,7 +25,7 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RecoveryTokenCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $data)
+    protected static function createElementFromData(array $data): \Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryToken
     {
         return RecoveryToken::from($data);
     }

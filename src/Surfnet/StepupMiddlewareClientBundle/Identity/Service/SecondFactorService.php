@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -43,26 +45,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class SecondFactorService
 {
-    /**
-     * @var LibrarySecondFactorService
-     */
-    private $service;
-
-    private $loaService;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
     public function __construct(
-        LibrarySecondFactorService $service,
-        SecondFactorTypeService $loaService,
-        ValidatorInterface $validator
+        private readonly LibrarySecondFactorService $service,
+        private readonly SecondFactorTypeService $loaService,
+        private readonly ValidatorInterface $validator
     ) {
-        $this->service = $service;
-        $this->validator = $validator;
-        $this->loaService = $loaService;
     }
 
     /**
@@ -73,7 +60,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getUnverified($secondFactorId)
+    public function getUnverified($secondFactorId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\UnverifiedSecondFactor
     {
         $data = $this->service->getUnverified($secondFactorId);
 
@@ -102,7 +89,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getVerified($secondFactorId)
+    public function getVerified($secondFactorId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor
     {
         $data = $this->service->getVerified($secondFactorId);
 
@@ -131,7 +118,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getVerifiedCanSkipProvePossession($secondFactorId)
+    public function getVerifiedCanSkipProvePossession($secondFactorId): bool
     {
         $data = $this->service->getVerifiedCanSkipProvePossession($secondFactorId);
 
@@ -146,7 +133,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getVetted($secondFactorId)
+    public function getVetted($secondFactorId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VettedSecondFactor
     {
         $data = $this->service->getVetted($secondFactorId);
 
@@ -170,7 +157,6 @@ class SecondFactorService
     }
 
     /**
-     * @param UnverifiedSecondFactorSearchQuery $query
      * @return UnverifiedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
@@ -199,7 +185,6 @@ class SecondFactorService
     }
 
     /**
-     * @param VerifiedSecondFactorSearchQuery $query
      * @return VerifiedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
@@ -228,7 +213,6 @@ class SecondFactorService
     }
 
     /**
-     * @param VerifiedSecondFactorOfIdentitySearchQuery $query
      * @return VerifiedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
@@ -257,7 +241,6 @@ class SecondFactorService
     }
 
     /**
-     * @param VettedSecondFactorSearchQuery $query
      * @return VettedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.

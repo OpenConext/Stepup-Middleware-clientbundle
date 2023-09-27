@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,17 +25,8 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
 class RaListingService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    /**
-     * @param ApiService $apiService
-     */
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     /**
@@ -44,16 +37,15 @@ class RaListingService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function get($id, $institution, $actorId)
+    public function get($id, $institution, $actorId): ?array
     {
         return $this->apiService->read('ra-listing/%s/%s?actorId=%s', [$id, $institution, $actorId]);
     }
 
     /**
-     * @param RaListingSearchQuery $searchQuery
      * @return mixed|null
      */
-    public function search(RaListingSearchQuery $searchQuery)
+    public function search(RaListingSearchQuery $searchQuery): ?array
     {
         return $this->apiService->read('ra-listing' . $searchQuery->toHttpQuery());
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2016 SURFnet B.V.
  *
@@ -26,26 +28,17 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class InstitutionConfigurationOptionsService
 {
-    /**
-     * @var LibraryInstitutionConfigurationOptionsService
-     */
-    private $service;
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    public function __construct(LibraryInstitutionConfigurationOptionsService $service, ValidatorInterface $validator)
-    {
-        $this->service   = $service;
-        $this->validator = $validator;
+    public function __construct(
+        private readonly LibraryInstitutionConfigurationOptionsService $service,
+        private readonly ValidatorInterface $validator
+    ) {
     }
 
     /**
      * @param $institution
      * @return null|InstitutionConfigurationOptions
      */
-    public function getInstitutionConfigurationOptionsFor($institution)
+    public function getInstitutionConfigurationOptionsFor($institution): ?InstitutionConfigurationOptions
     {
         $data = $this->service->getInstitutionConfigurationOptionsFor($institution);
 

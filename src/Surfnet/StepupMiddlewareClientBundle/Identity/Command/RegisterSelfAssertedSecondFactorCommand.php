@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURF bv
  *
@@ -57,7 +59,7 @@ class RegisterSelfAssertedSecondFactorCommand extends AbstractCommand
      */
     public $authoringRecoveryTokenId;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'authority_id' => $this->authorityId,

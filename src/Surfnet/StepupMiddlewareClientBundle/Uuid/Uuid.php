@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -25,7 +27,7 @@ class Uuid
     /**
      * @return string
      */
-    public static function generate()
+    public static function generate(): string
     {
         return (string) RamseyUuid::uuid4();
     }

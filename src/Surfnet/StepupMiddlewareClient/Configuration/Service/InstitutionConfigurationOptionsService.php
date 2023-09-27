@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2016 SURFnet B.V.
  *
@@ -22,21 +24,11 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
 class InstitutionConfigurationOptionsService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
-    /**
-     * @param string $institution
-     * @return array
-     */
-    public function getInstitutionConfigurationOptionsFor($institution)
+    public function getInstitutionConfigurationOptionsFor(string $institution): ?array
     {
         return $this->apiService->read('/institution-configuration-options/%s', [$institution]);
     }

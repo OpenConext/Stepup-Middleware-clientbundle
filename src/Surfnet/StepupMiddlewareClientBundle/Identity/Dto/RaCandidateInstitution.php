@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2019 SURFnet B.V.
  *
@@ -35,7 +37,7 @@ class RaCandidateInstitution implements Dto
      * @param array $data
      * @return static
      */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $institutionListing              = new self();
         $institutionListing->institution = $data['ra_institution'];

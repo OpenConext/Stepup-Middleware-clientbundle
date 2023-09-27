@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,7 +24,7 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RaLocationCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $raLocation)
+    protected static function createElementFromData(array $raLocation): \Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation
     {
         return RaLocation::fromData($raLocation);
     }

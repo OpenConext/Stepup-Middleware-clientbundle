@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -33,7 +35,7 @@ class AuditLogServiceTest extends TestCase
         m::close();
     }
 
-    private $mockAuditLog = <<<'JSON'
+    private string $mockAuditLog = <<<'JSON'
 {
   "collection":{
     "total_items":7,
@@ -77,24 +79,24 @@ class AuditLogServiceTest extends TestCase
 JSON;
 
 
-    public function testItGetsAnIdentity()
+    public function testItGetsAnIdentity(): void
     {
         $query = new SecondFactorAuditLogSearchQuery('Ibuildings bv', '5613875b-410e-407c-91ce-35bf0b5a8d89', 1);
 
-        $libraryService = m::mock('Surfnet\StepupMiddlewareClient\Identity\Service\AuditLogService')
-            ->shouldReceive('searchSecondFactorAuditLog')->with($query)->once()->andReturn(json_decode($this->mockAuditLog, true))
+        $libraryService = m::mock(\Surfnet\StepupMiddlewareClient\Identity\Service\AuditLogService::class)
+            ->shouldReceive('searchSecondFactorAuditLog')->with($query)->once()->andReturn(json_decode((string) $this->mockAuditLog, true, 512, JSON_THROW_ON_ERROR))
             ->getMock();
-        $violations = m::mock('Symfony\Component\Validator\ConstraintViolationListInterface')
+        $violations = m::mock(\Symfony\Component\Validator\ConstraintViolationListInterface::class)
             ->shouldReceive('count')->once()->andReturn(0)
             ->getMock();
-        $validator = m::mock('Symfony\Component\Validator\Validator\ValidatorInterface')
+        $validator = m::mock(\Symfony\Component\Validator\Validator\ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
 
         $service = new AuditLogService($libraryService, $validator);
         $actualAuditLog = $service->searchSecondFactorAuditLog($query);
 
-        $expectedAuditLog = AuditLog::fromData(json_decode($this->mockAuditLog, true));
+        $expectedAuditLog = AuditLog::fromData(json_decode((string) $this->mockAuditLog, true, 512, JSON_THROW_ON_ERROR));
 
         $this->assertEquals($expectedAuditLog, $actualAuditLog);
 

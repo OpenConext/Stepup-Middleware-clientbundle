@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -24,10 +26,10 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 final class RaSecondFactorExportQuery implements HttpQuery
 {
-    const STATUS_UNVERIFIED = 'unverified';
-    const STATUS_VERIFIED = 'verified';
-    const STATUS_VETTED = 'vetted';
-    const STATUS_REVOKED = 'revoked';
+    public const STATUS_UNVERIFIED = 'unverified';
+    public const STATUS_VERIFIED = 'verified';
+    public const STATUS_VETTED = 'vetted';
+    public const STATUS_REVOKED = 'revoked';
 
     /**
      * @var string|null
@@ -88,7 +90,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
      * @param string $actorInstitution
      * @return VerifiedSecondFactorSearchQuery
      */
-    public function setActorId($actorId)
+    public function setActorId($actorId): self
     {
         $this->assertNonEmptyString($actorId, 'actorId');
 
@@ -97,7 +99,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
         return $this;
     }
 
-    public function getFileName()
+    public function getFileName(): string
     {
         $date = new DateTime();
         $date = $date->format('Y-m-d');
@@ -126,7 +128,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param null|string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->assertNonEmptyString($name, 'name');
 
@@ -144,7 +146,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param null|string $type
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->assertNonEmptyString($type, 'type');
 
@@ -162,7 +164,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param null|string $secondFactorId
      */
-    public function setSecondFactorId($secondFactorId)
+    public function setSecondFactorId($secondFactorId): void
     {
         $this->assertNonEmptyString($secondFactorId, 'secondFactorId');
 
@@ -180,7 +182,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param null|string $email
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->assertNonEmptyString($email, 'email');
 
@@ -198,7 +200,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param null|string $institution
      */
-    public function setInstitution($institution)
+    public function setInstitution($institution): void
     {
         $this->institution = $institution;
     }
@@ -214,7 +216,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param string $status
      */
-    public function setStatus($status)
+    public function setStatus($status): void
     {
         Assert\that($status)->choice(
             [self::STATUS_UNVERIFIED, self::STATUS_VERIFIED, self::STATUS_VETTED, self::STATUS_REVOKED, ''],
@@ -227,7 +229,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param string $orderBy
      */
-    public function setOrderBy($orderBy)
+    public function setOrderBy($orderBy): void
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
@@ -237,7 +239,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param string|null $orderDirection
      */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection($orderDirection): void
     {
         Assert\that($orderDirection)->choice(
             ['asc', 'desc', '', null],
@@ -247,12 +249,12 @@ final class RaSecondFactorExportQuery implements HttpQuery
         $this->orderDirection = $orderDirection ?: null;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString($value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
         Assert\that($value)->string($message)->notEmpty($message);
@@ -263,7 +265,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
      *
      * @return string
      */
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         return '?' . http_build_query(
             array_filter(
@@ -278,9 +280,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
                     'orderBy'          => $this->orderBy,
                     'orderDirection'   => $this->orderDirection
                 ],
-                function ($value) {
-                    return !is_null($value);
-                }
+                fn($value): bool => !is_null($value)
             )
         );
     }

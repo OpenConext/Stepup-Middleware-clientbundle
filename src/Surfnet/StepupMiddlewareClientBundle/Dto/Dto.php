@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -21,7 +23,6 @@ namespace Surfnet\StepupMiddlewareClientBundle\Dto;
 interface Dto
 {
     /**
-     * @param array $data
      * @return static
      */
     public static function fromData(array $data);

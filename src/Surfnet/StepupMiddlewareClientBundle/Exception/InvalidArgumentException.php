@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -26,12 +28,12 @@ class InvalidArgumentException extends \InvalidArgumentException
      * @param mixed $parameter the parameter that is not of the expected type.
      * @return self
      */
-    public static function invalidType($expected, $parameterName, $parameter)
+    public static function invalidType($expected, $parameterName, mixed $parameter): self
     {
         $message = sprintf(
             'Invalid argument type: "%s" expected, "%s" given for "%s"',
             $expected,
-            is_object($parameter) ? get_class($parameter) : gettype($parameter),
+            get_debug_type($parameter),
             $parameterName
         );
 

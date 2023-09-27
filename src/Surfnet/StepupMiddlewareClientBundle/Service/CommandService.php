@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -29,32 +31,14 @@ use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
 
 class CommandService
 {
-    /**
-     * @var LibraryCommandService
-     */
-    private $commandService;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @param LibraryCommandService $commandService
-     * @param LoggerInterface $logger
-     */
-    public function __construct(LibraryCommandService $commandService, LoggerInterface $logger)
+    public function __construct(private readonly LibraryCommandService $commandService, private readonly LoggerInterface $logger)
     {
-        $this->commandService = $commandService;
-        $this->logger = $logger;
     }
 
     /**
-     * @param Command $command
-     * @param Metadata $metadata
      * @return ExecutionResult
      */
-    public function execute(Command $command, Metadata $metadata)
+    public function execute(Command $command, Metadata $metadata): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
     {
         $commandName = $this->getCommandName($command);
         $payload = $command->serialise();
@@ -83,7 +67,7 @@ class CommandService
                         "Command '%s' with UUID '%s' could not be executed (%s)",
                         $commandName,
                         $command->getUuid(),
-                        join('; ', $result->getErrors())
+                        implode('; ', $result->getErrors())
                     )
                 );
             }
@@ -105,21 +89,18 @@ class CommandService
     }
 
     /**
-     * @param Command $command
      * @return string
      */
-    private function getCommandName(Command $command)
+    private function getCommandName(Command $command): string
     {
         $commandNameParts = [];
 
-        if (!preg_match('~(\\w+)\\\\Command\\\\((\\w+\\\\)*\\w+)Command$~', get_class($command), $commandNameParts)) {
+        if (!preg_match('~(\\w+)\\\\Command\\\\((\\w+\\\\)*\\w+)Command$~', $command::class, $commandNameParts)) {
             throw new InvalidArgumentException(
                 "Given command's class name cannot be expressed using command name notation."
             );
         }
 
-        $commandName = sprintf('%s:%s', $commandNameParts[1], str_replace('\\', '.', $commandNameParts[2]));
-
-        return $commandName;
+        return sprintf('%s:%s', $commandNameParts[1], str_replace('\\', '.', $commandNameParts[2]));
     }
 }

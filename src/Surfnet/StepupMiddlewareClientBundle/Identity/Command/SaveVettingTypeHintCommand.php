@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURF bv
  *
@@ -37,7 +39,7 @@ class SaveVettingTypeHintCommand extends AbstractCommand
      */
     public $hints;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identityId' => $this->identityId,

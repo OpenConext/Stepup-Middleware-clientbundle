@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -36,12 +38,12 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
     /**
      * @var string|null
      */
-    private $orderBy;
+    private string $orderBy = 'recordedOn';
 
     /**
      * @var string|null
      */
-    private $orderDirection;
+    private $orderDirection = 'desc';
 
     /**
      * @var int
@@ -64,14 +66,9 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
         $this->institution = $institution;
         $this->identityId = $identityId;
         $this->pageNumber = $pageNumber;
-        $this->orderBy = 'recordedOn';
-        $this->orderDirection = 'desc';
     }
 
-    /**
-     * @param string $orderBy
-     */
-    public function setOrderBy($orderBy)
+    public function setOrderBy(string $orderBy): void
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
@@ -81,7 +78,7 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
     /**
      * @param string|null $orderDirection
      */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection($orderDirection): void
     {
         Assert\that($orderDirection)->choice(
             ['asc', 'desc', '', null],
@@ -91,12 +88,12 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
         $this->orderDirection = $orderDirection ?: null;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString($value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
         Assert\that($value)->string($message)->notEmpty($message);
@@ -107,7 +104,7 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
      *
      * @return string
      */
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         return '?' . http_build_query(
             [

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -41,7 +43,7 @@ class ProvePhoneRecoveryTokenPossessionCommand extends AbstractCommand
      */
     public $phoneNumber;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id' => $this->identityId,

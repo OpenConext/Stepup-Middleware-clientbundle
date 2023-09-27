@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,7 +24,7 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class VerifiedSecondFactorCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $data)
+    protected static function createElementFromData(array $data): \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor
     {
         return VerifiedSecondFactor::fromData($data);
     }

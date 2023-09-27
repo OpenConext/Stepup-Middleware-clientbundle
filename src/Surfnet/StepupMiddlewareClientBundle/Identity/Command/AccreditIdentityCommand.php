@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -75,7 +77,7 @@ class AccreditIdentityCommand extends AbstractCommand
     /**
      * @return array
      */
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'institution'         => $this->institution,

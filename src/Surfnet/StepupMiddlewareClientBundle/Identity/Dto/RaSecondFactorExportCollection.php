@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -29,7 +31,7 @@ class RaSecondFactorExportCollection
      */
     protected $elements;
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $exportCollection = new self;
 
@@ -42,12 +44,12 @@ class RaSecondFactorExportCollection
         return $exportCollection;
     }
 
-    public function count()
+    public function count(): int
     {
-        return count($this->elements);
+        return count((array) $this->elements);
     }
 
-    public function getColumnNames()
+    public function getColumnNames(): array
     {
         return [
             'secondFactorId' => 'Token ID',

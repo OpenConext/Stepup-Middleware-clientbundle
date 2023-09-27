@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -43,7 +45,7 @@ class ProveU2fDevicePossessionCommand extends AbstractCommand
      */
     public $keyHandle;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id' => $this->identityId,
