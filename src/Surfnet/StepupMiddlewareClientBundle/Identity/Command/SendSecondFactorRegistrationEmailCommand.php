@@ -27,12 +27,12 @@ class SendSecondFactorRegistrationEmailCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     public function serialise(): array
     {

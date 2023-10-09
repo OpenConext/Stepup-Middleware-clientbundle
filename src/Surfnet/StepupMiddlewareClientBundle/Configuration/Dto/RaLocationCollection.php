@@ -24,7 +24,23 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RaLocationCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $raLocation): \Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation
+    public static function fromData(array $data): self
+    {
+        $elements = [];
+        foreach ($data['items'] as $key => $item) {
+            $elements[$key] = self::createElementFromData($item);
+        }
+
+        return new self(
+            $elements,
+            $data['collection']['total_items'],
+            $data['collection']['page'],
+            $data['collection']['page_size'],
+            $data['filters']
+        );
+    }
+
+    protected static function createElementFromData(array $raLocation): RaLocation
     {
         return RaLocation::fromData($raLocation);
     }

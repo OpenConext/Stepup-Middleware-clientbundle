@@ -24,8 +24,24 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class VettedSecondFactorCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $data): \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VettedSecondFactor
+    public static function fromData(array $data): self
     {
-        return VettedSecondFactor::fromData($data);
+        $elements = [];
+        foreach ($data['items'] as $key => $item) {
+            $elements[$key] = self::createElementFromData($item);
+        }
+
+        return new self(
+            $elements,
+            $data['collection']['total_items'],
+            $data['collection']['page'],
+            $data['collection']['page_size'],
+            $data['filters']
+        );
+    }
+
+    protected static function createElementFromData(array $item): VettedSecondFactor
+    {
+        return VettedSecondFactor::fromData($item);
     }
 }

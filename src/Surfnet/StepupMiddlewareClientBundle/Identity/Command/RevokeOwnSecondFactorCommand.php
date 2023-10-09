@@ -21,19 +21,18 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Command;
 
 use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class RevokeOwnSecondFactorCommand extends AbstractCommand
 {
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * @return array

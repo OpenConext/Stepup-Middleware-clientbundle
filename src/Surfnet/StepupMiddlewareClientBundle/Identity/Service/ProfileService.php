@@ -35,7 +35,7 @@ class ProfileService
      * @param string $identityId
      * @return null|Profile
      */
-    public function get($identityId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Profile
+    public function get(string $identityId): ?Profile
     {
         $query = new ProfileSearchQuery($identityId, $identityId);
         $data = $this->service->get($query);
@@ -54,9 +54,9 @@ class ProfileService
 
     /**
      * @param object      $value
-     * @param null|string $message
+     * @param string|null $message
      */
-    private function assertIsValid(mixed $value, $message = null): void
+    private function assertIsValid(mixed $value, string $message = null): void
     {
         $violations = $this->validator->validate($value);
 

@@ -42,14 +42,11 @@ class IdentityService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function get($id): ?array
+    public function get(string $id): ?array
     {
         return $this->apiService->read('identity/%s', [$id]);
     }
 
-    /**
-     * @return array|null
-     */
     public function search(IdentitySearchQuery $searchQuery): ?array
     {
         return $this->apiService->read('identity', [], $searchQuery);
@@ -59,7 +56,7 @@ class IdentityService
      * @param string $identityId
      * @return array|null
      */
-    public function getRegistrationAuthorityCredentials($identityId): ?array
+    public function getRegistrationAuthorityCredentials(string $identityId): ?array
     {
         return $this->apiService->read('registration-authority/%s', [$identityId]);
     }

@@ -20,6 +20,7 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupMiddlewareClient\Identity\Service;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Surfnet\StepupMiddlewareClient\Exception\AccessDeniedToResourceException;
 use Surfnet\StepupMiddlewareClient\Exception\MalformedResponseException;
 use Surfnet\StepupMiddlewareClient\Exception\ResourceReadException;
@@ -28,7 +29,6 @@ use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryToken;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryTokenSearchQuery;
 use Surfnet\StepupMiddlewareClient\Service\ApiService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
-use function sprintf;
 
 /**
  * Recovery tokens are used in conjunction with self-asserted
@@ -50,6 +50,9 @@ class RecoveryTokenService
      */
     public function hasRecoveryToken(Identity $identity): bool
     {
+        if (!$identity->id) {
+            return false;
+        }
         $query = new RecoveryTokenSearchQuery(1, $identity->id);
         $query->setIdentityId((string)$identity);
         try {
@@ -61,12 +64,12 @@ class RecoveryTokenService
     }
 
     /**
-     * @return RecoveryToken[]
+     * @throws GuzzleException
      */
     public function getOne(string $recoveryTokenId): RecoveryToken
     {
         $result = $this->apiService->read(sprintf('recovery_token/%s', $recoveryTokenId));
-        if (!$result || $result === []) {
+        if (empty($result) || empty($result['items'])) {
             throw new RuntimeException(sprintf('No RecoveryToken found with recovery token id %s', $recoveryTokenId));
         }
         return RecoveryToken::from($result);
@@ -77,11 +80,14 @@ class RecoveryTokenService
      */
     public function getAll(Identity $identity): array
     {
+        if (!$identity->id) {
+            return [];
+        }
         $query = new RecoveryTokenSearchQuery(1, $identity->id);
         $query->setIdentityId((string)$identity);
         $query->setStatus(RecoveryTokenSearchQuery::STATUS_ACTIVE);
         $results = $this->apiService->read(sprintf('recovery_tokens%s', $query->toHttpQuery()));
-        if (!$results || empty($results['items'])) {
+        if (empty($results) || empty($results['items'])) {
             throw new RuntimeException(sprintf('No RecoveryTokens found for Identity %s', $identity));
         }
 

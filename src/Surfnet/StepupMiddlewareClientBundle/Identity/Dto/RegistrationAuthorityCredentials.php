@@ -31,7 +31,7 @@ class RegistrationAuthorityCredentials implements Dto
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @Assert\Expression(
@@ -41,7 +41,7 @@ class RegistrationAuthorityCredentials implements Dto
      *
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\Expression(
@@ -51,7 +51,7 @@ class RegistrationAuthorityCredentials implements Dto
      *
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     /**
      * @Assert\Expression(
@@ -61,7 +61,7 @@ class RegistrationAuthorityCredentials implements Dto
      *
      * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * @Assert\Expression(
@@ -71,21 +71,21 @@ class RegistrationAuthorityCredentials implements Dto
      *
      * @var string
      */
-    public $contactInformation;
+    public string $contactInformation;
 
     /**
      * @Assert\Type(type="bool", message="middleware_client.dto.ra_credentials.is_raa.must_be_boolean")
      *
      * @var bool
      */
-    public $isRaa;
+    public bool $isRaa;
 
     /**
      * @Assert\Type(type="bool", message="middleware_client.dto.ra_credentials.is_sraa.must_be_boolean")
      *
      * @var bool
      */
-    public $isSraa;
+    public bool $isSraa;
 
     public static function fromData(array $data): self
     {
@@ -101,9 +101,6 @@ class RegistrationAuthorityCredentials implements Dto
         return $credentials;
     }
 
-    /**
-     * @return bool
-     */
     public function assertNullOrString(mixed $value): bool
     {
         return is_null($value) || is_string($value);

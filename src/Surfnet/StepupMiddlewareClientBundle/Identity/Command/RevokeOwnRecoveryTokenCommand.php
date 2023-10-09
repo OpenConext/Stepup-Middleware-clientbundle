@@ -27,12 +27,12 @@ class RevokeOwnRecoveryTokenCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $recoveryTokenId;
+    public string $recoveryTokenId;
 
     /**
      * @return array

@@ -21,24 +21,19 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Dto;
 
 use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class RaCandidateInstitutions implements Dto
 {
     /**
      * @var RaCandidate
      */
-    public $raCandidate;
+    public RaCandidate $raCandidate;
 
     /**
      * @var RaCandidateInstitutionCollection
      */
-    public $institutions;
+    public RaCandidateInstitutionCollection $institutions;
 
-    /**
-     * @param array $data
-     * @return static
-     */
     public static function fromData(array $data): self
     {
         $raCandidateInstitutions  = new self();

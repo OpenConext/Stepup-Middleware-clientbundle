@@ -63,7 +63,7 @@ class ApiModelServiceTest extends TestCase
         $response = m::mock(ResponseInterface::class);
         $response->shouldReceive('getBody')->andReturn($body);
         $response->shouldReceive('getStatusCode')->andReturn('200');
-        $guzzle      = m::mock(\GuzzleHttp\Client::class)
+        $guzzle      = m::mock(Client::class)
             ->shouldReceive('get')->with($expectedUri, m::any())->once()->andReturn($response)
             ->getMock();
 

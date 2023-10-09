@@ -21,19 +21,18 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClientBundle\Configuration\Command;
 
 use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class RemoveRaLocationCommand extends AbstractCommand
 {
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @var string
      */
-    public $raLocationId;
+    public string $raLocationId;
 
     /**
      * @return array

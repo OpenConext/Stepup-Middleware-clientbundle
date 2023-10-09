@@ -32,9 +32,6 @@ class UnverifiedSecondFactorSearchQuery implements HttpQuery
      */
     private ?string $verificationNonce = null;
 
-    /**
-     * @return self
-     */
     public function setIdentityId(string $identityId): static
     {
         $this->assertNonEmptyString($identityId, 'identityId');
@@ -44,11 +41,7 @@ class UnverifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $verificationNonce
-     * @return self
-     */
-    public function setVerificationNonce(?string $verificationNonce): static
+    public function setVerificationNonce(string $verificationNonce): static
     {
         $this->assertNonEmptyString($verificationNonce, 'verificationNonce');
 
@@ -57,7 +50,7 @@ class UnverifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    private function assertNonEmptyString(?string $value, string $name): void
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
@@ -65,7 +58,7 @@ class UnverifiedSecondFactorSearchQuery implements HttpQuery
             (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
     public function toHttpQuery(): string

@@ -27,14 +27,14 @@ class ZigCommand extends AbstractCommand
     /**
      * @var array
      */
-    public $payload;
+    public array $payload;
 
     public function __construct(array $payload)
     {
         $this->payload = $payload;
     }
 
-    public function serialise()
+    public function serialise(): array
     {
         return $this->payload;
     }

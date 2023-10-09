@@ -27,22 +27,22 @@ class ProveGssfPossessionCommand extends AbstractCommand
     /**
      * @var string the UUID of the identity
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string the UUID of the second factor
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * @var string the name of the stepup provider
      */
-    public $stepupProvider;
+    public string $stepupProvider;
 
     /**
      * @var string the NameID of the second factor as providerd by the stepup provider
      */
-    public $gssfId;
+    public string $gssfId;
 
     /**
      * @return array

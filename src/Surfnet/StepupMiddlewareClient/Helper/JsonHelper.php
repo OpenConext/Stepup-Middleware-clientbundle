@@ -20,7 +20,6 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupMiddlewareClient\Helper;
 
-use Surfnet\StepupMiddlewareClient\Exception\InvalidArgumentException;
 use Surfnet\StepupMiddlewareClient\Exception\JsonException;
 
 final class JsonHelper
@@ -48,6 +47,6 @@ final class JsonHelper
             throw JsonException::withMessage($errorMessage);
         }
 
-        return $data;
+        return (array) $data;
     }
 }

@@ -21,7 +21,6 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClientBundle\Dto;
 
 use LogicException;
-use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class CollectionDto implements Dto
 {
@@ -31,31 +30,19 @@ abstract class CollectionDto implements Dto
 
     protected int $itemsPerPage;
 
-    /**
-     * @param int   $totalItems
-     * @param int   $currentPage
-     * @param int   $itemsPerPage
-     * @param array $filterOptions
-     */
-    public function __construct(/**
-         * @Assert\Valid
-         */
+    public function __construct(
         protected array $elements,
-        $totalItems,
-        $currentPage,
-        $itemsPerPage,
-        private $filterOptions = []
+        int $totalItems,
+        int $currentPage,
+        int $itemsPerPage,
+        private array $filterOptions = []
     ) {
-        $this->totalItems = (int) $totalItems;
-        $this->currentPage = (int) $currentPage;
-        $this->itemsPerPage = (int) $itemsPerPage;
+        $this->totalItems = $totalItems;
+        $this->currentPage = $currentPage;
+        $this->itemsPerPage = $itemsPerPage;
     }
 
-    /**
-     * @param  array  $data
-     * @return static
-     */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $elements = [];
         foreach ($data['items'] as $key => $item) {
@@ -71,7 +58,7 @@ abstract class CollectionDto implements Dto
         );
     }
 
-    public static function empty()
+    public static function empty(): static
     {
         return new static([], 0, 1, 1);
     }
@@ -82,32 +69,22 @@ abstract class CollectionDto implements Dto
      * @param  array $item
      * @return mixed
      */
-    protected static function createElementFromData(array $item)
+    protected static function createElementFromData(array $item): mixed
     {
         throw new LogicException('The method "%s::createElementFromData must be implemented to load the Collection Element"');
     }
 
-    /**
-     * @return int
-     */
-    public function getCurrentPage()
+    public function getCurrentPage(): int
     {
         return $this->currentPage;
     }
 
-    /**
-     * @return array
-     */
-    public function getElements()
+    public function getElements(): array
     {
         return $this->elements;
     }
 
-    /**
-     * @param string $key
-     * @return array
-     */
-    public function getFilterOption($key)
+    public function getFilterOption(string $key): array
     {
         if (!array_key_exists($key, $this->filterOptions)) {
             return [];
@@ -119,7 +96,7 @@ abstract class CollectionDto implements Dto
      * @return mixed|null
      * @throws LogicException When there is more than 1 element present.
      */
-    public function getOnlyElement()
+    public function getOnlyElement(): mixed
     {
         $elementCount = count($this->elements);
 
@@ -132,18 +109,12 @@ abstract class CollectionDto implements Dto
         throw new LogicException(sprintf('There are %d elements in this collection instead of one.', $elementCount));
     }
 
-    /**
-     * @return int
-     */
-    public function getItemsPerPage()
+    public function getItemsPerPage(): int
     {
         return $this->itemsPerPage;
     }
 
-    /**
-     * @return int
-     */
-    public function getTotalItems()
+    public function getTotalItems(): int
     {
         return $this->totalItems;
     }

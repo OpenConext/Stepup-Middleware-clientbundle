@@ -27,17 +27,17 @@ class RevokeRegistrantsRecoveryTokenCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $authorityId;
+    public string $authorityId;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $recoveryTokenId;
+    public string $recoveryTokenId;
 
     /**
      * @return array

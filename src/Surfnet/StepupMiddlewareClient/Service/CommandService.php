@@ -21,6 +21,7 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClient\Service;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use RuntimeException;
 use Surfnet\StepupMiddlewareClient\Exception\CommandExecutionFailedException;
 use Surfnet\StepupMiddlewareClient\Exception\InvalidArgumentException;
@@ -33,11 +34,9 @@ class CommandService
     private readonly string $password;
 
     /**
-     * @param Client $guzzleClient A Guzzle client preconfigured with the command URL.
-     * @param string $username
-     * @param string $password
+     * The Guzzle client preconfigured with the command URL.
      */
-    public function __construct(private readonly Client $guzzleClient, $username, $password)
+    public function __construct(private readonly Client $guzzleClient, string $username, string $password)
     {
         if (!is_string($username)) {
             throw InvalidArgumentException::invalidType('string', 'username', $username);
@@ -51,17 +50,12 @@ class CommandService
     }
 
     /**
-     * @param string $commandName
-     * @param string $uuid
-     * @return ExecutionResult
      * @throws CommandExecutionFailedException
+     * @throws GuzzleException
      */
-    public function execute(mixed $commandName, $uuid, array $payload, array $metadata = []): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
+    public function execute(string $commandName, string $uuid, array $payload, array $metadata = []): ExecutionResult
     {
         $this->assertIsValidCommandName($commandName);
-        if (!is_string($uuid)) {
-            throw InvalidArgumentException::invalidType('string', 'uuid', $uuid);
-        }
 
         $command = [
             'name' => $commandName,
@@ -81,7 +75,7 @@ class CommandService
             'auth'        => [$this->username, $this->password, 'basic'],
             'headers'     => ['Accept' => 'application/json'],
         ];
-        $httpResponse = $this->guzzleClient->post(null, $requestOptions);
+        $httpResponse = $this->guzzleClient->post('', $requestOptions);
 
         try {
             $response = JsonHelper::decode($httpResponse->getBody()->getContents());
@@ -101,23 +95,16 @@ class CommandService
     /**
      * @throws InvalidArgumentException
      */
-    private function assertIsValidCommandName(mixed $commandName): void
+    private function assertIsValidCommandName(string $commandName): void
     {
-        if (!is_string($commandName)) {
-            InvalidArgumentException::invalidType('string', 'command', $commandName);
-        }
-
-        if (!preg_match('~^[a-z0-9_]+:([a-z0-9_].)*[a-z0-9_]+$~i', (string) $commandName)) {
+        if (!preg_match('~^[a-z0-9_]+:([a-z0-9_].)*[a-z0-9_]+$~i', $commandName)) {
             throw new InvalidArgumentException(
                 'Command must be formatted AggregateRoot:Command or AggregateRoot:Name.Space.Command'
             );
         }
     }
 
-    /**
-     * @return ExecutionResult
-     */
-    private function processOkResponse(string $uuid, mixed $response): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
+    private function processOkResponse(string $uuid, array $response): ExecutionResult
     {
         if (!isset($response['command'])) {
             throw new CommandExecutionFailedException('Unexpected response format: command key missing.');
@@ -145,20 +132,10 @@ class CommandService
         return new ExecutionResult($uuid, $response['processed_by']);
     }
 
-    /**
-     * @return ExecutionResult
-     */
-    private function processErrorResponse(string $uuid, mixed $response): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
+    private function processErrorResponse(string $uuid, array $response): ExecutionResult
     {
         if (!isset($response['errors'])) {
             throw new CommandExecutionFailedException('Unexpected response format: errors key missing.');
-        }
-
-        if (!is_array($response['errors'])) {
-            throw new CommandExecutionFailedException(sprintf(
-                'Unexpected response format: errors should be an array, "%s" given.',
-                gettype($response['errors'])
-            ));
         }
 
         return new ExecutionResult($uuid, null, $response['errors']);

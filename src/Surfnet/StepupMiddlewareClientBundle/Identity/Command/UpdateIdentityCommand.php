@@ -27,18 +27,18 @@ class UpdateIdentityCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     /**
      * @param string $id
      * @param string $institution
      */
-    public function __construct(public $id, public $institution)
+    public function __construct(public string $id, public string $institution)
     {
     }
 

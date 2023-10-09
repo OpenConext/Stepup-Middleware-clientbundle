@@ -21,7 +21,6 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Dto;
 
 use Doctrine\ORM\Mapping as ORM;
-use JsonSerializable;
 use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
 
 /**
@@ -38,58 +37,54 @@ final class RaSecondFactor implements Dto
     /**
      * @var string The second factor's ID (UUID).
      */
-    public $id;
+    public string $id;
 
     /**
      * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * @var string The ID of the specific instance of second factor type (ie. phone number, Yubikey public ID).
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * @var string One of the RaSecondFactor::STATUS_* constants.
      */
-    public $status;
+    public string $status;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * The name of the registrant.
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * Number of the document that was used in vetting.
      *
      * @var string|null
      */
-    public $documentNumber;
+    public ?string $documentNumber;
 
     /**
      * The e-mail of the registrant.
      *
      * @var string
      */
-    public $email;
+    public string $email;
 
-    /**
-     * @param array $data
-     * @return static
-     */
     public static function fromData(array $data): self
     {
         $secondFactor = new self();

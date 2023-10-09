@@ -29,17 +29,11 @@ class RaCandidateService
     {
     }
 
-    /**
-     * @return array|null
-     */
     public function search(RaCandidateSearchQuery $query): ?array
     {
         return $this->apiClient->read('ra-candidate' . $query->toHttpQuery());
     }
 
-    /**
-     * @return array|null
-     */
     public function get(string $identityId, string $actorId): ?array
     {
         return $this->apiClient->read('ra-candidate/%s?actorId=%s', [$identityId, $actorId]);

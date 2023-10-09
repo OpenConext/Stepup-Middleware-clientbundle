@@ -42,7 +42,7 @@ class AuditLogService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchSecondFactorAuditLog(SecondFactorAuditLogSearchQuery $query)
+    public function searchSecondFactorAuditLog(SecondFactorAuditLogSearchQuery $query): ?AuditLog
     {
         $data = $this->service->searchSecondFactorAuditLog($query);
 

@@ -28,72 +28,68 @@ final class AuditLogEntry implements Dto
     /**
      * @var string|null
      */
-    public $actorId;
+    public ?string $actorId;
 
     /**
      * @var string|null
      */
-    public $actorInstitution;
+    public ?string $actorInstitution;
 
     /**
      * @var string|null
      */
-    public $raInstitution;
+    public ?string $raInstitution;
 
     /**
      * @var string
      */
-    public $actorCommonName;
+    public string $actorCommonName;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $identityInstitution;
+    public string $identityInstitution;
 
     /**
      * @var string|null
      */
-    public $secondFactorId;
+    public ?string $secondFactorId;
 
     /**
      * @var string|null
      */
-    public $secondFactorType;
+    public ?string $secondFactorType;
 
     /**
      * @var string
      */
-    public $secondFactorIdentifier;
+    public string $secondFactorIdentifier;
 
     /**
      * @var string
      */
-    public $recoveryTokenIdentifier;
+    public string $recoveryTokenIdentifier;
 
     /**
      * @var string
      */
-    public $recoveryTokenType;
+    public string $recoveryTokenType;
 
     /**
      * @var string
      */
-    public $action;
+    public string $action;
 
     /**
      * @var DateTime
      */
-    public $recordedOn;
+    public DateTime $recordedOn;
 
-    /**
-     * @param array $data
-     * @return static
-     */
     public static function fromData(array $data): self
     {
         $entry                         = new self();

@@ -60,7 +60,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getUnverified($secondFactorId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\UnverifiedSecondFactor
+    public function getUnverified(string $secondFactorId): ?UnverifiedSecondFactor
     {
         $data = $this->service->getUnverified($secondFactorId);
 
@@ -89,7 +89,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getVerified($secondFactorId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor
+    public function getVerified(string $secondFactorId): ?VerifiedSecondFactor
     {
         $data = $this->service->getVerified($secondFactorId);
 
@@ -110,15 +110,7 @@ class SecondFactorService
         return $secondFactor;
     }
 
-    /**
-     * @param string $secondFactorId
-     * @return bool|null
-     * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
-     * @throws InvalidResponseException When the API responded with invalid data.
-     * @throws ResourceReadException When the API doesn't respond with the resource.
-     * @throws MalformedResponseException When the API doesn't respond with a proper response.
-     */
-    public function getVerifiedCanSkipProvePossession($secondFactorId): bool
+    public function getVerifiedCanSkipProvePossession(string $secondFactorId): bool
     {
         $data = $this->service->getVerifiedCanSkipProvePossession($secondFactorId);
 
@@ -133,7 +125,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getVetted($secondFactorId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VettedSecondFactor
+    public function getVetted(string $secondFactorId): ?VettedSecondFactor
     {
         $data = $this->service->getVetted($secondFactorId);
 
@@ -163,7 +155,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchUnverified(UnverifiedSecondFactorSearchQuery $query)
+    public function searchUnverified(UnverifiedSecondFactorSearchQuery $query): ?UnverifiedSecondFactorCollection
     {
         $data = $this->service->searchUnverified($query);
 
@@ -185,13 +177,12 @@ class SecondFactorService
     }
 
     /**
-     * @return VerifiedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchVerified(VerifiedSecondFactorSearchQuery $query)
+    public function searchVerified(VerifiedSecondFactorSearchQuery $query): ?VerifiedSecondFactorCollection
     {
         $data = $this->service->searchVerified($query);
 
@@ -219,7 +210,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchOwnVerified(VerifiedSecondFactorOfIdentitySearchQuery $query)
+    public function searchOwnVerified(VerifiedSecondFactorOfIdentitySearchQuery $query): ?VerifiedSecondFactorCollection
     {
         $data = $this->service->searchOwnVerified($query);
 
@@ -247,7 +238,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchVetted(VettedSecondFactorSearchQuery $query)
+    public function searchVetted(VettedSecondFactorSearchQuery $query): ?VettedSecondFactorCollection
     {
         $data = $this->service->searchVetted($query);
 

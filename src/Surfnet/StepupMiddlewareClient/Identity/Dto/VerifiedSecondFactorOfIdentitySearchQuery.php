@@ -28,30 +28,20 @@ class VerifiedSecondFactorOfIdentitySearchQuery implements HttpQuery
     /**
      * @var string
      */
-    private $identityId;
+    private string $identityId;
 
-    /**
-     * @param string $identityId
-     * @return self
-     */
-    public function setIdentityId($identityId): static
+    public function setIdentityId(string $identityId): self
     {
-        $this->assertNonEmptyString($identityId, 'identityId');
+        $message = sprintf(
+            '"%s" must be a non-empty string, "%s" given',
+            'identityId',
+            (get_debug_type($identityId))
+        );
+        Assert\that($identityId)->notEmpty($message);
 
         $this->identityId = $identityId;
 
         return $this;
-    }
-
-    private function assertNonEmptyString($value, string $name): void
-    {
-        $message = sprintf(
-            '"%s" must be a non-empty string, "%s" given',
-            $name,
-            (get_debug_type($value))
-        );
-
-        Assert\that($value)->string($message)->notEmpty($message);
     }
 
     public function toHttpQuery(): string

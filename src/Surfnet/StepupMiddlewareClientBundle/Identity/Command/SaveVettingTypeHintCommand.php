@@ -27,17 +27,17 @@ class SaveVettingTypeHintCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @var string[]
      */
-    public $hints;
+    public array $hints;
 
     public function serialise(): array
     {

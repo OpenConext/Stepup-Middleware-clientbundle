@@ -31,14 +31,14 @@ class VerifiedSecondFactor implements Dto
      * @Assert\Type(type="string", message="middleware_client.dto.verified_second_factor.id.must_be_string")
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.type.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.verified_second_factor.type.must_be_string")
      * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * @Assert\NotBlank(
@@ -50,7 +50,7 @@ class VerifiedSecondFactor implements Dto
      * )
      * @var string
      */
-    public $secondFactorIdentifier;
+    public string $secondFactorIdentifier;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.registration_code.must_not_be_blank")
@@ -60,13 +60,13 @@ class VerifiedSecondFactor implements Dto
      * )
      * @var string
      */
-    public $registrationCode;
+    public string $registrationCode;
 
 
     /**
      * @var DateTime
      */
-    public $registrationRequestedAt;
+    public DateTime $registrationRequestedAt;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.identity_id.must_not_be_blank")
@@ -76,7 +76,7 @@ class VerifiedSecondFactor implements Dto
      * )
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.institution.must_not_be_blank")
@@ -86,7 +86,7 @@ class VerifiedSecondFactor implements Dto
      * )
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.common_name.must_not_be_blank")
@@ -96,7 +96,7 @@ class VerifiedSecondFactor implements Dto
      * )
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     public static function fromData(array $data): self
     {

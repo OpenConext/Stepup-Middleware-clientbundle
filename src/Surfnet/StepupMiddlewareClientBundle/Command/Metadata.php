@@ -28,20 +28,8 @@ final class Metadata
 
     private ?string $actorInstitution = null;
 
-    /**
-     * @param string|null $actorId
-     * @param string|null $actorInstitution
-     */
-    public function __construct($actorId, $actorInstitution)
+    public function __construct(?string $actorId, ?string $actorInstitution)
     {
-        if (!is_string($actorId) && $actorId !== null) {
-            throw InvalidArgumentException::invalidType('string|null', 'actorId', $actorId);
-        }
-
-        if (!is_string($actorInstitution) && $actorInstitution !== null) {
-            throw InvalidArgumentException::invalidType('string|null', 'actorInstitution', $actorInstitution);
-        }
-
         $this->actorId = $actorId;
         $this->actorInstitution = $actorInstitution;
     }

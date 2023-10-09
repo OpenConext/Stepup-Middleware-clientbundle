@@ -21,19 +21,18 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Command;
 
 use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class VerifyEmailCommand extends AbstractCommand
 {
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $verificationNonce;
+    public string $verificationNonce;
 
     public function serialise(): array
     {

@@ -28,9 +28,9 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuthorizationService;
 
 class AuthorizationServiceTest extends TestCase
 {
-    private \Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuthorizationService $service;
+    private AuthorizationService $service;
 
-    private $apiService;
+    private ApiService|Mockery\MockInterface|Mockery\LegacyMockInterface $apiService;
 
     public function setUp(): void
     {

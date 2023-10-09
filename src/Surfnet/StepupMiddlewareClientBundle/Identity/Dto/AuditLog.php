@@ -24,8 +24,24 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class AuditLog extends CollectionDto
 {
-    protected static function createElementFromData(array $data): \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\AuditLogEntry
+    public static function fromData(array $data): self
     {
-        return AuditLogEntry::fromData($data);
+        $elements = [];
+        foreach ($data['items'] as $key => $item) {
+            $elements[$key] = self::createElementFromData($item);
+        }
+
+        return new self(
+            $elements,
+            $data['collection']['total_items'],
+            $data['collection']['page'],
+            $data['collection']['page_size'],
+            $data['filters']
+        );
+    }
+
+    protected static function createElementFromData(array $item): AuditLogEntry
+    {
+        return AuditLogEntry::fromData($item);
     }
 }

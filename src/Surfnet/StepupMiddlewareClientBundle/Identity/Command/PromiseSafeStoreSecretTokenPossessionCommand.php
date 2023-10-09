@@ -29,21 +29,21 @@ class PromiseSafeStoreSecretTokenPossessionCommand extends AbstractCommand
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * The ID of the recovery code to create.
      *
      * @var string
      */
-    public $recoveryTokenId;
+    public string $recoveryTokenId;
 
     /**
      * The unhashed password
      *
      * @var string
      */
-    public $secret;
+    public string $secret;
 
     public function serialise(): array
     {

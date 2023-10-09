@@ -44,9 +44,6 @@ class RaLocationService
         return $this->apiService->read('ra-location/%s', [$id]);
     }
 
-    /**
-     * @return mixed|null
-     */
     public function search(RaLocationSearchQuery $searchQuery): ?array
     {
         return $this->apiService->read('ra-location' . $searchQuery->toHttpQuery());

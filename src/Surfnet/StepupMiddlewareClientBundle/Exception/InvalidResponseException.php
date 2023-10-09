@@ -20,24 +20,21 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupMiddlewareClientBundle\Exception;
 
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class InvalidResponseException extends RuntimeException
 {
     /**
      * @param string $message
-     * @return self
      */
-    public static function withViolations($message, ConstraintViolationListInterface $violations): self
+    public static function withViolations(string $message, ConstraintViolationListInterface $violations): self
     {
         $message = sprintf('%s (%s)', $message, self::convertViolationsToString($violations));
 
         return new self($message);
     }
 
-    /**
-     * @return string
-     */
     private static function convertViolationsToString(ConstraintViolationListInterface $violations): string
     {
         $violationStrings = [];

@@ -35,10 +35,7 @@ class CommandService
     {
     }
 
-    /**
-     * @return ExecutionResult
-     */
-    public function execute(Command $command, Metadata $metadata): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
+    public function execute(Command $command, Metadata $metadata): ExecutionResult
     {
         $commandName = $this->getCommandName($command);
         $payload = $command->serialise();
@@ -52,6 +49,14 @@ class CommandService
         $this->logger->info(sprintf("Command '%s' with UUID '%s' is executing", $commandName, $command->getUuid()));
 
         try {
+            if (!$command->getUuid()) {
+                throw new CommandExecutionFailedException(
+                    sprintf(
+                        'Unable to execute "%s", no UUID set on the command',
+                        $commandName
+                    )
+                );
+            }
             $result = $this->commandService->execute($commandName, $command->getUuid(), $payload, $metadataPayload);
 
             if ($result->isSuccessful()) {
@@ -88,9 +93,6 @@ class CommandService
         return $result;
     }
 
-    /**
-     * @return string
-     */
     private function getCommandName(Command $command): string
     {
         $commandNameParts = [];

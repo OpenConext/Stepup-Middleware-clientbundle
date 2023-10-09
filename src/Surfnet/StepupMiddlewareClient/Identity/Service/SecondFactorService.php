@@ -45,7 +45,7 @@ class SecondFactorService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function getUnverified($secondFactorId): ?array
+    public function getUnverified(string $secondFactorId): ?array
     {
         return $this->apiService->read('unverified-second-factor/%s', [$secondFactorId]);
     }
@@ -57,7 +57,7 @@ class SecondFactorService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function getVerified($secondFactorId): ?array
+    public function getVerified(string $secondFactorId): ?array
     {
         return $this->apiService->read('verified-second-factor/%s', [$secondFactorId]);
     }
@@ -70,7 +70,7 @@ class SecondFactorService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function getVerifiedCanSkipProvePossession($secondFactorId): ?array
+    public function getVerifiedCanSkipProvePossession(string $secondFactorId): ?array
     {
         return $this->apiService->read('verified-second-factor/%s/skip-prove-possession', [$secondFactorId]);
     }
@@ -82,13 +82,12 @@ class SecondFactorService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function getVetted($secondFactorId): ?array
+    public function getVetted(string $secondFactorId): ?array
     {
         return $this->apiService->read('vetted-second-factor/%s', [$secondFactorId]);
     }
 
     /**
-     * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
@@ -99,7 +98,6 @@ class SecondFactorService
     }
 
     /**
-     * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
@@ -110,7 +108,6 @@ class SecondFactorService
     }
 
     /**
-     * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
@@ -121,7 +118,6 @@ class SecondFactorService
     }
 
     /**
-     * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.

@@ -20,6 +20,10 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupMiddlewareClient\Identity\Service;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Surfnet\StepupMiddlewareClient\Exception\AccessDeniedToResourceException;
+use Surfnet\StepupMiddlewareClient\Exception\MalformedResponseException;
+use Surfnet\StepupMiddlewareClient\Exception\ResourceReadException;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
@@ -32,19 +36,16 @@ class RaListingService
     /**
      * @param string $id The RA's identity ID.
      * @param string $institution The institution.
-     * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
-     * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
+     * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON
+     * @throws GuzzleException
      */
-    public function get($id, $institution, $actorId): ?array
+    public function get(string $id, string $institution, $actorId): ?array
     {
         return $this->apiService->read('ra-listing/%s/%s?actorId=%s', [$id, $institution, $actorId]);
     }
 
-    /**
-     * @return mixed|null
-     */
     public function search(RaListingSearchQuery $searchQuery): ?array
     {
         return $this->apiService->read('ra-listing' . $searchQuery->toHttpQuery());

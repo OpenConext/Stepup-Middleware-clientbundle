@@ -40,7 +40,7 @@ class RaLocationService
      * @param string $id
      * @return null|RaLocation
      */
-    public function get($id): ?\Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation
+    public function get(string $id): ?RaLocation
     {
         $data = $this->service->get($id);
 
@@ -58,7 +58,7 @@ class RaLocationService
     /**
      * @return RaLocationCollection
      */
-    public function search(RaLocationSearchQuery $searchQuery)
+    public function search(RaLocationSearchQuery $searchQuery): RaLocationCollection
     {
         $data = $this->service->search($searchQuery);
 
@@ -80,9 +80,9 @@ class RaLocationService
 
     /**
      * @param object      $value
-     * @param null|string $message
+     * @param string|null $message
      */
-    private function assertIsValid(mixed $value, $message = null): void
+    private function assertIsValid(mixed $value, string $message = null): void
     {
         $violations = $this->validator->validate($value);
 

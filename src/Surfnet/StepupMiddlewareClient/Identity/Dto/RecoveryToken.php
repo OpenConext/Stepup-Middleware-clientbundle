@@ -25,42 +25,42 @@ final class RecoveryToken
     /**
      * @var string
      */
-    public $recoveryTokenId;
+    public string $recoveryTokenId;
 
     /**
      * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * @var string
      */
-    public $identifier;
+    public string $identifier;
 
     /**
      * @var string
      */
-    public $status;
+    public string $status;
 
     /**
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     public static function from(array $apiResult): self
     {

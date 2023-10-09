@@ -22,6 +22,9 @@ namespace Surfnet\StepupMiddlewareClientBundle\Tests\Service;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Surfnet\StepupMiddlewareClient\Service\CommandService as LibraryCommandService;
+use Surfnet\StepupMiddlewareClient\Service\ExecutionResult;
 use Surfnet\StepupMiddlewareClientBundle\Command\Command;
 use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
@@ -37,7 +40,11 @@ class CommandServiceTest extends TestCase
 
     /**
      * @dataProvider commands
-     * @param Metadata|null $metadata
+     * @param string $expectedCommandName
+     * @param array $expectedPayload
+     * @param array $expectedMetadataPayload
+     * @param Command $command
+     * @param Metadata $metadata
      */
     public function testItExecutesCommands(
         string $expectedCommandName,
@@ -46,16 +53,16 @@ class CommandServiceTest extends TestCase
         Command $command,
         Metadata $metadata
     ): void {
-        $result = m::mock(\Surfnet\StepupMiddlewareClient\Service\ExecutionResult::class)
+        $result = m::mock(ExecutionResult::class)
             ->shouldReceive('isSuccessful')->andReturn(true)
             ->shouldReceive('getUuid')->andReturn('uu-id')
             ->shouldReceive('getProcessedBy')->andReturn('mw-01')
             ->getMock();
-        $commandService = m::mock(\Surfnet\StepupMiddlewareClient\Service\CommandService::class)
+        $commandService = m::mock(LibraryCommandService::class)
             ->shouldReceive('execute')->once()->with($expectedCommandName, $this->spy($sentUuid), $expectedPayload, $expectedMetadataPayload)->andReturn($result)
             ->getMock();
 
-        $service = new CommandService($commandService, m::mock(\Psr\Log\LoggerInterface::class)->shouldIgnoreMissing());
+        $service = new CommandService($commandService, m::mock(LoggerInterface::class)->shouldIgnoreMissing());
         $service->execute($command, $metadata);
 
         $this->assertNotEmpty($command->getUuid(), 'UUID wasn\'t set during command execution');
@@ -90,23 +97,23 @@ class CommandServiceTest extends TestCase
         $command = new ZigCommand([]);
         $command->setUuid($preSetUuid);
 
-        $result = m::mock(\Surfnet\StepupMiddlewareClient\Service\ExecutionResult::class)
+        $result = m::mock(ExecutionResult::class)
             ->shouldReceive('isSuccessful')->andReturn(true)
             ->shouldReceive('getUuid')->andReturn($preSetUuid)
             ->shouldReceive('getProcessedBy')->andReturn('mw-01')
             ->getMock();
-        $commandService = m::mock(\Surfnet\StepupMiddlewareClient\Service\CommandService::class)
+        $commandService = m::mock(LibraryCommandService::class)
             ->shouldReceive('execute')->once()->with('Root:Name.Spaced.Zig', $this->spy($sentUuid), [], ['actor_id' => 'actorId', 'actor_institution' => 'actorInstitution'])->andReturn($result)
             ->getMock();
 
-        $service = new CommandService($commandService, m::mock(\Psr\Log\LoggerInterface::class)->shouldIgnoreMissing());
+        $service = new CommandService($commandService, m::mock(LoggerInterface::class)->shouldIgnoreMissing());
         $service->execute($command, new Metadata('actorId', 'actorInstitution'));
 
         $this->assertEquals($preSetUuid, $command->getUuid(), 'UUID was overwritten during command execution');
         $this->assertEquals($preSetUuid, $sentUuid, 'Another UUID than the pre-set UUID was sent to the server');
     }
 
-    private function spy(&$spiedValue)
+    private function spy(&$spiedValue): m\Matcher\Closure
     {
         return m::on(function ($value) use (&$spiedValue): bool {
             $spiedValue = $value;

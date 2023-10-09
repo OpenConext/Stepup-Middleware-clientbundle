@@ -82,9 +82,9 @@ class IdentitySearchQuery implements HttpQuery
 
     public function toHttpQuery(): string
     {
-        $fields = '';
+        $fields = [];
         if ($this->institution !== '' && $this->institution !== '0') {
-            $fields = ['institution' => $this->institution];
+            $fields['institution'] = $this->institution;
         }
 
         if ($this->commonName !== '' && $this->commonName !== '0') {

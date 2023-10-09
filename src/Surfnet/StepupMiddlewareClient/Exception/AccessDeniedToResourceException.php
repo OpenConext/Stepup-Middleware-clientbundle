@@ -20,15 +20,17 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupMiddlewareClient\Exception;
 
+use Exception;
+
 class AccessDeniedToResourceException extends RuntimeException implements ApiErrorException
 {
     /**
      * @param string $resource
      * @param string[] $errors
      * @param int $code
-     * @param null|\Exception $previous
+     * @param null|Exception $previous
      */
-    public function __construct($resource, private readonly array $errors, $code = 0, \Exception $previous = null)
+    public function __construct(string $resource, private readonly array $errors, $code = 0, Exception $previous = null)
     {
         $message = sprintf("Access denied to resource '%s': are you properly authorised?", $resource);
 

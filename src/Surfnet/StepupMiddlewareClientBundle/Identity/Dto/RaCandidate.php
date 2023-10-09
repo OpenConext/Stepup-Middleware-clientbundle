@@ -31,7 +31,7 @@ class RaCandidate implements Dto
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_candidate.institution.must_not_be_blank")
@@ -39,7 +39,7 @@ class RaCandidate implements Dto
      *
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_candidate.name_id.must_not_be_blank")
@@ -47,7 +47,7 @@ class RaCandidate implements Dto
      *
      * @var string
      */
-    public $nameId;
+    public string $nameId;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_candidate.common_name.must_not_be_blank")
@@ -55,7 +55,7 @@ class RaCandidate implements Dto
      *
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_candidate.email.must_not_be_blank")
@@ -63,12 +63,8 @@ class RaCandidate implements Dto
      *
      * @var string
      */
-    public $email;
+    public string $email;
 
-    /**
-     * @param array $data
-     * @return static
-     */
     public static function fromData(array $data): self
     {
         $raCandidate              = new self();

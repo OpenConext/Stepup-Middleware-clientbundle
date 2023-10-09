@@ -22,6 +22,7 @@ namespace Surfnet\StepupMiddlewareClient\Identity\Dto;
 
 use Assert;
 use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
+use function is_array;
 
 class RaCandidateSearchQuery implements HttpQuery
 {
@@ -161,12 +162,12 @@ class RaCandidateSearchQuery implements HttpQuery
                     'orderDirection'    => $this->orderDirection,
                     'p'                 => $this->pageNumber,
                 ],
-                fn($value): bool => !is_null($value)
+                fn($value): bool => !is_array($value)
             )
         );
     }
 
-    private function assertNonEmptyString(mixed $value, string $parameterName, string $message = null): void
+    private function assertNonEmptyString(string $value, string $parameterName, string $message = null): void
     {
         $message = sprintf(
             $message ?: '"%s" must be a non-empty string, "%s" given',
@@ -174,6 +175,6 @@ class RaCandidateSearchQuery implements HttpQuery
             (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 }

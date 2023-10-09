@@ -65,6 +65,7 @@ class ProfileSearchQuery implements HttpQuery
 
     public function toHttpQuery(): string
     {
+        $fields = [];
         if ($this->actorId !== '' && $this->actorId !== '0') {
             $fields = ['actorId' => $this->actorId];
         }

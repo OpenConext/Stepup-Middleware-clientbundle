@@ -40,9 +40,6 @@ class IdentityService
     ) {
     }
 
-    /**
-     * @return null|Identity
-     */
     public function get(string $id): ?DtoIdentity
     {
         $data = $this->service->get($id);
@@ -62,6 +59,9 @@ class IdentityService
     public function search(IdentitySearchQuery $searchQuery): IdentityCollection
     {
         $data = $this->service->search($searchQuery);
+        if (!$data) {
+            return IdentityCollection::empty();
+        }
 
         $collection = IdentityCollection::fromData($data);
 
@@ -72,6 +72,9 @@ class IdentityService
 
     public function getRegistrationAuthorityCredentials(Identity $identity): ?RegistrationAuthorityCredentials
     {
+        if (!$identity->id) {
+            return null;
+        }
         $data = $this->service->getRegistrationAuthorityCredentials($identity->id);
 
         // 404 Not Found is a valid case.

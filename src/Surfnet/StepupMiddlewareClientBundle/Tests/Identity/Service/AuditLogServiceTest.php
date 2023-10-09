@@ -24,9 +24,12 @@ use DateTime;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\SecondFactorAuditLogSearchQuery;
+use Surfnet\StepupMiddlewareClient\Identity\Service\AuditLogService as LibraryAuditLogService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\AuditLog;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\AuditLogEntry;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuditLogService;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuditLogServiceTest extends TestCase
 {
@@ -83,20 +86,20 @@ JSON;
     {
         $query = new SecondFactorAuditLogSearchQuery('Ibuildings bv', '5613875b-410e-407c-91ce-35bf0b5a8d89', 1);
 
-        $libraryService = m::mock(\Surfnet\StepupMiddlewareClient\Identity\Service\AuditLogService::class)
-            ->shouldReceive('searchSecondFactorAuditLog')->with($query)->once()->andReturn(json_decode((string) $this->mockAuditLog, true, 512, JSON_THROW_ON_ERROR))
+        $libraryService = m::mock(LibraryAuditLogService::class)
+            ->shouldReceive('searchSecondFactorAuditLog')->with($query)->once()->andReturn(json_decode($this->mockAuditLog, true, 512, JSON_THROW_ON_ERROR))
             ->getMock();
-        $violations = m::mock(\Symfony\Component\Validator\ConstraintViolationListInterface::class)
+        $violations = m::mock(ConstraintViolationListInterface::class)
             ->shouldReceive('count')->once()->andReturn(0)
             ->getMock();
-        $validator = m::mock(\Symfony\Component\Validator\Validator\ValidatorInterface::class)
+        $validator = m::mock(ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
 
         $service = new AuditLogService($libraryService, $validator);
         $actualAuditLog = $service->searchSecondFactorAuditLog($query);
 
-        $expectedAuditLog = AuditLog::fromData(json_decode((string) $this->mockAuditLog, true, 512, JSON_THROW_ON_ERROR));
+        $expectedAuditLog = AuditLog::fromData(json_decode($this->mockAuditLog, true, 512, JSON_THROW_ON_ERROR));
 
         $this->assertEquals($expectedAuditLog, $actualAuditLog);
 

@@ -31,12 +31,8 @@ class RaCandidateInstitution implements Dto
      *
      * @var string
      */
-    public $institution;
+    public string $institution;
 
-    /**
-     * @param array $data
-     * @return static
-     */
     public static function fromData(array $data): self
     {
         $institutionListing              = new self();

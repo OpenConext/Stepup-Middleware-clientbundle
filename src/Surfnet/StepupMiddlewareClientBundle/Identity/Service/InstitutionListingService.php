@@ -34,9 +34,12 @@ class InstitutionListingService
     /**
      * @return InstitutionListingCollection
      */
-    public function getAll(): \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\InstitutionListingCollection
+    public function getAll(): InstitutionListingCollection
     {
         $data = $this->clientService->getAll();
+        if (!$data) {
+            return InstitutionListingCollection::empty();
+        }
         $collection = InstitutionListingCollection::fromData($data);
 
         $violations = $this->validator->validate($collection);

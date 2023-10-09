@@ -25,7 +25,7 @@ final class VettingTypeHint
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * Keyed on locale, the hints shown to the
@@ -34,12 +34,12 @@ final class VettingTypeHint
      *
      * @var array
      */
-    public $hints;
+    public array $hints;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     public static function from(array $apiResult): self
     {

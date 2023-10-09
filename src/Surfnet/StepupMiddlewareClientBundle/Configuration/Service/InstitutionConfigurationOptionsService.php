@@ -35,10 +35,9 @@ final class InstitutionConfigurationOptionsService
     }
 
     /**
-     * @param $institution
      * @return null|InstitutionConfigurationOptions
      */
-    public function getInstitutionConfigurationOptionsFor($institution): ?InstitutionConfigurationOptions
+    public function getInstitutionConfigurationOptionsFor(string $institution): ?InstitutionConfigurationOptions
     {
         $data = $this->service->getInstitutionConfigurationOptionsFor($institution);
 

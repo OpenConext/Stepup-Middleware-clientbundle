@@ -29,7 +29,7 @@ class RaSecondFactorExportCollection
      *
      * @var array
      */
-    protected $elements;
+    protected array $elements;
 
     public static function fromData(array $data): self
     {
@@ -46,7 +46,7 @@ class RaSecondFactorExportCollection
 
     public function count(): int
     {
-        return count((array) $this->elements);
+        return count($this->elements);
     }
 
     public function getColumnNames(): array
@@ -65,7 +65,7 @@ class RaSecondFactorExportCollection
     /**
      * @return array
      */
-    public function getElements()
+    public function getElements(): array
     {
         return $this->elements;
     }

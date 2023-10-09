@@ -27,5 +27,5 @@ interface HttpQuery
      *
      * @return string
      */
-    public function toHttpQuery();
+    public function toHttpQuery(): string;
 }

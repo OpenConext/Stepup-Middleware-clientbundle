@@ -22,8 +22,5 @@ namespace Surfnet\StepupMiddlewareClientBundle\Dto;
 
 interface Dto
 {
-    /**
-     * @return static
-     */
-    public static function fromData(array $data);
+    public static function fromData(array $data): self;
 }

@@ -9,20 +9,11 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class RaLocationSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
     private readonly string $institution;
 
-    /**
-     * @var string|null
-     */
-    private ?string $orderBy = 'name';
+    private string $orderBy = 'name';
 
-    /**
-     * @var string|null
-     */
-    private ?string $orderDirection = 'asc';
+    private string $orderDirection = 'asc';
 
     public function __construct(string $institution)
     {
@@ -58,7 +49,7 @@ class RaLocationSearchQuery implements HttpQuery
     {
         $this->assertNonEmptyString($orderDirection, 'orderDirection');
         Assert\that($orderDirection)->choice(
-            ['asc', 'desc', '', null],
+            ['asc', 'desc'],
             "Invalid order direction, must be one of 'asc', 'desc'"
         );
 

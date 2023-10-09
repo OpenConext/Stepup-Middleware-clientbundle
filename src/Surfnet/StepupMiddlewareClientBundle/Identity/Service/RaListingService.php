@@ -36,14 +36,7 @@ class RaListingService
     {
     }
 
-    /**
-     * @param string $id
-     * @param string $institution
-     * @param string $actorInstitution
-     * @param string $actorId
-     * @return null|RaListing
-     */
-    public function get($id, $institution, $actorId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing
+    public function get(string $id, string $institution, string $actorId): ?RaListing
     {
         $data = $this->service->get($id, $institution, $actorId);
 
@@ -61,7 +54,7 @@ class RaListingService
     /**
      * @return RaListingCollection
      */
-    public function search(RaListingSearchQuery $searchQuery)
+    public function search(RaListingSearchQuery $searchQuery): RaListingCollection
     {
         $data = $this->service->search($searchQuery);
 
@@ -83,9 +76,9 @@ class RaListingService
 
     /**
      * @param object      $value
-     * @param null|string $message
+     * @param string|null $message
      */
-    private function assertIsValid(mixed $value, $message = null): void
+    private function assertIsValid(mixed $value, string $message = null): void
     {
         $violations = $this->validator->validate($value);
 

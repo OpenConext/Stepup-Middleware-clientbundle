@@ -49,9 +49,6 @@ class SurfnetStepupMiddlewareClientExtension extends Extension
         $commandService->replaceArgument(2, $config['authorisation']['password']);
     }
 
-    /**
-     * @return \Symfony\Component\DependencyInjection\Definition
-     */
     private function configureMiddlewareCommandApiUrl(array $config, ContainerBuilder $container): void
     {
         $guzzle = $container->getDefinition('surfnet_stepup_middleware_client.guzzle.commands');

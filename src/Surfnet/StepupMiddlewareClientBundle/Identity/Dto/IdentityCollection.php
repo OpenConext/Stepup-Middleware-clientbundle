@@ -24,8 +24,24 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class IdentityCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $data): \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
+    public static function fromData(array $data): self
     {
-        return Identity::fromData($data);
+        $elements = [];
+        foreach ($data['items'] as $key => $item) {
+            $elements[$key] = self::createElementFromData($item);
+        }
+
+        return new self(
+            $elements,
+            $data['collection']['total_items'],
+            $data['collection']['page'],
+            $data['collection']['page_size'],
+            $data['filters']
+        );
+    }
+
+    protected static function createElementFromData(array $item): Identity
+    {
+        return Identity::fromData($item);
     }
 }

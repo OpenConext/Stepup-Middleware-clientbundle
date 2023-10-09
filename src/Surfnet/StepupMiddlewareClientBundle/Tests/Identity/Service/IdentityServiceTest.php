@@ -20,11 +20,15 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupMiddlewareClient\Tests\Identity\Service;
 
+use ArrayIterator;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Surfnet\StepupMiddlewareClient\Identity\Service\IdentityService as LibraryIdentityService;
 use Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class IdentityServiceTest extends TestCase
 {
@@ -44,13 +48,13 @@ class IdentityServiceTest extends TestCase
 
     public function testItGetsAnIdentity(): void
     {
-        $libraryService = m::mock(\Surfnet\StepupMiddlewareClient\Identity\Service\IdentityService::class)
+        $libraryService = m::mock(LibraryIdentityService::class)
             ->shouldReceive('get')->with($this->mockIdentity['id'])->once()->andReturn($this->mockIdentity)
             ->getMock();
-        $violations = m::mock(\Symfony\Component\Validator\ConstraintViolationListInterface::class)
+        $violations = m::mock(ConstraintViolationListInterface::class)
             ->shouldReceive('count')->once()->andReturn(0)
             ->getMock();
-        $validator = m::mock(\Symfony\Component\Validator\Validator\ValidatorInterface::class)
+        $validator = m::mock(ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
 
@@ -64,14 +68,14 @@ class IdentityServiceTest extends TestCase
 
     public function testItValidatesTheIdentity(): void
     {
-        $libraryService = m::mock(\Surfnet\StepupMiddlewareClient\Identity\Service\IdentityService::class)
+        $libraryService = m::mock(LibraryIdentityService::class)
             ->shouldReceive('get')->with($this->mockIdentity['id'])->once()->andReturn($this->mockIdentity)
             ->getMock();
-        $violations = m::mock(\Symfony\Component\Validator\ConstraintViolationListInterface::class)
+        $violations = m::mock(ConstraintViolationListInterface::class)
             ->shouldReceive('count')->with()->once()->andReturn(1)
-            ->shouldReceive('getIterator')->with()->once()->andReturn(new \ArrayIterator())
+            ->shouldReceive('getIterator')->with()->once()->andReturn(new ArrayIterator())
             ->getMock();
-        $validator = m::mock(\Symfony\Component\Validator\Validator\ValidatorInterface::class)
+        $validator = m::mock(ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
 

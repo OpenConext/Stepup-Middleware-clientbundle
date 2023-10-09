@@ -92,9 +92,9 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @group institution-configuration
      *
      * @dataProvider nonBooleanProvider
-     * @param $nonBoolean
+     * @param array|string|int|float|stdClass|null $nonBoolean
      */
-    public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid(null|array|string|int|float|\stdClass $nonBoolean): void
+    public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid(null|array|string|int|float|stdClass $nonBoolean): void
     {
         $institution = 'surfnet.nl';
 
@@ -142,9 +142,9 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @group institution-configuration
      *
      * @dataProvider nonBooleanProvider
-     * @param $nonBoolean
+     * @param array|string|int|float|stdClass|null $nonBoolean
      */
-    public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid(null|array|string|int|float|\stdClass $nonBoolean): void
+    public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid(null|array|string|int|float|stdClass $nonBoolean): void
     {
         $institution = 'surfnet.nl';
 
@@ -192,9 +192,9 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @group institution-configuration
      *
      * @dataProvider nonArrayProvider
-     * @param $nonArray
+     * @param bool|string|int|float|stdClass|null $nonArray
      */
-    public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid(null|bool|string|int|float|\stdClass $nonArray): void
+    public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid(null|bool|string|int|float|stdClass $nonArray): void
     {
         $institution = 'surfnet.nl';
 
@@ -242,9 +242,9 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @group institution-configuration
      *
      * @dataProvider nonStringProvider
-     * @param $nonArray
+     * @param bool|array|int|float|stdClass|null $nonArray
      */
-    public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid(null|bool|array|int|float|\stdClass $nonArray): void
+    public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid(null|bool|array|int|float|stdClass $nonArray): void
     {
         $institution = 'surfnet.nl';
 

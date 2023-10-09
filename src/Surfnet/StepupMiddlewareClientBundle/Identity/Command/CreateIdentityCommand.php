@@ -27,32 +27,32 @@ class CreateIdentityCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @var string
      */
-    public $nameId;
+    public string $nameId;
 
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     /**
      * @var string
      */
-    public $preferredLocale;
+    public string $preferredLocale;
 
     public function serialise(): array
     {

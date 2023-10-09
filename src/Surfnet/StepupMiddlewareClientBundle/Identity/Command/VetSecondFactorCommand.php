@@ -21,54 +21,53 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Command;
 
 use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class VetSecondFactorCommand extends AbstractCommand
 {
     /**
      * @var string
      */
-    public $authorityId;
+    public string $authorityId;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * @var string
      */
-    public $registrationCode;
+    public string $registrationCode;
 
     /**
      * @var string
      */
-    public $secondFactorType;
+    public string $secondFactorType;
 
     /**
      * @var string
      */
-    public $secondFactorIdentifier;
+    public string $secondFactorIdentifier;
 
     /**
      * @var string
      */
-    public $documentNumber;
+    public string $documentNumber;
 
     /**
      * @var bool
      */
-    public $provePossessionSkipped;
+    public bool $provePossessionSkipped;
 
     /**
      * @var boolean
      */
-    public $identityVerified;
+    public bool $identityVerified;
 
     public function serialise(): array
     {

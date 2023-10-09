@@ -36,7 +36,7 @@ class RaCandidateService
     /**
      * @return RaCandidateCollection
      */
-    public function search(RaCandidateSearchQuery $query)
+    public function search(RaCandidateSearchQuery $query): RaCandidateCollection
     {
         $data = $this->libraryService->search($query);
 
@@ -53,13 +53,7 @@ class RaCandidateService
         return $collection;
     }
 
-    /**
-     * @param string $identityId
-     * @param string $institution
-     * @param string $actorId
-     * @return RaCandidateInstitutions
-     */
-    public function get($identityId, $actorId): ?\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitutions
+    public function get(string $identityId, string $actorId): ?RaCandidateInstitutions
     {
         $data = $this->libraryService->get($identityId, $actorId);
 

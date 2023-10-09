@@ -26,9 +26,12 @@ use PHPUnit\Framework\TestCase;
 use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\UnverifiedSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\VerifiedSecondFactorSearchQuery;
+use Surfnet\StepupMiddlewareClient\Identity\Service\SecondFactorService as LibrarySecondFactorService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\UnverifiedSecondFactor;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecondFactorServiceTest extends TestCase
 {
@@ -54,13 +57,13 @@ class SecondFactorServiceTest extends TestCase
         ];
         $query = (new UnverifiedSecondFactorSearchQuery())->setIdentityId($identityId);
 
-        $libraryService = m::mock(\Surfnet\StepupMiddlewareClient\Identity\Service\SecondFactorService::class)
+        $libraryService = m::mock(LibrarySecondFactorService::class)
             ->shouldReceive('searchUnverified')->with($query)->once()->andReturn($secondFactorData)
             ->getMock();
-        $violations = m::mock(\Symfony\Component\Validator\ConstraintViolationListInterface::class)
+        $violations = m::mock(ConstraintViolationListInterface::class)
             ->shouldReceive('count')->with()->once()->andReturn(0)
             ->getMock();
-        $validator = m::mock(\Symfony\Component\Validator\Validator\ValidatorInterface::class)
+        $validator = m::mock(ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
 
@@ -98,13 +101,13 @@ class SecondFactorServiceTest extends TestCase
         ];
         $query = (new VerifiedSecondFactorSearchQuery())->setIdentityId($identityId);
 
-        $libraryService = m::mock(\Surfnet\StepupMiddlewareClient\Identity\Service\SecondFactorService::class)
+        $libraryService = m::mock(LibrarySecondFactorService::class)
             ->shouldReceive('searchVerified')->with($query)->once()->andReturn($secondFactorData)
             ->getMock();
-        $violations = m::mock(\Symfony\Component\Validator\ConstraintViolationListInterface::class)
+        $violations = m::mock(ConstraintViolationListInterface::class)
             ->shouldReceive('count')->with()->once()->andReturn(0)
             ->getMock();
-        $validator = m::mock(\Symfony\Component\Validator\Validator\ValidatorInterface::class)
+        $validator = m::mock(ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
         $typeService = m::mock(SecondFactorTypeService::class);

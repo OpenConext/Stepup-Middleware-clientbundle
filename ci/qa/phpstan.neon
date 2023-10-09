@@ -1,8 +1,11 @@
 includes:
     - phpstan-baseline.neon
+    - ../../vendor/phpstan/phpstan-symfony/extension.neon
 parameters:
-	level: 1
+	level: 9
 	paths:
 		- ../../src
 	excludePaths:
-		- ../../src/Tests
+		- ../../vendor
+		- ../../src/Surfnet/StepupMiddlewareClient/Tests
+		- ../../src/Surfnet/StepupMiddlewareClientBundle/Tests

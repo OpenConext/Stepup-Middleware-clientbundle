@@ -28,34 +28,31 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
     /**
      * @var string
      */
-    private $institution;
+    private string $institution;
 
     /**
      * @var string
      */
-    private $identityId;
+    private string $identityId;
 
-    /**
-     * @var string|null
-     */
     private string $orderBy = 'recordedOn';
 
     /**
      * @var string|null
      */
-    private $orderDirection = 'desc';
+    private ?string $orderDirection = 'desc';
 
     /**
      * @var int
      */
-    private $pageNumber;
+    private int $pageNumber;
 
     /**
      * @param string $institution
      * @param string $identityId
-     * @param int    $pageNumber
+     * @param int $pageNumber
      */
-    public function __construct($institution, $identityId, $pageNumber)
+    public function __construct(string $institution, string $identityId, int $pageNumber)
     {
         $this->assertNonEmptyString($institution, 'institution');
         $this->assertNonEmptyString($identityId, 'identityId');
@@ -78,7 +75,7 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
     /**
      * @param string|null $orderDirection
      */
-    public function setOrderDirection($orderDirection): void
+    public function setOrderDirection(?string $orderDirection): void
     {
         Assert\that($orderDirection)->choice(
             ['asc', 'desc', '', null],
@@ -88,7 +85,7 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
         $this->orderDirection = $orderDirection ?: null;
     }
 
-    private function assertNonEmptyString($value, string $name): void
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
@@ -96,7 +93,7 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
             (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
     /**

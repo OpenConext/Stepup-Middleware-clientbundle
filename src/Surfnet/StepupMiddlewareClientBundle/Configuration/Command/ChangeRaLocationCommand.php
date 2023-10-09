@@ -31,7 +31,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @Assert\NotBlank()
@@ -39,7 +39,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\NotBlank()
@@ -47,7 +47,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * @Assert\NotBlank()
@@ -55,7 +55,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * @Assert\NotBlank()
@@ -63,7 +63,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $contactInformation;
+    public string $contactInformation;
 
     public function serialise(): array
     {

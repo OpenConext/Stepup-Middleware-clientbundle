@@ -28,7 +28,7 @@ class ExpressLocalePreferenceCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @Assert\NotBlank()
@@ -36,7 +36,7 @@ class ExpressLocalePreferenceCommand extends AbstractCommand
      *
      * @var string
      */
-    public $preferredLocale;
+    public string $preferredLocale;
 
     /**
      * @return array

@@ -28,30 +28,19 @@ class VettedSecondFactorSearchQuery implements HttpQuery
     /**
      * @var string
      */
-    private $identityId;
+    private string $identityId;
 
-    /**
-     * @param string $identityId
-     * @return self
-     */
-    public function setIdentityId($identityId): static
-    {
-        $this->assertNonEmptyString($identityId, 'identityId');
-
-        $this->identityId = $identityId;
-
-        return $this;
-    }
-
-    private function assertNonEmptyString($value, string $name): void
+    public function setIdentityId(string $identityId): self
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
-            $name,
-            (get_debug_type($value))
+            'identityId',
+            (get_debug_type($identityId))
         );
+        Assert\that($identityId)->notEmpty($message);
+        $this->identityId = $identityId;
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        return $this;
     }
 
     public function toHttpQuery(): string

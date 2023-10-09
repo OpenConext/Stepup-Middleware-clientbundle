@@ -30,14 +30,14 @@ class UnverifiedSecondFactor implements Dto
      * @Assert\Type(type="string", message="middleware_client.dto.unverified_second_factor.id.must_be_string")
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.unverified_second_factor.type.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.unverified_second_factor.type.must_be_string")
      * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * @Assert\NotBlank(
@@ -49,7 +49,7 @@ class UnverifiedSecondFactor implements Dto
      * )
      * @var string
      */
-    public $secondFactorIdentifier;
+    public string $secondFactorIdentifier;
 
     public static function fromData(array $data): self
     {

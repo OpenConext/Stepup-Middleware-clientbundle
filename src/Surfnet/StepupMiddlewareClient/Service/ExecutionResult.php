@@ -26,14 +26,14 @@ class ExecutionResult
      * @param string|null $uuid Null in case of errors.
      * @param string|null $processedBy Null in case of errors.
      */
-    public function __construct(private $uuid, private $processedBy, private readonly array $errors = [])
+    public function __construct(private ?string $uuid, private ?string $processedBy, private readonly array $errors = [])
     {
     }
 
     /**
      * @return string|null Null in case of errors.
      */
-    public function getUuid()
+    public function getUuid(): ?string
     {
         return $this->uuid;
     }
@@ -41,7 +41,7 @@ class ExecutionResult
     /**
      * @return null|string Null in case of errors.
      */
-    public function getProcessedBy()
+    public function getProcessedBy(): ?string
     {
         return $this->processedBy;
     }

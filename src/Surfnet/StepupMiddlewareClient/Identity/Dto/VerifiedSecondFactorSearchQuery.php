@@ -28,32 +28,28 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
     /**
      * @var string
      */
-    private $identityId;
+    private string $identityId;
 
     /**
      * @var string
      */
-    private $secondFactorId;
+    private string $secondFactorId;
 
     /**
      * @var string
      */
-    private $registrationCode;
+    private string $registrationCode;
 
     /**
      * @var string
      */
-    private $institution;
+    private string $institution;
     /**
      * @var string
      */
-    private $actorId;
+    private string $actorId;
 
-    /**
-     * @param string $identityId
-     * @return self
-     */
-    public function setIdentityId($identityId): static
+    public function setIdentityId(string $identityId): static
     {
         $this->assertNonEmptyString($identityId, 'identityId');
 
@@ -62,11 +58,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $secondFactorId
-     * @return self
-     */
-    public function setSecondFactorId($secondFactorId): static
+    public function setSecondFactorId(string $secondFactorId): static
     {
         $this->assertNonEmptyString($secondFactorId, 'secondFactorId');
 
@@ -75,11 +67,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $registrationCode
-     * @return self
-     */
-    public function setRegistrationCode($registrationCode): static
+    public function setRegistrationCode(string $registrationCode): static
     {
         $this->assertNonEmptyString($registrationCode, 'registrationCode');
 
@@ -88,11 +76,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $institution
-     * @return VerifiedSecondFactorSearchQuery
-     */
-    public function setInstitution($institution): static
+    public function setInstitution(string $institution): static
     {
         $this->assertNonEmptyString($institution, 'institution');
 
@@ -101,11 +85,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $actorId
-     * @return VerifiedSecondFactorSearchQuery
-     */
-    public function setActorId($actorId): static
+    public function setActorId(string $actorId): static
     {
         $this->assertNonEmptyString($actorId, 'actorId');
 
@@ -114,7 +94,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    private function assertNonEmptyString($value, string $name): void
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
@@ -122,7 +102,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
             (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
     public function toHttpQuery(): string

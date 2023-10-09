@@ -21,7 +21,8 @@ declare(strict_types = 1);
 namespace Surfnet\StepupMiddlewareClient\Tests\Helper;
 
 use PHPUnit\Framework\TestCase;
-use Surfnet\StepupMiddlewareClient\Exception\InvalidArgumentException;
+use StdClass;
+use Surfnet\StepupMiddlewareClient\Exception\JsonException;
 use Surfnet\StepupMiddlewareClient\Helper\JsonHelper;
 
 class JsonHelperTest extends TestCase
@@ -45,7 +46,7 @@ class JsonHelperTest extends TestCase
     public function jsonHelperThrowsAnExceptionWhenThereIsASyntaxError(): void
     {
         $this->expectExceptionMessage("Syntax error");
-        $this->expectException(\Surfnet\StepupMiddlewareClient\Exception\JsonException::class);
+        $this->expectException(JsonException::class);
         $jsonWithMissingDoubleQuotes = '{ hello : world }';
         JsonHelper::decode($jsonWithMissingDoubleQuotes);
     }
@@ -58,7 +59,7 @@ class JsonHelperTest extends TestCase
             'array'   => [[]],
             'integer' => [1],
             'float'   => [1.2],
-            'object'  => [new \StdClass()],
+            'object'  => [new StdClass()],
         ];
     }
 }

@@ -27,12 +27,12 @@ class RetractRegistrationAuthorityCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     public function serialise(): array
     {

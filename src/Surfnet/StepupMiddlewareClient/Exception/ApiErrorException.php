@@ -25,5 +25,5 @@ interface ApiErrorException extends StepupMiddlewareClientException
     /**
      * @return string[]
      */
-    public function getErrors();
+    public function getErrors(): array;
 }

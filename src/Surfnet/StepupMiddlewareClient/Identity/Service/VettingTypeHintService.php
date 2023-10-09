@@ -33,7 +33,7 @@ class VettingTypeHintService
     public function getOne(string $institution): VettingTypeHint
     {
         $result = $this->apiService->read(sprintf('vetting-type-hint/%s', $institution));
-        if (!$result || $result === []) {
+        if (empty($result)) {
             throw new RuntimeException(sprintf('No vetting type hint found for institution %s', $institution));
         }
         return VettingTypeHint::from($result);

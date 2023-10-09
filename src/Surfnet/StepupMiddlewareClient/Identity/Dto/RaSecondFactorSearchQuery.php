@@ -33,53 +33,53 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @var string|null
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @var string|null
      */
-    private $type;
+    private ?string $type;
 
     /**
      * @var string|null The second factor type's ID (eg. Yubikey public ID)
      */
-    private $secondFactorId;
+    private ?string $secondFactorId;
 
     /**
      * @var string|null
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @var string|null One of the STATUS_* constants.
      */
-    private $status;
+    private ?string $status;
 
     /**
      * @var string|null
      */
-    private $institution;
+    private ?string $institution;
 
     /**
      * @var string|null
      */
-    private $orderBy;
+    private ?string $orderBy;
 
     /**
      * @var string|null
      */
-    private $orderDirection;
+    private ?string $orderDirection;
 
     /**
      * @var int
      */
-    private $pageNumber;
+    private int $pageNumber;
 
     /**
      * @param int $pageNumber
-     * @param  string $actorId
+     * @param string $actorId
      */
-    public function __construct($pageNumber, private $actorId)
+    public function __construct(int $pageNumber, private string $actorId)
     {
         Assert\that($pageNumber)
             ->integer('Page number must be an integer')
@@ -87,11 +87,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
         $this->pageNumber = $pageNumber;
     }
 
-    /**
-     * @param string $actorId
-     * @return VerifiedSecondFactorSearchQuery
-     */
-    public function setActorId($actorId): self
+    public function setActorId(string $actorId): self
     {
         $this->assertNonEmptyString($actorId, 'actorId');
 
@@ -103,87 +99,62 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param null|string $name
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
-        $this->assertNonEmptyString($name, 'name');
-
         $this->name = $name;
     }
 
     /**
      * @return null|string
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param null|string $type
-     */
-    public function setType($type): void
+    public function setType(string $type): void
     {
-        $this->assertNonEmptyString($type, 'type');
-
         $this->type = $type;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getSecondFactorId()
+    public function getSecondFactorId(): ?string
     {
         return $this->secondFactorId;
     }
 
-    /**
-     * @param null|string $secondFactorId
-     */
-    public function setSecondFactorId($secondFactorId): void
+    public function setSecondFactorId(string $secondFactorId): void
     {
-        $this->assertNonEmptyString($secondFactorId, 'secondFactorId');
-
         $this->secondFactorId = $secondFactorId;
     }
 
     /**
      * @return null|string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param null|string $email
-     */
-    public function setEmail($email): void
+    public function setEmail(string $email): void
     {
         $this->assertNonEmptyString($email, 'email');
-
         $this->email = $email;
     }
 
     /**
      * @return null|string
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     */
-    public function setStatus($status): void
+    public function setStatus(string $status): void
     {
         Assert\that($status)->choice(
             [self::STATUS_UNVERIFIED, self::STATUS_VERIFIED, self::STATUS_VETTED, self::STATUS_REVOKED, ''],
@@ -196,43 +167,34 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     /**
      * @return null|string
      */
-    public function getInstitution()
+    public function getInstitution(): ?string
     {
         return $this->institution;
     }
 
-    /**
-     * @param null|string $institution
-     */
-    public function setInstitution($institution): void
+    public function setInstitution(string $institution): void
     {
         $this->institution = $institution;
     }
 
-    /**
-     * @param string $orderBy
-     */
-    public function setOrderBy($orderBy): void
+    public function setOrderBy(string $orderBy): void
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
         $this->orderBy = $orderBy;
     }
 
-    /**
-     * @param string|null $orderDirection
-     */
-    public function setOrderDirection($orderDirection): void
+    public function setOrderDirection(string $orderDirection): void
     {
         Assert\that($orderDirection)->choice(
-            ['asc', 'desc', '', null],
+            ['asc', 'desc'],
             "Invalid order direction, must be one of 'asc', 'desc'"
         );
 
         $this->orderDirection = $orderDirection ?: null;
     }
 
-    private function assertNonEmptyString($value, string $name): void
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
@@ -240,7 +202,7 @@ final class RaSecondFactorSearchQuery implements HttpQuery
             (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
     /**

@@ -31,7 +31,7 @@ class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @Assert\NotBlank()
@@ -39,7 +39,7 @@ class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * @Assert\NotBlank()
@@ -47,7 +47,7 @@ class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $contactInformation;
+    public string $contactInformation;
 
     /**
      * @Assert\NotBlank()
@@ -55,7 +55,7 @@ class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $raInstitution;
+    public string $raInstitution;
 
     /**
      * @return array

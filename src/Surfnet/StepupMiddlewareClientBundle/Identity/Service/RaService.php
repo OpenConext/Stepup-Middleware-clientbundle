@@ -38,9 +38,13 @@ class RaService
      * @param string $institution
      * @return RegistrationAuthorityCredentialsCollection
      */
-    public function listRas($institution)
+    public function listRas(string $institution): RegistrationAuthorityCredentialsCollection
     {
         $data = $this->service->listRas($institution);
+
+        if (!$data) {
+            return RegistrationAuthorityCredentialsCollection::empty();
+        }
 
         $collection = RegistrationAuthorityCredentialsCollection::fromData($data);
 
@@ -51,9 +55,9 @@ class RaService
 
     /**
      * @param object      $value
-     * @param null|string $message
+     * @param string|null $message
      */
-    private function assertIsValid(mixed $value, $message = null): void
+    private function assertIsValid(mixed $value, string $message = null): void
     {
         $violations = $this->validator->validate($value);
 
