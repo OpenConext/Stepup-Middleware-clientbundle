@@ -25,13 +25,13 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class IdentitySearchQuery implements HttpQuery
 {
-    private string $nameId;
+    private string $nameId = '';
 
-    private string $institution;
+    private string $institution = '';
 
-    private string $email;
+    private string $email = '';
 
-    private string $commonName;
+    private string $commonName = '';
 
     public function setInstitution(string $institution): self
     {
