@@ -69,7 +69,7 @@ class RecoveryTokenService
     public function getOne(string $recoveryTokenId): RecoveryToken
     {
         $result = $this->apiService->read(sprintf('recovery_token/%s', $recoveryTokenId));
-        if (empty($result) || empty($result['items'])) {
+        if (empty($result)) {
             throw new RuntimeException(sprintf('No RecoveryToken found with recovery token id %s', $recoveryTokenId));
         }
         return RecoveryToken::from($result);
