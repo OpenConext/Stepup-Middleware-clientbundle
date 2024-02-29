@@ -25,29 +25,11 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class VerifiedSecondFactorSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private string $identityId;
-
-    /**
-     * @var string
-     */
-    private string $secondFactorId;
-
-    /**
-     * @var string
-     */
-    private string $registrationCode;
-
-    /**
-     * @var string
-     */
-    private string $institution;
-    /**
-     * @var string
-     */
-    private string $actorId;
+    private string $identityId = '';
+    private string $secondFactorId = '';
+    private string $registrationCode = '';
+    private string $institution = '';
+    private string $actorId = '';
 
     public function setIdentityId(string $identityId): static
     {
