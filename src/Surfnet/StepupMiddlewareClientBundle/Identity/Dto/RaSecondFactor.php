@@ -34,56 +34,19 @@ final class RaSecondFactor implements Dto
     public const STATUS_VETTED = 'vetted';
     public const STATUS_REVOKED = 'revoked';
 
-    /**
-     * @var string The second factor's ID (UUID).
-     */
-    public string $id;
-
-    /**
-     * @var string
-     */
-    public string $type;
-
-    /**
-     * @var string The ID of the specific instance of second factor type (ie. phone number, Yubikey public ID).
-     */
-    public string $secondFactorId;
-
-    /**
-     * @var string One of the RaSecondFactor::STATUS_* constants.
-     */
-    public string $status;
-
-    /**
-     * @var string
-     */
-    public string $identityId;
-
-    /**
-     * @var string
-     */
-    public string $institution;
-
-    /**
-     * The name of the registrant.
-     *
-     * @var string
-     */
-    public string $name;
-
-    /**
-     * Number of the document that was used in vetting.
-     *
-     * @var string|null
-     */
-    public ?string $documentNumber;
+    public string $id = '';
+    public string $type = '';
+    public string $secondFactorId = '';
+    public string $status = '';
+    public string $identityId = '';
+    public string $institution = '';
+    public string $name = '';
+    public ?string $documentNumber = null;
 
     /**
      * The e-mail of the registrant.
-     *
-     * @var string
      */
-    public string $email;
+    public string $email = '';
 
     public static function fromData(array $data): self
     {
