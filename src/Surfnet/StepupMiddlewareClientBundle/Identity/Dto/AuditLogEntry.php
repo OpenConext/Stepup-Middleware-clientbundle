@@ -68,17 +68,17 @@ final class AuditLogEntry implements Dto
     /**
      * @var string
      */
-    public string $secondFactorIdentifier;
+    public ?string $secondFactorIdentifier;
 
     /**
      * @var string
      */
-    public string $recoveryTokenIdentifier;
+    public ?string $recoveryTokenIdentifier;
 
     /**
      * @var string
      */
-    public string $recoveryTokenType;
+    public ?string $recoveryTokenType;
 
     /**
      * @var string
