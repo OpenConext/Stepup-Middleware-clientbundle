@@ -25,51 +25,15 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 final class RaListingSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private string $actorId;
-
-    /**
-     * @var string
-     */
-    private string $name;
-
-    /**
-     * @var string
-     */
-    private string $email;
-
-    /**
-     * @var string
-     */
-    private string $role;
-
-    /**
-     * @var string
-     */
-    private string $raInstitution;
-
-    /**
-     * @var string|null
-     */
-    private ?string $institution;
-
-    /**
-     * @var string|null
-     */
-    private ?string $identityId;
-
-    /**
-     * @var int
-     */
-    private int $pageNumber;
-
+    private string $actorId = '';
+    private string $name = '';
+    private string $email = '';
+    private string $role = '';
+    private string $raInstitution = '';
+    private ?string $institution = null;
+    private ?string $identityId = null;
+    private int $pageNumber = 0;
     private string $orderBy = 'commonName';
-
-    /**
-     * @var string|null
-     */
     private ?string $orderDirection = 'asc';
 
     /**
