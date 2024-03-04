@@ -26,42 +26,14 @@ use function is_array;
 
 class RaCandidateSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
     private readonly string $actorId;
-
-    /**
-     * @var string
-     */
-    private string $institution;
-
-    /**
-     * @var string
-     */
-    private string $commonName;
-
-    /**
-     * @var string
-     */
-    private string $email;
-
-    /**
-     * @var string
-     */
-    private string $raInstitution;
-
+    private string $institution = '';
+    private string $commonName = '';
+    private string $email = '';
+    private string $raInstitution = '';
     private readonly int $pageNumber;
-
-    /**
-     * @var string
-     */
-    private string $orderBy;
-
-    /**
-     * @var string
-     */
-    private string $orderDirection;
+    private string $orderBy = '';
+    private string $orderDirection = '';
 
     /**
      * @var string[]
