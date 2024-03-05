@@ -114,7 +114,11 @@ class SecondFactorService
     {
         $data = $this->service->getVerifiedCanSkipProvePossession($secondFactorId);
 
-        return (bool)$data;
+        if (null === $data) {
+            return false;
+        } 
+        
+        return $data[0];
     }
 
     /**
