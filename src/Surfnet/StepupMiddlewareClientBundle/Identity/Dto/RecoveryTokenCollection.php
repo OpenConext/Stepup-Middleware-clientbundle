@@ -25,9 +25,9 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RecoveryTokenCollection extends CollectionDto
 {
-    public static function fromData(array $data): self
+    public static function fromData(array $data): CollectionDto
     {
-        return static::fromData($data);
+        return parent::fromData($data);
     }
 
     protected static function createElementFromData(array $item): RecoveryToken
