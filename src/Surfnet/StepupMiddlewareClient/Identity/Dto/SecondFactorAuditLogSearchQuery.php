@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -26,34 +28,31 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
     /**
      * @var string
      */
-    private $institution;
+    private string $institution;
 
     /**
      * @var string
      */
-    private $identityId;
+    private string $identityId;
+
+    private string $orderBy = 'recordedOn';
 
     /**
      * @var string|null
      */
-    private $orderBy;
-
-    /**
-     * @var string|null
-     */
-    private $orderDirection;
+    private ?string $orderDirection = 'desc';
 
     /**
      * @var int
      */
-    private $pageNumber;
+    private int $pageNumber;
 
     /**
      * @param string $institution
      * @param string $identityId
-     * @param int    $pageNumber
+     * @param int $pageNumber
      */
-    public function __construct($institution, $identityId, $pageNumber)
+    public function __construct(string $institution, string $identityId, int $pageNumber)
     {
         $this->assertNonEmptyString($institution, 'institution');
         $this->assertNonEmptyString($identityId, 'identityId');
@@ -64,14 +63,9 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
         $this->institution = $institution;
         $this->identityId = $identityId;
         $this->pageNumber = $pageNumber;
-        $this->orderBy = 'recordedOn';
-        $this->orderDirection = 'desc';
     }
 
-    /**
-     * @param string $orderBy
-     */
-    public function setOrderBy($orderBy)
+    public function setOrderBy(string $orderBy): void
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
@@ -81,7 +75,7 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
     /**
      * @param string|null $orderDirection
      */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection(?string $orderDirection): void
     {
         Assert\that($orderDirection)->choice(
             ['asc', 'desc', '', null],
@@ -91,15 +85,15 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
         $this->orderDirection = $orderDirection ?: null;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
     /**
@@ -107,7 +101,7 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
      *
      * @return string
      */
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         return '?' . http_build_query(
             [

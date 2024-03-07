@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,7 +24,23 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RaListingCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $raListing)
+    public static function fromData(array $data): self
+    {
+        $elements = [];
+        foreach ($data['items'] as $key => $item) {
+            $elements[$key] = self::createElementFromData($item);
+        }
+
+        return new self(
+            $elements,
+            $data['collection']['total_items'],
+            $data['collection']['page'],
+            $data['collection']['page_size'],
+            $data['filters']
+        );
+    }
+
+    protected static function createElementFromData(array $raListing): RaListing
     {
         return RaListing::fromData($raListing);
     }
@@ -32,7 +50,7 @@ class RaListingCollection extends CollectionDto
      * @param $institution
      * @return bool
      */
-    public function isListed($institution)
+    public function isListed($institution): bool
     {
         /** @var RaListing $raListing */
         foreach ($this->getElements() as $raListing) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -29,7 +31,7 @@ class RaLocation implements Dto
      *
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_location.institution.must_not_be_blank")
@@ -37,7 +39,7 @@ class RaLocation implements Dto
      *
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_location.name.must_not_be_blank")
@@ -45,7 +47,7 @@ class RaLocation implements Dto
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_location.location.must_not_be_blank")
@@ -53,20 +55,16 @@ class RaLocation implements Dto
      *
      * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * @Assert\Type(type="string", message="middleware_client.dto.ra_location.contact_information.must_be_string")
      *
      * @var string
      */
-    public $contactInformation;
+    public string $contactInformation;
 
-    /**
-     * @param array $data
-     * @return static
-     */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $raLocation                     = new self();
         $raLocation->id                 = $data['id'];

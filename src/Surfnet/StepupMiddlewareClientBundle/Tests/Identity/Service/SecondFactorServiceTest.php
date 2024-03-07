@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -21,11 +23,15 @@ namespace Surfnet\StepupMiddlewareClient\Tests\Identity\Service;
 use DateTime;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\UnverifiedSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\VerifiedSecondFactorSearchQuery;
+use Surfnet\StepupMiddlewareClient\Identity\Service\SecondFactorService as LibrarySecondFactorService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\UnverifiedSecondFactor;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecondFactorServiceTest extends TestCase
 {
@@ -34,7 +40,7 @@ class SecondFactorServiceTest extends TestCase
         m::close();
     }
 
-    public function testItSearchesUnverifiedSecondFactorsByIdentity()
+    public function testItSearchesUnverifiedSecondFactorsByIdentity(): void
     {
         $identityId = 'a';
 
@@ -51,17 +57,18 @@ class SecondFactorServiceTest extends TestCase
         ];
         $query = (new UnverifiedSecondFactorSearchQuery())->setIdentityId($identityId);
 
-        $libraryService = m::mock('Surfnet\StepupMiddlewareClient\Identity\Service\SecondFactorService')
+        $libraryService = m::mock(LibrarySecondFactorService::class)
             ->shouldReceive('searchUnverified')->with($query)->once()->andReturn($secondFactorData)
             ->getMock();
-        $violations = m::mock('Symfony\Component\Validator\ConstraintViolationListInterface')
+        $violations = m::mock(ConstraintViolationListInterface::class)
             ->shouldReceive('count')->with()->once()->andReturn(0)
             ->getMock();
-        $validator = m::mock('Symfony\Component\Validator\Validator\ValidatorInterface')
+        $validator = m::mock(ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
 
-        $service = new SecondFactorService($libraryService, $validator);
+        $typeService = m::mock(SecondFactorTypeService::class);
+        $service = new SecondFactorService($libraryService, $typeService, $validator);
         $secondFactors = $service->searchUnverified($query);
 
         $expectedSecondFactor = new UnverifiedSecondFactor();
@@ -72,7 +79,7 @@ class SecondFactorServiceTest extends TestCase
         $this->assertEquals([$expectedSecondFactor], $secondFactors->getElements());
     }
 
-    public function testItSearchesVerifiedSecondFactorsByIdentity()
+    public function testItSearchesVerifiedSecondFactorsByIdentity(): void
     {
         $identityId = 'a';
 
@@ -94,17 +101,17 @@ class SecondFactorServiceTest extends TestCase
         ];
         $query = (new VerifiedSecondFactorSearchQuery())->setIdentityId($identityId);
 
-        $libraryService = m::mock('Surfnet\StepupMiddlewareClient\Identity\Service\SecondFactorService')
+        $libraryService = m::mock(LibrarySecondFactorService::class)
             ->shouldReceive('searchVerified')->with($query)->once()->andReturn($secondFactorData)
             ->getMock();
-        $violations = m::mock('Symfony\Component\Validator\ConstraintViolationListInterface')
+        $violations = m::mock(ConstraintViolationListInterface::class)
             ->shouldReceive('count')->with()->once()->andReturn(0)
             ->getMock();
-        $validator = m::mock('Symfony\Component\Validator\Validator\ValidatorInterface')
+        $validator = m::mock(ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
-
-        $service = new SecondFactorService($libraryService, $validator);
+        $typeService = m::mock(SecondFactorTypeService::class);
+        $service = new SecondFactorService($libraryService, $typeService, $validator);
         $secondFactors = $service->searchVerified($query);
 
         $expectedSecondFactor = new VerifiedSecondFactor();

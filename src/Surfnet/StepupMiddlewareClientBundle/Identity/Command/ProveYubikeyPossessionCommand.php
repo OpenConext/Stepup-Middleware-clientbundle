@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -27,23 +29,23 @@ class ProveYubikeyPossessionCommand extends AbstractCommand
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * The ID of the second factor to create.
      *
      * @var string
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * The Yubikey's public ID.
      *
      * @var string
      */
-    public $yubikeyPublicId;
+    public string $yubikeyPublicId;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id' => $this->identityId,

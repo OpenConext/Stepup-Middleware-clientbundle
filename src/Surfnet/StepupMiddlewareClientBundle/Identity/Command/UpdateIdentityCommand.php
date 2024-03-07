@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -25,30 +27,22 @@ class UpdateIdentityCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $id;
+    public string $email;
 
     /**
      * @var string
      */
-    public $email;
+    public string $commonName;
 
     /**
-     * @var string
+     * @param string $id
+     * @param string $institution
      */
-    public $commonName;
-
-    /**
-     * @var string
-     */
-    public $institution;
-
-    public function __construct($id, $institution)
+    public function __construct(public string $id, public string $institution)
     {
-        $this->id          = $id;
-        $this->institution = $institution;
     }
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'id'          => $this->id,

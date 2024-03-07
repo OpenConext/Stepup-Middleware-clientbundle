@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -29,7 +31,7 @@ class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @Assert\NotBlank()
@@ -37,7 +39,7 @@ class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * @Assert\NotBlank()
@@ -45,7 +47,7 @@ class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $contactInformation;
+    public string $contactInformation;
 
     /**
      * @Assert\NotBlank()
@@ -53,12 +55,12 @@ class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $raInstitution;
+    public string $raInstitution;
 
     /**
      * @return array
      */
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id'         => $this->identityId,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2016 SURFnet B.V.
  *
@@ -34,7 +36,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
     /**
      * @group institution-configuration
      */
-    public function testQueriedInstitutionConfigurationOptionsAreConvertedToADtoCorrectly()
+    public function testQueriedInstitutionConfigurationOptionsAreConvertedToADtoCorrectly(): void
     {
         $institution = 'surfnet.nl';
 
@@ -55,6 +57,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information'  => false,
             'verify_email'                  => true,
             'self_vet'                      => true,
+            'sso_on_2fa'                   => false,
             'allow_self_asserted_tokens'    => false,
             'number_of_tokens_per_identity' => 2,
             'allowed_second_factors'        => ['sms', 'yubikey'],
@@ -89,9 +92,9 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @group institution-configuration
      *
      * @dataProvider nonBooleanProvider
-     * @param $nonBoolean
+     * @param array|string|int|float|stdClass|null $nonBoolean
      */
-    public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid($nonBoolean)
+    public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid(null|array|string|int|float|stdClass $nonBoolean): void
     {
         $institution = 'surfnet.nl';
 
@@ -101,6 +104,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information' => $nonBoolean,
             'verify_email'                 => true,
             'self_vet'                     => false,
+            'sso_on_2fa'                   => false,
             'allow_self_asserted_tokens'   => false,
             'number_of_tokens_per_identity' => 1,
             'allowed_second_factors'       => ['sms', 'yubikey'],
@@ -138,9 +142,9 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @group institution-configuration
      *
      * @dataProvider nonBooleanProvider
-     * @param $nonBoolean
+     * @param array|string|int|float|stdClass|null $nonBoolean
      */
-    public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid($nonBoolean)
+    public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid(null|array|string|int|float|stdClass $nonBoolean): void
     {
         $institution = 'surfnet.nl';
 
@@ -151,6 +155,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'verify_email'                 => true,
             'self_vet'                     => false,
             'allow_self_asserted_tokens'    => false,
+            'sso_on_2fa'                   => false,
             'number_of_tokens_per_identity' => 0,
             'allowed_second_factors'       => ['sms', 'yubikey'],
             'use_ra'                        => [$institution],
@@ -187,9 +192,9 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @group institution-configuration
      *
      * @dataProvider nonArrayProvider
-     * @param $nonArray
+     * @param bool|string|int|float|stdClass|null $nonArray
      */
-    public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid($nonArray)
+    public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid(null|bool|string|int|float|stdClass $nonArray): void
     {
         $institution = 'surfnet.nl';
 
@@ -199,6 +204,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information' => true,
             'verify_email'                 => true,
             'self_vet'                     => false,
+            'sso_on_2fa'                   => false,
             'allow_self_asserted_tokens'    => false,
             'number_of_tokens_per_identity' => 5,
             'allowed_second_factors'       => ['sms', 'yubikey'],
@@ -236,9 +242,9 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
      * @group institution-configuration
      *
      * @dataProvider nonStringProvider
-     * @param $nonArray
+     * @param bool|array|int|float|stdClass|null $nonArray
      */
-    public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid($nonArray)
+    public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid(null|bool|array|int|float|stdClass $nonArray): void
     {
         $institution = 'surfnet.nl';
 
@@ -248,6 +254,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
             'show_raa_contact_information' => true,
             'verify_email'                 => true,
             'self_vet'                     => false,
+            'sso_on_2fa'                   => false,
             'allow_self_asserted_tokens'    => false,
             'number_of_tokens_per_identity' => 1,
             'allowed_second_factors'       => ['sms', 'yubikey'],
@@ -281,7 +288,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
-    public function nonBooleanProvider()
+    public function nonBooleanProvider(): array
     {
         return [
             'null'    => [null],
@@ -293,7 +300,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         ];
     }
 
-    public function nonArrayProvider()
+    public function nonArrayProvider(): array
     {
         return [
             'null'    => [null],
@@ -305,7 +312,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         ];
     }
 
-    public function nonStringProvider()
+    public function nonStringProvider(): array
     {
         return [
             'null'    => [null],

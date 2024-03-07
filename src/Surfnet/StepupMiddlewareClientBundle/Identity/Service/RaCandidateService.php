@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -27,31 +29,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RaCandidateService
 {
-    /**
-     * @var LibraryRaCandidateService
-     */
-    private $libraryService;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @param LibraryRaCandidateService $libraryService
-     * @param ValidatorInterface        $validator
-     */
-    public function __construct(LibraryRaCandidateService $libraryService, ValidatorInterface $validator)
+    public function __construct(private readonly LibraryRaCandidateService $libraryService, private readonly ValidatorInterface $validator)
     {
-        $this->libraryService = $libraryService;
-        $this->validator      = $validator;
     }
 
     /**
-     * @param RaCandidateSearchQuery $query
      * @return RaCandidateCollection
      */
-    public function search(RaCandidateSearchQuery $query)
+    public function search(RaCandidateSearchQuery $query): RaCandidateCollection
     {
         $data = $this->libraryService->search($query);
 
@@ -68,13 +53,7 @@ class RaCandidateService
         return $collection;
     }
 
-    /**
-     * @param string $identityId
-     * @param string $institution
-     * @param string $actorId
-     * @return RaCandidateInstitutions
-     */
-    public function get($identityId, $actorId)
+    public function get(string $identityId, string $actorId): ?RaCandidateInstitutions
     {
         $data = $this->libraryService->get($identityId, $actorId);
 
@@ -89,15 +68,11 @@ class RaCandidateService
         return $raCandidateInstitutions;
     }
 
-    /**
-     * @param mixed $value
-     * @param string $message
-     */
-    private function assertIsValid($value, $message)
+    private function assertIsValid(mixed $value, string $message): void
     {
         $violations = $this->validator->validate($value);
 
-        if (count($violations)) {
+        if (count($violations) > 0) {
             throw InvalidResponseException::withViolations($message, $violations);
         }
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -26,7 +28,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SurfnetStepupMiddlewareClientExtension extends Extension
 {
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration(), $config);
@@ -40,33 +42,20 @@ class SurfnetStepupMiddlewareClientExtension extends Extension
         $this->configureMiddlewareReadApiClient($config, $container);
     }
 
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     */
-    private function configureMiddlewareApiCredentials(array $config, ContainerBuilder $container)
+    private function configureMiddlewareApiCredentials(array $config, ContainerBuilder $container): void
     {
         $commandService = $container->getDefinition('surfnet_stepup_middleware_client.library.service.command');
         $commandService->replaceArgument(1, $config['authorisation']['username']);
         $commandService->replaceArgument(2, $config['authorisation']['password']);
     }
 
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @return \Symfony\Component\DependencyInjection\Definition
-     */
-    private function configureMiddlewareCommandApiUrl(array $config, ContainerBuilder $container)
+    private function configureMiddlewareCommandApiUrl(array $config, ContainerBuilder $container): void
     {
         $guzzle = $container->getDefinition('surfnet_stepup_middleware_client.guzzle.commands');
         $guzzle->replaceArgument(0, ['base_uri' => $config['url']['command_api']]);
     }
 
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     */
-    private function configureMiddlewareReadApiClient(array $config, ContainerBuilder $container)
+    private function configureMiddlewareReadApiClient(array $config, ContainerBuilder $container): void
     {
         $guzzle = $container->getDefinition('surfnet_stepup_middleware_client.guzzle.api');
         $guzzle->replaceArgument(

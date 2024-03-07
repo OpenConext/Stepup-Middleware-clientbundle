@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -29,7 +31,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @Assert\NotBlank()
@@ -37,7 +39,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\NotBlank()
@@ -45,7 +47,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * @Assert\NotBlank()
@@ -53,7 +55,7 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * @Assert\NotBlank()
@@ -61,9 +63,9 @@ class ChangeRaLocationCommand extends AbstractCommand
      *
      * @var string
      */
-    public $contactInformation;
+    public string $contactInformation;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'ra_location_id' => $this->id,

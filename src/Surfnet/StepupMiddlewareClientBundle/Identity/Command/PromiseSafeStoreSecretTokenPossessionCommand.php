@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -27,23 +29,23 @@ class PromiseSafeStoreSecretTokenPossessionCommand extends AbstractCommand
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * The ID of the recovery code to create.
      *
      * @var string
      */
-    public $recoveryTokenId;
+    public string $recoveryTokenId;
 
     /**
      * The unhashed password
      *
      * @var string
      */
-    public $secret;
+    public string $secret;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id'      => $this->identityId,

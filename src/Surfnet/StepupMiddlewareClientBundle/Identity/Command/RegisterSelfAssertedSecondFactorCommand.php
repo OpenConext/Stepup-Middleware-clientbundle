@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURF bv
  *
@@ -25,39 +27,39 @@ class RegisterSelfAssertedSecondFactorCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $authorityId;
+    public string $authorityId;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * @var string
      */
-    public $registrationCode;
+    public string $registrationCode;
 
     /**
      * @var string
      */
-    public $secondFactorType;
+    public string $secondFactorType;
 
     /**
      * @var string
      */
-    public $secondFactorIdentifier;
+    public string $secondFactorIdentifier;
 
     /**
      * @var string
      */
-    public $authoringRecoveryTokenId;
+    public string $authoringRecoveryTokenId;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'authority_id' => $this->authorityId,

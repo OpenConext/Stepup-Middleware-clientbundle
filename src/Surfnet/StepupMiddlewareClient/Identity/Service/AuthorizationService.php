@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -36,14 +38,8 @@ use function array_key_exists;
  */
 class AuthorizationService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     /**
@@ -75,7 +71,7 @@ class AuthorizationService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function assertRegistrationOfRecoveryTokensAreAllowed(Identity $identity)
+    public function assertRegistrationOfRecoveryTokensAreAllowed(Identity $identity): bool
     {
         $response = $this->apiService->read(
             sprintf('/authorization/may-register-recovery-tokens/%s', $identity->id)

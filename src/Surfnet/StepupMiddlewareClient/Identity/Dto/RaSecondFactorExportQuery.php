@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -24,80 +26,36 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 final class RaSecondFactorExportQuery implements HttpQuery
 {
-    const STATUS_UNVERIFIED = 'unverified';
-    const STATUS_VERIFIED = 'verified';
-    const STATUS_VETTED = 'vetted';
-    const STATUS_REVOKED = 'revoked';
+    public const STATUS_UNVERIFIED = 'unverified';
+    public const STATUS_VERIFIED = 'verified';
+    public const STATUS_VETTED = 'vetted';
+    public const STATUS_REVOKED = 'revoked';
 
-    /**
-     * @var string|null
-     */
-    private $name;
+    private ?string $name = null;
+    private ?string $type = null;
+    private ?string $secondFactorId = null;
+    private ?string $email = null;
+    private ?string $institution = null;
+    private ?string $status = null;
+    private ?string $orderBy = null;
+    private ?string $orderDirection = null;
+    private string $actorId;
 
-    /**
-     * @var string|null
-     */
-    private $type;
-
-    /**
-     * @var string|null The second factor type's ID (eg. Yubikey public ID)
-     */
-    private $secondFactorId;
-
-    /**
-     * @var string|null
-     */
-    private $email;
-
-    /**
-     * @var string|null
-     */
-    private $institution;
-
-    /**
-     * @var string|null One of the STATUS_* constants.
-     */
-    private $status;
-
-    /**
-     * @var string|null
-     */
-    private $orderBy;
-
-    /**
-     * @var string|null
-     */
-    private $orderDirection;
-
-    /**
-     * @var string
-     */
-    private $actorId;
-
-    /**
-     * @param string $actorId
-     */
-    public function __construct($actorId)
+    public function __construct(string $actorId)
     {
         $this->assertNonEmptyString($actorId, 'actorId');
 
         $this->actorId = $actorId;
     }
 
-    /**
-     * @param string $actorInstitution
-     * @return VerifiedSecondFactorSearchQuery
-     */
-    public function setActorId($actorId)
+    public function setActorId(string $actorId): self
     {
-        $this->assertNonEmptyString($actorId, 'actorId');
-
         $this->actorId = $actorId;
 
         return $this;
     }
 
-    public function getFileName()
+    public function getFileName(): string
     {
         $date = new DateTime();
         $date = $date->format('Y-m-d');
@@ -118,87 +76,64 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param null|string $name
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
-        $this->assertNonEmptyString($name, 'name');
-
         $this->name = $name;
     }
 
     /**
      * @return null|string
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param null|string $type
-     */
-    public function setType($type)
+    public function setType(string $type): void
     {
-        $this->assertNonEmptyString($type, 'type');
-
         $this->type = $type;
     }
 
     /**
      * @return null|string
      */
-    public function getSecondFactorId()
+    public function getSecondFactorId(): ?string
     {
         return $this->secondFactorId;
     }
 
-    /**
-     * @param null|string $secondFactorId
-     */
-    public function setSecondFactorId($secondFactorId)
+    public function setSecondFactorId(string $secondFactorId): void
     {
-        $this->assertNonEmptyString($secondFactorId, 'secondFactorId');
-
         $this->secondFactorId = $secondFactorId;
     }
 
     /**
      * @return null|string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param null|string $email
-     */
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
-        $this->assertNonEmptyString($email, 'email');
-
         $this->email = $email;
     }
 
     /**
      * @return null|string
      */
-    public function getInstitution()
+    public function getInstitution(): ?string
     {
         return $this->institution;
     }
 
-    /**
-     * @param null|string $institution
-     */
-    public function setInstitution($institution)
+    public function setInstitution(string $institution): void
     {
         $this->institution = $institution;
     }
@@ -206,15 +141,12 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @return null|string
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     */
-    public function setStatus($status)
+    public function setStatus(string $status): void
     {
         Assert\that($status)->choice(
             [self::STATUS_UNVERIFIED, self::STATUS_VERIFIED, self::STATUS_VETTED, self::STATUS_REVOKED, ''],
@@ -227,35 +159,32 @@ final class RaSecondFactorExportQuery implements HttpQuery
     /**
      * @param string $orderBy
      */
-    public function setOrderBy($orderBy)
+    public function setOrderBy(string $orderBy): void
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
         $this->orderBy = $orderBy;
     }
 
-    /**
-     * @param string|null $orderDirection
-     */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection(string $orderDirection): void
     {
         Assert\that($orderDirection)->choice(
-            ['asc', 'desc', '', null],
+            ['asc', 'desc'],
             "Invalid order direction, must be one of 'asc', 'desc'"
         );
 
-        $this->orderDirection = $orderDirection ?: null;
+        $this->orderDirection = $orderDirection;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
     /**
@@ -263,7 +192,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
      *
      * @return string
      */
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         return '?' . http_build_query(
             array_filter(
@@ -278,9 +207,7 @@ final class RaSecondFactorExportQuery implements HttpQuery
                     'orderBy'          => $this->orderBy,
                     'orderDirection'   => $this->orderDirection
                 ],
-                function ($value) {
-                    return !is_null($value);
-                }
+                fn($value): bool => !is_null($value)
             )
         );
     }

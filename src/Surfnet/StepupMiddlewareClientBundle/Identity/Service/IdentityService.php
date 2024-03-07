@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,6 +24,7 @@ use Surfnet\StepupMiddlewareClient\Identity\Dto\IdentitySearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Service\IdentityService as LibraryIdentityService;
 use Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity as DtoIdentity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\IdentityCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -31,31 +34,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class IdentityService
 {
-    /**
-     * @var LibraryIdentityService
-     */
-    private $service;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @param LibraryIdentityService $service
-     * @param ValidatorInterface $validator
-     */
-    public function __construct(LibraryIdentityService $service, ValidatorInterface $validator)
-    {
-        $this->service = $service;
-        $this->validator = $validator;
+    public function __construct(
+        private readonly LibraryIdentityService $service,
+        private readonly ValidatorInterface $validator
+    ) {
     }
 
-    /**
-     * @param string $id
-     * @return null|Identity
-     */
-    public function get($id)
+    public function get(string $id): ?DtoIdentity
     {
         $data = $this->service->get($id);
 
@@ -71,13 +56,12 @@ class IdentityService
         return $identity;
     }
 
-    /**
-     * @param IdentitySearchQuery $searchQuery
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\IdentityCollection
-     */
-    public function search(IdentitySearchQuery $searchQuery)
+    public function search(IdentitySearchQuery $searchQuery): IdentityCollection
     {
         $data = $this->service->search($searchQuery);
+        if (!$data) {
+            return IdentityCollection::empty();
+        }
 
         $collection = IdentityCollection::fromData($data);
 
@@ -86,12 +70,11 @@ class IdentityService
         return $collection;
     }
 
-    /**
-     * @param Identity $identity
-     * @return RegistrationAuthorityCredentials|null
-     */
-    public function getRegistrationAuthorityCredentials(Identity $identity)
+    public function getRegistrationAuthorityCredentials(Identity $identity): ?RegistrationAuthorityCredentials
     {
+        if (!$identity->id) {
+            return null;
+        }
         $data = $this->service->getRegistrationAuthorityCredentials($identity->id);
 
         // 404 Not Found is a valid case.
@@ -107,11 +90,7 @@ class IdentityService
         return $credentials;
     }
 
-    /**
-     * @param object      $value
-     * @param null|string $message
-     */
-    private function assertIsValid($value, $message = null)
+    private function assertIsValid(mixed $value, ?string $message = null): void
     {
         $violations = $this->validator->validate($value);
 

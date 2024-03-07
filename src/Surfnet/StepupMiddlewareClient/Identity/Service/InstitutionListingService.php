@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,17 +24,11 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
 class InstitutionListingService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
-    public function getAll()
+    public function getAll(): ?array
     {
         return $this->apiService->read('institution-listing');
     }

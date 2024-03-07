@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,14 +24,14 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class InstitutionListingCollection extends CollectionDto
 {
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $elements = [];
         foreach ($data as $item) {
             $elements[] = static::createElementFromData($item);
         }
 
-        return new static(
+        return new self(
             $elements,
             count($elements),
             1,
@@ -37,7 +39,7 @@ class InstitutionListingCollection extends CollectionDto
         );
     }
 
-    protected static function createElementFromData(array $item)
+    protected static function createElementFromData(array $item): InstitutionListing
     {
         return InstitutionListing::fromData($item);
     }

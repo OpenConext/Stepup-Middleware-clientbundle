@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2016 SURFnet bv
  *
@@ -19,24 +21,23 @@
 namespace Surfnet\StepupMiddlewareClientBundle\Configuration\Command;
 
 use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class RemoveRaLocationCommand extends AbstractCommand
 {
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @var string
      */
-    public $raLocationId;
+    public string $raLocationId;
 
     /**
      * @return array
      */
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'institution'      => $this->institution,

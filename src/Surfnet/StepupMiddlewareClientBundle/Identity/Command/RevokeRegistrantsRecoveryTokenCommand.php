@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -25,22 +27,22 @@ class RevokeRegistrantsRecoveryTokenCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $authorityId;
+    public string $authorityId;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $recoveryTokenId;
+    public string $recoveryTokenId;
 
     /**
      * @return array
      */
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'authority_id'     => $this->authorityId,

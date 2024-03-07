@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,7 +24,23 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 
 class RaCandidateCollection extends CollectionDto
 {
-    protected static function createElementFromData(array $item)
+    public static function fromData(array $data): self
+    {
+        $elements = [];
+        foreach ($data['items'] as $key => $item) {
+            $elements[$key] = self::createElementFromData($item);
+        }
+
+        return new self(
+            $elements,
+            $data['collection']['total_items'],
+            $data['collection']['page'],
+            $data['collection']['page_size'],
+            $data['filters']
+        );
+    }
+
+    protected static function createElementFromData(array $item): RaCandidate
     {
         return RaCandidate::fromData($item);
     }

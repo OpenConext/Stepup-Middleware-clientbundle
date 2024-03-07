@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -19,58 +21,28 @@
 namespace Surfnet\StepupMiddlewareClientBundle\Dto;
 
 use LogicException;
-use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class CollectionDto implements Dto
 {
-    /**
-     * @Assert\Valid
-     *
-     * @var array
-     */
-    protected $elements;
+    protected int $totalItems;
 
-    /**
-     * @var int
-     */
-    protected $totalItems;
+    protected int $currentPage;
 
-    /**
-     * @var int
-     */
-    protected $currentPage;
+    protected int $itemsPerPage;
 
-    /**
-     * @var int
-     */
-    protected $itemsPerPage;
-
-    /**
-     * @var array
-     */
-    private $filterOptions;
-
-    /**
-     * @param array $elements
-     * @param int   $totalItems
-     * @param int   $currentPage
-     * @param int   $itemsPerPage
-     * @param array $filterOptions
-     */
-    public function __construct(array $elements, $totalItems, $currentPage, $itemsPerPage, $filterOptions = array())
-    {
-        $this->elements = $elements;
-        $this->totalItems = (int) $totalItems;
-        $this->currentPage = (int) $currentPage;
-        $this->itemsPerPage = (int) $itemsPerPage;
-        $this->filterOptions = $filterOptions;
+    public function __construct(
+        protected array $elements,
+        int $totalItems,
+        int $currentPage,
+        int $itemsPerPage,
+        private array $filterOptions = []
+    ) {
+        $this->totalItems = $totalItems;
+        $this->currentPage = $currentPage;
+        $this->itemsPerPage = $itemsPerPage;
     }
 
-    /**
-     * @param  array  $data
-     * @return static
-     */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $elements = [];
         foreach ($data['items'] as $key => $item) {
@@ -86,7 +58,7 @@ abstract class CollectionDto implements Dto
         );
     }
 
-    public static function empty()
+    public static function empty(): static
     {
         return new static([], 0, 1, 1);
     }
@@ -97,34 +69,22 @@ abstract class CollectionDto implements Dto
      * @param  array $item
      * @return mixed
      */
-    protected static function createElementFromData(array $item)
+    protected static function createElementFromData(array $item): mixed
     {
-        throw new LogicException(sprintf(
-            'The method "%s::createElementFromData must be implemented to load the Collection Element"'
-        ));
+        throw new LogicException('The method "%s::createElementFromData must be implemented to load the Collection Element"');
     }
 
-    /**
-     * @return int
-     */
-    public function getCurrentPage()
+    public function getCurrentPage(): int
     {
         return $this->currentPage;
     }
 
-    /**
-     * @return array
-     */
-    public function getElements()
+    public function getElements(): array
     {
         return $this->elements;
     }
 
-    /**
-     * @param string $key
-     * @return array
-     */
-    public function getFilterOption($key)
+    public function getFilterOption(string $key): array
     {
         if (!array_key_exists($key, $this->filterOptions)) {
             return [];
@@ -136,7 +96,7 @@ abstract class CollectionDto implements Dto
      * @return mixed|null
      * @throws LogicException When there is more than 1 element present.
      */
-    public function getOnlyElement()
+    public function getOnlyElement(): mixed
     {
         $elementCount = count($this->elements);
 
@@ -149,18 +109,12 @@ abstract class CollectionDto implements Dto
         throw new LogicException(sprintf('There are %d elements in this collection instead of one.', $elementCount));
     }
 
-    /**
-     * @return int
-     */
-    public function getItemsPerPage()
+    public function getItemsPerPage(): int
     {
         return $this->itemsPerPage;
     }
 
-    /**
-     * @return int
-     */
-    public function getTotalItems()
+    public function getTotalItems(): int
     {
         return $this->totalItems;
     }

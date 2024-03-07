@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2017 SURFnet B.V.
  *
@@ -19,7 +21,8 @@
 namespace Surfnet\StepupMiddlewareClient\Tests\Helper;
 
 use PHPUnit\Framework\TestCase;
-use Surfnet\StepupMiddlewareClient\Exception\InvalidArgumentException;
+use StdClass;
+use Surfnet\StepupMiddlewareClient\Exception\JsonException;
 use Surfnet\StepupMiddlewareClient\Helper\JsonHelper;
 
 class JsonHelperTest extends TestCase
@@ -27,21 +30,8 @@ class JsonHelperTest extends TestCase
     /**
      * @test
      * @group json
-     *
-     * @dataProvider nonStringProvider
-     * @param $nonString
      */
-    public function jsonHelperCanOnlyDecodeStrings($nonString)
-    {
-        $this->expectException(InvalidArgumentException::class);
-        JsonHelper::decode($nonString);
-    }
-
-    /**
-     * @test
-     * @group json
-     */
-    public function jsonHelperDecodesStringsToArrays()
+    public function jsonHelperDecodesStringsToArrays(): void
     {
         $expectedDecodedResult = ['hello' => 'world'];
         $json                  = '{ "hello" : "world" }';
@@ -53,15 +43,15 @@ class JsonHelperTest extends TestCase
      * @test
      * @group json
      */
-    public function jsonHelperThrowsAnExceptionWhenThereIsASyntaxError()
+    public function jsonHelperThrowsAnExceptionWhenThereIsASyntaxError(): void
     {
         $this->expectExceptionMessage("Syntax error");
-        $this->expectException(\Surfnet\StepupMiddlewareClient\Exception\JsonException::class);
+        $this->expectException(JsonException::class);
         $jsonWithMissingDoubleQuotes = '{ hello : world }';
         JsonHelper::decode($jsonWithMissingDoubleQuotes);
     }
 
-    public function nonStringProvider()
+    public function nonStringProvider(): array
     {
         return [
             'null'    => [null],
@@ -69,7 +59,7 @@ class JsonHelperTest extends TestCase
             'array'   => [[]],
             'integer' => [1],
             'float'   => [1.2],
-            'object'  => [new \StdClass()],
+            'object'  => [new StdClass()],
         ];
     }
 }

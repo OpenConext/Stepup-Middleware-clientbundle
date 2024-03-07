@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -26,12 +28,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder;
-
-        $treeBuilder
-            ->root('surfnet_stepup_middleware_client')
+        $treeBuilder = new TreeBuilder('surfnet_stepup_middleware_client');
+        $rootNode = $treeBuilder->getRootNode();
+        $rootNode
             ->children()
                 ->arrayNode('authorisation')
                     ->info('Middleware API Credentials')
@@ -46,9 +47,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('api')
                             ->isRequired()
                             ->validate()
-                                ->ifTrue(function ($url) {
-                                    return !preg_match('~/$~', $url);
-                                })
+                                ->ifTrue(fn($url): bool => !str_ends_with((string)$url, '/'))
                                 ->thenInvalid("API URL must end with a forward slash, got '%s'")
                             ->end()
                         ->end()

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -28,14 +30,8 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RecoveryTokenCollection;
 
 class RecoveryTokenService
 {
-    /**
-     * @var LibraryRecoveryTokenService
-     */
-    private $recoveryTokenService;
-
-    public function __construct(LibraryRecoveryTokenService $recoveryTokenService)
+    public function __construct(private readonly LibraryRecoveryTokenService $recoveryTokenService)
     {
-        $this->recoveryTokenService = $recoveryTokenService;
     }
 
     public function hasRecoveryToken(Identity $identity): bool
@@ -47,7 +43,7 @@ class RecoveryTokenService
     {
         try {
             return $this->recoveryTokenService->getOne($recoveryTokenId);
-        } catch (RuntimeException $e) {
+        } catch (RuntimeException) {
             throw new NotFoundException('Recovery Token not found ');
         }
     }
@@ -56,7 +52,7 @@ class RecoveryTokenService
     {
         try {
             return $this->recoveryTokenService->getAll($identity);
-        } catch (RuntimeException $e) {
+        } catch (RuntimeException) {
             return [];
         }
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -19,6 +21,7 @@
 namespace Surfnet\StepupMiddlewareClient\Service;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use RuntimeException;
 use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 use Surfnet\StepupMiddlewareClient\Exception\AccessDeniedToResourceException;
@@ -32,16 +35,10 @@ use Surfnet\StepupMiddlewareClient\Helper\JsonHelper;
 class ApiService
 {
     /**
-     * @var Client
-     */
-    private $guzzleClient;
-
-    /**
      * @param Client $guzzleClient A Guzzle client preconfigured with base URL and proper authentication.
      */
-    public function __construct(Client $guzzleClient)
+    public function __construct(private readonly Client $guzzleClient)
     {
-        $this->guzzleClient = $guzzleClient;
     }
 
     /**
@@ -49,13 +46,13 @@ class ApiService
      *               will be URL encoded and formatted into the path string.
      *               Example: '/institution/%s/identity/%s', ['institution' => 'ab-cd', 'identity' => 'ef']
      * @param array $parameters An array containing the parameters to replace in the path.
-     * @param HttpQuery $httpQuery|null
-     * @return null|mixed Most likely an array structure, null when the resource doesn't exist.
+     * @param HttpQuery $httpQuery |null
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
+     * @throws GuzzleException
      */
-    public function read($path, array $parameters = [], HttpQuery $httpQuery = null)
+    public function read(string $path, array $parameters = [], HttpQuery $httpQuery = null): ?array
     {
         $resource = $this->buildResourcePath($path, $parameters, $httpQuery);
 
@@ -63,10 +60,10 @@ class ApiService
         $statusCode = $response->getStatusCode();
 
         try {
-            $body = (string)$response->getBody();
+            $body = $response->getBody()->getContents();
             $data = JsonHelper::decode($body);
             $errors = isset($data['errors']) && is_array($data['errors']) ? $data['errors'] : [];
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException) {
             // Malformed JSON body
             throw new MalformedResponseException('Cannot read resource: Middleware returned malformed JSON');
         }
@@ -92,17 +89,12 @@ class ApiService
 
     /**
      * @param string $path
-     * @param array $parameters
      * @param HttpQuery|null $httpQuery
      * @return string
      */
-    private function buildResourcePath($path, array $parameters, HttpQuery $httpQuery = null)
+    private function buildResourcePath(string $path, array $parameters, HttpQuery $httpQuery = null): string
     {
-        if (count($parameters) > 0) {
-            $resource = vsprintf($path, array_map('urlencode', $parameters));
-        } else {
-            $resource = $path;
-        }
+        $resource = $parameters !== [] ? vsprintf($path, array_map('urlencode', $parameters)) : $path;
 
         if (empty($resource)) {
             throw new RuntimeException(
@@ -110,12 +102,12 @@ class ApiService
                     'Could not construct resource path from path "%s", parameters "%s" and search query "%s"',
                     $path,
                     implode('","', $parameters),
-                    $httpQuery ? $httpQuery->toHttpQuery() : ''
+                    $httpQuery instanceof HttpQuery ? $httpQuery->toHttpQuery() : ''
                 )
             );
         }
 
-        if ($httpQuery !== null) {
+        if ($httpQuery instanceof HttpQuery) {
             $resource .= $httpQuery->toHttpQuery();
         }
 

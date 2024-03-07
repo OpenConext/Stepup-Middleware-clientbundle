@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -19,24 +21,23 @@
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Command;
 
 use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class RevokeOwnSecondFactorCommand extends AbstractCommand
 {
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * @return array
      */
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id' => $this->identityId,

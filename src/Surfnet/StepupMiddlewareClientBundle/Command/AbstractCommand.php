@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -26,22 +28,15 @@ use Surfnet\StepupMiddlewareClientBundle\Exception\InvalidArgumentException;
  */
 abstract class AbstractCommand implements Command
 {
-    /**
-     * @var string|null
-     */
-    private $commandUuid;
+    private ?string $commandUuid = null;
 
-    public function getUuid()
+    public function getUuid(): ?string
     {
         return $this->commandUuid;
     }
 
-    public function setUuid($uuid)
+    public function setUuid(string $uuid): void
     {
-        if (!is_string($uuid)) {
-            InvalidArgumentException::invalidType('string', 'uuid', $uuid);
-        }
-
         if ($this->commandUuid) {
             throw new DomainException('Command UUID may not be overwritten');
         }

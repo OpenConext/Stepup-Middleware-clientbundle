@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -30,39 +32,26 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
  */
 class RaSecondFactorService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    /**
-     * @param ApiService $apiService
-     */
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     /**
-     * @param RaSecondFactorSearchQuery $query
-     * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function search(RaSecondFactorSearchQuery $query)
+    public function search(RaSecondFactorSearchQuery $query): ?array
     {
         return $this->apiService->read('ra-second-factors' . $query->toHttpQuery());
     }
 
     /**
-     * @param RaSecondFactorExportQuery $query
-     * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function searchForExport(RaSecondFactorExportQuery $query)
+    public function searchForExport(RaSecondFactorExportQuery $query): ?array
     {
         return $this->apiService->read('ra-second-factors-export' . $query->toHttpQuery());
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -18,27 +20,21 @@
 
 namespace Surfnet\StepupMiddlewareClient\Exception;
 
+use Exception;
+
 class ResourceReadException extends RuntimeException implements ApiErrorException
 {
     /**
-     * @var string[]
-     */
-    private $errors;
-
-    /**
-     * @param string $message
      * @param string[] $errors
      * @param int $code
-     * @param null|\Exception $previous
+     * @param null|Exception $previous
      */
-    public function __construct($message, array $errors, $code = 0, \Exception $previous = null)
+    public function __construct(string $message, private readonly array $errors, $code = 0, Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);
-
-        $this->errors = $errors;
     }
 
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

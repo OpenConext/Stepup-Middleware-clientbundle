@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -19,54 +21,55 @@
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Dto;
 
 use Serializable;
+use Stringable;
 use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
+use Surfnet\StepupMiddlewareClientBundle\Exception\RuntimeException;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Identity implements Dto, Serializable
+class Identity implements Dto, Serializable, Stringable
 {
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.id.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.id.must_be_string")
-     * @var string
      */
-    public $id;
+    public ?string $id = null;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.name_id.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.name_id.must_be_string")
      * @var string
      */
-    public $nameId;
+    public string $nameId;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.institution.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.institution.must_be_string")
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.email.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.email.must_be_string")
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.common_name.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.common_name.must_be_string")
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.preferred_locale.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.preferred_locale.must_be_string")
      * @var string
      */
-    public $preferredLocale;
+    public string $preferredLocale;
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $identity = new self();
         $identity->id = $data['id'];
@@ -82,10 +85,8 @@ class Identity implements Dto, Serializable
     /**
      * Used so that we can serialize the Identity within the SAMLToken, so we can store the token in a session.
      * This to support persistent login
-     *
-     * @return string
      */
-    public function serialize()
+    public function serialize(): string
     {
         return serialize(
             [
@@ -102,19 +103,10 @@ class Identity implements Dto, Serializable
     /**
      * Used so that we can unserialize the Identity within the SAMLToken, so that it can be loaded from the session
      * for persistent login.
-     *
-     * @param string $serialized
      */
-    public function unserialize($serialized)
+    public function unserialize(string $data): void
     {
-        list (
-            $this->id,
-            $this->nameId,
-            $this->institution,
-            $this->email,
-            $this->commonName,
-            $this->preferredLocale
-        ) = unserialize($serialized);
+        [$this->id, $this->nameId, $this->institution, $this->email, $this->commonName, $this->preferredLocale] = unserialize($data);
     }
 
     /**
@@ -123,8 +115,41 @@ class Identity implements Dto, Serializable
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
+        if (!$this->id) {
+            throw new RuntimeException('Unable to cast Identity Id to string, it was never set');
+        }
         return $this->id;
+    }
+
+    /**
+     * Used so that we can serialize the Identity within the SAMLToken, so we can store the token in a session.
+     * This to support persistent login
+     */
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'nameId' => $this->nameId,
+            'institution' => $this->institution,
+            'email' => $this->email,
+            'commonName' => $this->commonName,
+            'preferredLocale' => $this->preferredLocale
+        ];
+    }
+
+    /**
+     * Used so that we can unserialize the Identity within the SAMLToken, so that it can be loaded from the session
+     * for persistent login.
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->id = $data['id'];
+        $this->nameId = $data['nameId'];
+        $this->institution = $data['institution'];
+        $this->email = $data['email'];
+        $this->commonName = $data['commonName'];
+        $this->preferredLocale = $data['preferredLocale'];
     }
 }
