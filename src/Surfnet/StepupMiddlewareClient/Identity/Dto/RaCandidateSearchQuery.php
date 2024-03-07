@@ -27,13 +27,13 @@ use function is_array;
 class RaCandidateSearchQuery implements HttpQuery
 {
     private readonly string $actorId;
-    private string $institution = '';
-    private string $commonName = '';
-    private string $email = '';
-    private string $raInstitution = '';
+    private ?string $institution = null;
+    private ?string $commonName = null;
+    private ?string $email = null;
+    private ?string $raInstitution = null;
     private readonly int $pageNumber;
-    private string $orderBy = '';
-    private string $orderDirection = '';
+    private ?string $orderBy = null;
+    private ?string $orderDirection = null;
 
     /**
      * @var string[]
@@ -134,7 +134,7 @@ class RaCandidateSearchQuery implements HttpQuery
                     'orderDirection'    => $this->orderDirection,
                     'p'                 => $this->pageNumber,
                 ],
-                fn($value): bool => !is_array($value)
+                fn($value): bool => $value !== [] && $value !== '' && $value !== null,
             )
         );
     }
