@@ -31,54 +31,16 @@ final class RaSecondFactorExportQuery implements HttpQuery
     public const STATUS_VETTED = 'vetted';
     public const STATUS_REVOKED = 'revoked';
 
-    /**
-     * @var string|null
-     */
-    private ?string $name;
-
-    /**
-     * @var string|null
-     */
-    private ?string $type;
-
-    /**
-     * @var string|null The second factor type's ID (eg. Yubikey public ID)
-     */
-    private ?string $secondFactorId;
-
-    /**
-     * @var string|null
-     */
-    private ?string $email;
-
-    /**
-     * @var string|null
-     */
-    private ?string $institution;
-
-    /**
-     * @var string|null One of the STATUS_* constants.
-     */
-    private ?string $status;
-
-    /**
-     * @var string|null
-     */
-    private ?string $orderBy;
-
-    /**
-     * @var string|null
-     */
-    private ?string $orderDirection;
-
-    /**
-     * @var string
-     */
+    private ?string $name = null;
+    private ?string $type = null;
+    private ?string $secondFactorId = null;
+    private ?string $email = null;
+    private ?string $institution = null;
+    private ?string $status = null;
+    private ?string $orderBy = null;
+    private ?string $orderDirection = null;
     private string $actorId;
 
-    /**
-     * @param string $actorId
-     */
     public function __construct(string $actorId)
     {
         $this->assertNonEmptyString($actorId, 'actorId');
