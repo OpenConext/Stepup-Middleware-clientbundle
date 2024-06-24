@@ -1,7 +1,7 @@
 # Step-up Middleware Client Bundle
-[![Build Status](https://travis-ci.org/OpenConext/Stepup-Middleware-clientbundle.svg)](https://travis-ci.org/OpenConext/Stepup-Middleware-clientbundle) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpenConext/Stepup-Middleware-clientbundle/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/OpenConext/Stepup-Middleware-clientbundle/?branch=develop) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/3fef2be8-1351-4fbb-b6e8-00296c1d8d36/mini.png)](https://insight.sensiolabs.com/projects/3fef2be8-1351-4fbb-b6e8-00296c1d8d36)
+[![Build status](https://github.com/OpenConext/Stepup-Middleware-clientbundle/actions/workflows/test-integration.yml/badge.svg)](https://github.com/SURFnet/sp-dashboard/actions/workflows/test-integration.yml)
 
-A Symfony6 bundle to consume the Step-up Middleware API. See [Stepup-Deploy](https://github.com/OpenConext/Stepup-Deploy) for an overview. 
+A Symfony 6 bundle to consume the Step-up Middleware API. See [Stepup-Deploy](https://github.com/OpenConext/Stepup-Deploy) for an overview. 
 
 ## Requirements
 
