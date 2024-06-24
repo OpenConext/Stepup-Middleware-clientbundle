@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -25,14 +27,14 @@ class ZigCommand extends AbstractCommand
     /**
      * @var array
      */
-    public $payload;
+    public array $payload;
 
     public function __construct(array $payload)
     {
         $this->payload = $payload;
     }
 
-    public function serialise()
+    public function serialise(): array
     {
         return $this->payload;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -25,30 +27,19 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class InstitutionListingService
 {
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @var LibraryInstitutionListingService
-     */
-    private $clientService;
-
-    public function __construct(
-        LibraryInstitutionListingService $institutionListingService,
-        ValidatorInterface $validator
-    ) {
-        $this->clientService = $institutionListingService;
-        $this->validator = $validator;
+    public function __construct(private readonly LibraryInstitutionListingService $clientService, private readonly ValidatorInterface $validator)
+    {
     }
 
     /**
      * @return InstitutionListingCollection
      */
-    public function getAll()
+    public function getAll(): InstitutionListingCollection
     {
         $data = $this->clientService->getAll();
+        if (!$data) {
+            return InstitutionListingCollection::empty();
+        }
         $collection = InstitutionListingCollection::fromData($data);
 
         $violations = $this->validator->validate($collection);

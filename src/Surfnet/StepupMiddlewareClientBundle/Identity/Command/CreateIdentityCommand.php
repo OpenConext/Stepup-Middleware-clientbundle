@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -25,34 +27,34 @@ class CreateIdentityCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @var string
      */
-    public $nameId;
+    public string $nameId;
 
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     /**
      * @var string
      */
-    public $preferredLocale;
+    public string $preferredLocale;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'id'                => $this->id,

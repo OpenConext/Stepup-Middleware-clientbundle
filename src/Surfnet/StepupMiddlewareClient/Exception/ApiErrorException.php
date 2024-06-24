@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,5 +25,5 @@ interface ApiErrorException extends StepupMiddlewareClientException
     /**
      * @return string[]
      */
-    public function getErrors();
+    public function getErrors(): array;
 }

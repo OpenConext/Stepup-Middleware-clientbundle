@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -22,20 +24,15 @@ use Surfnet\StepupMiddlewareClient\Exception\RuntimeException;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryToken;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryTokenSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService as LibraryRecoveryTokenService;
+use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 use Surfnet\StepupMiddlewareClientBundle\Exception\NotFoundException;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RecoveryTokenCollection;
 
 class RecoveryTokenService
 {
-    /**
-     * @var LibraryRecoveryTokenService
-     */
-    private $recoveryTokenService;
-
-    public function __construct(LibraryRecoveryTokenService $recoveryTokenService)
+    public function __construct(private readonly LibraryRecoveryTokenService $recoveryTokenService)
     {
-        $this->recoveryTokenService = $recoveryTokenService;
     }
 
     public function hasRecoveryToken(Identity $identity): bool
@@ -47,7 +44,7 @@ class RecoveryTokenService
     {
         try {
             return $this->recoveryTokenService->getOne($recoveryTokenId);
-        } catch (RuntimeException $e) {
+        } catch (RuntimeException) {
             throw new NotFoundException('Recovery Token not found ');
         }
     }
@@ -56,7 +53,7 @@ class RecoveryTokenService
     {
         try {
             return $this->recoveryTokenService->getAll($identity);
-        } catch (RuntimeException $e) {
+        } catch (RuntimeException) {
             return [];
         }
     }
@@ -66,7 +63,7 @@ class RecoveryTokenService
         return ['sms' => 'sms', 'safe-store' => 'safe-store'];
     }
 
-    public function search(RecoveryTokenSearchQuery $query): RecoveryTokenCollection
+    public function search(RecoveryTokenSearchQuery $query): CollectionDto
     {
         $data = $this->recoveryTokenService->search($query);
         if ($data === null) {

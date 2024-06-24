@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -19,6 +21,7 @@
 namespace Surfnet\StepupMiddlewareClient\Service;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use RuntimeException;
 use Surfnet\StepupMiddlewareClient\Exception\CommandExecutionFailedException;
 use Surfnet\StepupMiddlewareClient\Exception\InvalidArgumentException;
@@ -26,27 +29,14 @@ use Surfnet\StepupMiddlewareClient\Helper\JsonHelper;
 
 class CommandService
 {
-    /**
-     * @var Client
-     */
-    private $guzzleClient;
+    private readonly string $username;
+
+    private readonly string $password;
 
     /**
-     * @var string
+     * The Guzzle client preconfigured with the command URL.
      */
-    private $username;
-
-    /**
-     * @var string
-     */
-    private $password;
-
-    /**
-     * @param Client $guzzleClient A Guzzle client preconfigured with the command URL.
-     * @param string $username
-     * @param string $password
-     */
-    public function __construct(Client $guzzleClient, $username, $password)
+    public function __construct(private readonly Client $guzzleClient, string $username, string $password)
     {
         if (!is_string($username)) {
             throw InvalidArgumentException::invalidType('string', 'username', $username);
@@ -55,26 +45,17 @@ class CommandService
         if (!is_string($password)) {
             throw InvalidArgumentException::invalidType('string', 'password', $password);
         }
-
-        $this->guzzleClient = $guzzleClient;
         $this->username = $username;
         $this->password = $password;
     }
 
     /**
-     * @param string $commandName
-     * @param string $uuid
-     * @param array $payload
-     * @param array $metadata
-     * @return ExecutionResult
      * @throws CommandExecutionFailedException
+     * @throws GuzzleException
      */
-    public function execute($commandName, $uuid, array $payload, array $metadata = [])
+    public function execute(string $commandName, string $uuid, array $payload, array $metadata = []): ExecutionResult
     {
         $this->assertIsValidCommandName($commandName);
-        if (!is_string($uuid)) {
-            throw InvalidArgumentException::invalidType('string', 'uuid', $uuid);
-        }
 
         $command = [
             'name' => $commandName,
@@ -84,7 +65,7 @@ class CommandService
 
         $body = ['command' => $command];
 
-        if (count($metadata) > 0) {
+        if ($metadata !== []) {
             $body['meta'] = $metadata;
         }
 
@@ -94,10 +75,10 @@ class CommandService
             'auth'        => [$this->username, $this->password, 'basic'],
             'headers'     => ['Accept' => 'application/json'],
         ];
-        $httpResponse = $this->guzzleClient->post(null, $requestOptions);
+        $httpResponse = $this->guzzleClient->post('', $requestOptions);
 
         try {
-            $response = JsonHelper::decode((string) $httpResponse->getBody());
+            $response = JsonHelper::decode($httpResponse->getBody()->getContents());
         } catch (RuntimeException $e) {
             throw new CommandExecutionFailedException(
                 'Server response could not be decoded as it isn\'t valid JSON.',
@@ -112,15 +93,10 @@ class CommandService
     }
 
     /**
-     * @param mixed $commandName
      * @throws InvalidArgumentException
      */
-    private function assertIsValidCommandName($commandName)
+    private function assertIsValidCommandName(string $commandName): void
     {
-        if (!is_string($commandName)) {
-            InvalidArgumentException::invalidType('string', 'command', $commandName);
-        }
-
         if (!preg_match('~^[a-z0-9_]+:([a-z0-9_].)*[a-z0-9_]+$~i', $commandName)) {
             throw new InvalidArgumentException(
                 'Command must be formatted AggregateRoot:Command or AggregateRoot:Name.Space.Command'
@@ -128,12 +104,7 @@ class CommandService
         }
     }
 
-    /**
-     * @param string $uuid
-     * @param mixed $response
-     * @return ExecutionResult
-     */
-    private function processOkResponse($uuid, $response)
+    private function processOkResponse(string $uuid, array $response): ExecutionResult
     {
         if (!isset($response['command'])) {
             throw new CommandExecutionFailedException('Unexpected response format: command key missing.');
@@ -161,22 +132,10 @@ class CommandService
         return new ExecutionResult($uuid, $response['processed_by']);
     }
 
-    /**
-     * @param string $uuid
-     * @param mixed $response
-     * @return ExecutionResult
-     */
-    private function processErrorResponse($uuid, $response)
+    private function processErrorResponse(string $uuid, array $response): ExecutionResult
     {
         if (!isset($response['errors'])) {
             throw new CommandExecutionFailedException('Unexpected response format: errors key missing.');
-        }
-
-        if (!is_array($response['errors'])) {
-            throw new CommandExecutionFailedException(sprintf(
-                'Unexpected response format: errors should be an array, "%s" given.',
-                gettype($response['errors'])
-            ));
         }
 
         return new ExecutionResult($uuid, null, $response['errors']);

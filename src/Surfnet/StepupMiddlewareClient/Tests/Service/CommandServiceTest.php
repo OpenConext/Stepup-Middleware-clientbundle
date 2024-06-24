@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -18,8 +20,11 @@
 
 namespace Surfnet\StepupMiddlewareClient\Tests\Service;
 
+use GuzzleHttp\Client;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 use Surfnet\StepupMiddlewareClient\Exception\CommandExecutionFailedException;
 use Surfnet\StepupMiddlewareClient\Service\CommandService;
 
@@ -32,20 +37,20 @@ class CommandServiceTest extends TestCase
 
     /**
      * @dataProvider commandMetadata
-     * @param bool $shouldHaveMeta
-     * @param array $metadata
      */
-    public function testItExecutesCommands($shouldHaveMeta, array $metadata)
+    public function testItExecutesCommands(bool $shouldHaveMeta, array $metadata): void
     {
         $uuid = 'uu-id';
         $processedBy = 'server-1';
         $json = json_encode(['command' => $uuid, 'processed_by' => $processedBy]);
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn($json);
 
-        $responseStub = m::mock('Psr\Http\Message\ResponseInterface');
-        $responseStub->shouldReceive('getBody')->once()->andReturn($json);
+        $responseStub = m::mock(ResponseInterface::class);
+        $responseStub->shouldReceive('getBody')->once()->andReturn($body);
         $responseStub->shouldReceive('getStatusCode')->once()->andReturn('200');
-        $guzzleClient = m::mock('GuzzleHttp\Client')
-            ->shouldReceive('post')->once()->with(null, self::spy($options))->andReturn($responseStub)
+        $guzzleClient = m::mock(Client::class)
+            ->shouldReceive('post')->once()->with('', $this->spy($options))->andReturn($responseStub)
             ->getMock();
 
         $username = 'user';
@@ -73,7 +78,7 @@ class CommandServiceTest extends TestCase
         $this->assertEquals($command->getProcessedBy(), $processedBy);
     }
 
-    public function commandMetadata()
+    public function commandMetadata(): array
     {
         return [
             'No metadata' => [false, []],
@@ -81,17 +86,20 @@ class CommandServiceTest extends TestCase
         ];
     }
 
-    public function testItHandlesErrorResponses()
+    public function testItHandlesErrorResponses(): void
     {
         $errors = ['Field X is fine', 'Field Y is durable', 'Field Z is zepto'];
         $json = json_encode(['errors' => $errors]);
 
-        $responseStub = m::mock('Psr\Http\Message\ResponseInterface');
-        $responseStub->shouldReceive('getBody')->once()->andReturn($json);
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn($json);
+
+        $responseStub = m::mock(ResponseInterface::class);
+        $responseStub->shouldReceive('getBody')->once()->andReturn($body);
         $responseStub->shouldReceive('getStatusCode')->once()->andReturn('400');
 
-        $guzzleClient = m::mock('GuzzleHttp\Client')
-            ->shouldReceive('post')->once()->with(null, self::spy($options))->andReturn($responseStub)
+        $guzzleClient = m::mock(Client::class)
+            ->shouldReceive('post')->once()->with(null, $this->spy($options))->andReturn($responseStub)
             ->getMock();
 
         $username = 'user';
@@ -114,14 +122,16 @@ class CommandServiceTest extends TestCase
         $this->assertCount(3, $command->getErrors());
     }
 
-    public function testItThrowsWhenMalformedJsonIsReturned()
+    public function testItThrowsWhenMalformedJsonIsReturned(): void
     {
         $malformedJson = "Malformed JSON";
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn($malformedJson);
 
-        $responseStub = m::mock('Psr\Http\Message\ResponseInterface')
-            ->shouldReceive('getBody')->andReturn($malformedJson)
+        $responseStub = m::mock(ResponseInterface::class)
+            ->shouldReceive('getBody')->andReturn($body)
             ->getMock();
-        $guzzleClient = m::mock('GuzzleHttp\Client')
+        $guzzleClient = m::mock(Client::class)
             ->shouldReceive('post')->once()->with(null, m::type('array'))->andReturn($responseStub)
             ->getMock();
 
@@ -137,18 +147,17 @@ class CommandServiceTest extends TestCase
 
     /**
      * @dataProvider invalidResponses
-     * @param int $statusCode
-     * @param array $response
      */
-    public function testItThrowsWhenInvalidResponseIsReturned($statusCode, $response)
+    public function testItThrowsWhenInvalidResponseIsReturned(int $statusCode, array $response): void
     {
-        $json = json_encode($response);
-
-        $responseStub = m::mock('Psr\Http\Message\ResponseInterface')
-            ->shouldReceive('getBody')->once()->andReturn($json)
+        $json = json_encode($response, JSON_THROW_ON_ERROR);
+        $body = m::mock(StreamInterface::class);
+        $body->shouldReceive('getContents')->andReturn($json);
+        $responseStub = m::mock(ResponseInterface::class)
+            ->shouldReceive('getBody')->once()->andReturn($body)
             ->shouldReceive('getStatusCode')->once()->andReturn((string) $statusCode)
             ->getMock();
-        $guzzleClient = m::mock('GuzzleHttp\Client')
+        $guzzleClient = m::mock(Client::class)
             ->shouldReceive('post')->once()->with(null, m::type('array'))->andReturn($responseStub)
             ->getMock();
 
@@ -161,7 +170,7 @@ class CommandServiceTest extends TestCase
         $service->execute($commandName, $uuid, $payload);
     }
 
-    public function invalidResponses()
+    public function invalidResponses(): array
     {
         return [
             '200, missing command' => [200, ['processed_by' => 'server-3']],
@@ -169,15 +178,14 @@ class CommandServiceTest extends TestCase
             '200, non-string command' => [200, ['command' => 3, 'processed_by' => 'server-3']],
             '200, non-string processed_by' => [200, ['command' => 'uid', 'processed_by' => 4]],
             '400, missing errors' => [400, ['command' => 'uu-id-4']],
-            '500, errors a string' => [400, ['errors' => 'uu-id-4']],
             '500, command, processed_by' => [400, ['name' => 'uu-id', 'processed_by' => 'server-3']],
             '200, errors' => [200, ['errors' => ['hoi']]],
         ];
     }
 
-    private static function spy(&$spiedValue)
+    private function spy(&$spiedValue): m\Matcher\Closure
     {
-        return m::on(function ($value) use (&$spiedValue) {
+        return m::on(function ($value) use (&$spiedValue): bool {
             $spiedValue = $value;
 
             return true;

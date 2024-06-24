@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -29,7 +31,7 @@ class RaListing implements Dto
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_listing.institution.must_not_be_blank")
@@ -37,7 +39,7 @@ class RaListing implements Dto
      *
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_listing.institution.must_not_be_blank")
@@ -45,7 +47,7 @@ class RaListing implements Dto
      *
      * @var string
      */
-    public $raInstitution;
+    public string $raInstitution;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_listing.common_name.must_not_be_blank")
@@ -53,7 +55,7 @@ class RaListing implements Dto
      *
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_listing.email.must_not_be_blank")
@@ -61,7 +63,7 @@ class RaListing implements Dto
      *
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_listing.role.must_not_be_blank")
@@ -69,7 +71,7 @@ class RaListing implements Dto
      *
      * @var string
      */
-    public $role;
+    public string $role;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_listing.location.must_not_be_blank")
@@ -77,7 +79,7 @@ class RaListing implements Dto
      *
      * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.ra_listing.contact_information.must_not_be_blank")
@@ -85,13 +87,9 @@ class RaListing implements Dto
      *
      * @var string
      */
-    public $contactInformation;
+    public string $contactInformation;
 
-    /**
-     * @param array $data
-     * @return static
-     */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $raListing                     = new self();
         $raListing->identityId         = $data['identity_id'];

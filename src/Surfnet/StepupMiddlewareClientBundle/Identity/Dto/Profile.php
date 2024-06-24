@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2019 SURFnet B.V.
  *
@@ -28,55 +30,55 @@ class Profile implements Dto
      * @Assert\Type(type="string", message="middleware_client.dto.identity.id.must_be_string")
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.name_id.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.name_id.must_be_string")
      * @var string
      */
-    public $nameId;
+    public string $nameId;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.institution.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.institution.must_be_string")
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.email.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.email.must_be_string")
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.common_name.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.common_name.must_be_string")
      * @var string
      */
-    public $commonName;
+    public string $commonName;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.identity.preferred_locale.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.identity.preferred_locale.must_be_string")
      * @var string
      */
-    public $preferredLocale;
+    public string $preferredLocale;
 
     /**
      * @var bool
      */
-    public $isSraa;
+    public bool $isSraa;
 
     /**
      * @var array
      */
-    public $authorizations;
+    public array $authorizations;
 
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $identity = new self();
         $identity->id = $data['id'];
@@ -95,7 +97,7 @@ class Profile implements Dto
     /**
      * @return array List with institutions
      */
-    public function getRaaInstitutions()
+    public function getRaaInstitutions(): array
     {
         $choices = [];
         foreach ($this->authorizations as $institution => $role) {

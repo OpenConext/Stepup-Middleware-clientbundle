@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -26,13 +28,11 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService;
 
 class RecoveryTokenServiceTest extends TestCase
 {
-    private $service;
+    private RecoveryTokenService $service;
 
-    private $apiService;
+    private Identity $vangelis;
 
-    private $vangelis;
-
-    private $eno;
+    private Identity $eno;
 
     protected function setUp(): void
     {
@@ -44,18 +44,18 @@ class RecoveryTokenServiceTest extends TestCase
         $this->eno->id = '1b0d8788-ebb1-11ec-8ea0-0242ac120002';
         $this->eno->commonName = 'Brian Peter George St John le Baptiste de la Salle Eno';
 
-        $this->apiService = Mockery::mock(ApiService::class);
-        $this->apiService
+        $apiService = Mockery::mock(ApiService::class);
+        $apiService
             ->shouldReceive('hasRecoveryToken')
             ->with($this->vangelis)
             ->andReturnTrue();
 
-        $this->apiService
+        $apiService
             ->shouldReceive('hasRecoveryToken')
             ->with($this->eno)
             ->andReturnFalse();
 
-        $this->service = new RecoveryTokenService($this->apiService);
+        $this->service = new RecoveryTokenService($apiService);
     }
 
     protected function tearDown(): void
@@ -63,10 +63,9 @@ class RecoveryTokenServiceTest extends TestCase
         Mockery::close();
     }
 
-    public function test_assert_recovery_token()
+    public function test_assert_recovery_token(): void
     {
         $this->assertTrue($this->service->hasRecoveryToken($this->vangelis));
         $this->assertFalse($this->service->hasRecoveryToken($this->eno));
     }
-
 }

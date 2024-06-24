@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -30,34 +32,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class RaListingService
 {
-    /**
-     * @var LibraryRaListingService
-     */
-    private $service;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @param LibraryRaListingService $service
-     * @param ValidatorInterface      $validator
-     */
-    public function __construct(LibraryRaListingService $service, ValidatorInterface $validator)
+    public function __construct(private readonly LibraryRaListingService $service, private readonly ValidatorInterface $validator)
     {
-        $this->service   = $service;
-        $this->validator = $validator;
     }
 
-    /**
-     * @param string $id
-     * @param string $institution
-     * @param string $actorInstitution
-     * @param string $actorId
-     * @return null|RaListing
-     */
-    public function get($id, $institution, $actorId)
+    public function get(string $id, string $institution, string $actorId): ?RaListing
     {
         $data = $this->service->get($id, $institution, $actorId);
 
@@ -73,10 +52,9 @@ class RaListingService
     }
 
     /**
-     * @param RaListingSearchQuery $searchQuery
      * @return RaListingCollection
      */
-    public function search(RaListingSearchQuery $searchQuery)
+    public function search(RaListingSearchQuery $searchQuery): RaListingCollection
     {
         $data = $this->service->search($searchQuery);
 
@@ -98,9 +76,9 @@ class RaListingService
 
     /**
      * @param object      $value
-     * @param null|string $message
+     * @param string|null $message
      */
-    private function assertIsValid($value, $message = null)
+    private function assertIsValid(mixed $value, string $message = null): void
     {
         $violations = $this->validator->validate($value);
 

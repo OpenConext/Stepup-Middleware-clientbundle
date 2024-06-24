@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -27,21 +29,21 @@ class ProvePhoneRecoveryTokenPossessionCommand extends AbstractCommand
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * The ID of the Recovery Token to create.
      *
      * @var string
      */
-    public $recoveryTokenId;
+    public string $recoveryTokenId;
 
     /**
      * @var string
      */
-    public $phoneNumber;
+    public string $phoneNumber;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id' => $this->identityId,

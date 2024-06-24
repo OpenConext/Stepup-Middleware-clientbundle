@@ -1,0 +1,766 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Configuration\\\\Service\\\\InstitutionConfigurationOptionsService\\:\\:getInstitutionConfigurationOptionsFor\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Configuration/Service/InstitutionConfigurationOptionsService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Configuration\\\\Service\\\\RaLocationService\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Configuration/Service/RaLocationService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Configuration\\\\Service\\\\RaLocationService\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Configuration/Service/RaLocationService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Exception\\\\InvalidArgumentException\\:\\:invalidType\\(\\) has parameter \\$parameterName with no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Exception/InvalidArgumentException.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Exception\\\\JsonException\\:\\:withMessage\\(\\) has parameter \\$errorMessage with no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Exception/JsonException.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Helper\\\\JsonHelper\\:\\:decode\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Helper/JsonHelper.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClient\\\\Helper\\\\JsonHelper\\:\\:\\$jsonErrors type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Helper/JsonHelper.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Dto\\\\RaCandidateSearchQuery\\:\\:setSecondFactorTypes\\(\\) has parameter \\$secondFactorTypes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Dto/RaCandidateSearchQuery.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Dto\\\\RecoveryToken\\:\\:from\\(\\) has parameter \\$apiResult with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Dto/RecoveryToken.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Dto\\\\VettingTypeHint\\:\\:from\\(\\) has parameter \\$apiResult with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Dto/VettingTypeHint.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Dto\\\\VettingTypeHint\\:\\:\\$hints type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Dto/VettingTypeHint.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\AuditLogService\\:\\:searchSecondFactorAuditLog\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/AuditLogService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\IdentityService\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/IdentityService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\IdentityService\\:\\:getRegistrationAuthorityCredentials\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/IdentityService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\IdentityService\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/IdentityService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\InstitutionListingService\\:\\:getAll\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/InstitutionListingService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\ProfileService\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/ProfileService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RaCandidateService\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RaCandidateService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RaCandidateService\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RaCandidateService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RaListingService\\:\\:get\\(\\) has parameter \\$actorId with no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RaListingService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RaListingService\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RaListingService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RaListingService\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RaListingService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RaSecondFactorService\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RaSecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RaSecondFactorService\\:\\:searchForExport\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RaSecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RaService\\:\\:listRas\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RaService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\RecoveryTokenService\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/RecoveryTokenService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:getUnverified\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/SecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:getVerified\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/SecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:getVerifiedCanSkipProvePossession\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/SecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:getVetted\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/SecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:searchOwnVerified\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/SecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:searchUnverified\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/SecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:searchVerified\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/SecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:searchVetted\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Identity/Service/SecondFactorService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Service\\\\ApiService\\:\\:buildResourcePath\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Service/ApiService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Service\\\\ApiService\\:\\:read\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Service/ApiService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Service\\\\ApiService\\:\\:read\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Service/ApiService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Service\\\\CommandService\\:\\:execute\\(\\) has parameter \\$metadata with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Service/CommandService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Service\\\\CommandService\\:\\:execute\\(\\) has parameter \\$payload with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Service/CommandService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Service\\\\CommandService\\:\\:processErrorResponse\\(\\) has parameter \\$response with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Service/CommandService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Service\\\\CommandService\\:\\:processOkResponse\\(\\) has parameter \\$response with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Service/CommandService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClient\\\\Service\\\\ExecutionResult\\:\\:__construct\\(\\) has parameter \\$errors with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClient/Service/ExecutionResult.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Command\\\\Command\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Command/Command.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Command\\\\Command\\:\\:setUuid\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Command/Command.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Command\\\\Metadata\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Command/Metadata.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Command\\\\AddRaLocationCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Command/AddRaLocationCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Command\\\\ChangeRaLocationCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Command/ChangeRaLocationCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Command\\\\RemoveRaLocationCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Command/RemoveRaLocationCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$allowSelfAssertedTokens has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$allowedSecondFactors has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$numberOfTokensPerIdentity has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$selectRaa has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$selfVet has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$showRaaContactInformation has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$ssoOn2fa has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$useRa has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$useRaLocations has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$useRaa has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$verifyEmail has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\RaLocation\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/RaLocation.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\RaLocationCollection\\:\\:createElementFromData\\(\\) has parameter \\$raLocation with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/RaLocationCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\RaLocationCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/RaLocationCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\DependencyInjection\\\\SurfnetStepupMiddlewareClientExtension\\:\\:configureMiddlewareApiCredentials\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/DependencyInjection/SurfnetStepupMiddlewareClientExtension.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\DependencyInjection\\\\SurfnetStepupMiddlewareClientExtension\\:\\:configureMiddlewareCommandApiUrl\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/DependencyInjection/SurfnetStepupMiddlewareClientExtension.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\DependencyInjection\\\\SurfnetStepupMiddlewareClientExtension\\:\\:configureMiddlewareReadApiClient\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/DependencyInjection/SurfnetStepupMiddlewareClientExtension.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Dto\\\\CollectionDto\\:\\:__construct\\(\\) has parameter \\$elements with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Dto/CollectionDto.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Dto\\\\CollectionDto\\:\\:__construct\\(\\) has parameter \\$filterOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Dto/CollectionDto.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Dto\\\\CollectionDto\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Dto/CollectionDto.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Dto\\\\CollectionDto\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Dto/CollectionDto.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Dto\\\\CollectionDto\\:\\:getElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Dto/CollectionDto.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Dto\\\\CollectionDto\\:\\:getFilterOption\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Dto/CollectionDto.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 2
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Dto/CollectionDto.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Dto\\\\Dto\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Dto/Dto.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Exception\\\\InvalidArgumentException\\:\\:invalidType\\(\\) has parameter \\$parameterName with no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Exception/InvalidArgumentException.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\AccreditIdentityCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/AccreditIdentityCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\AmendRegistrationAuthorityInformationCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/AmendRegistrationAuthorityInformationCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\AppointRoleCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/AppointRoleCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\CreateIdentityCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/CreateIdentityCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\ExpressLocalePreferenceCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/ExpressLocalePreferenceCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\PromiseSafeStoreSecretTokenPossessionCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/PromiseSafeStoreSecretTokenPossessionCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\ProveGssfPossessionCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/ProveGssfPossessionCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\ProvePhonePossessionCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/ProvePhonePossessionCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\ProvePhoneRecoveryTokenPossessionCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/ProvePhoneRecoveryTokenPossessionCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\ProveU2fDevicePossessionCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/ProveU2fDevicePossessionCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\ProveYubikeyPossessionCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/ProveYubikeyPossessionCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\RegisterSelfAssertedSecondFactorCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/RegisterSelfAssertedSecondFactorCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\RetractRegistrationAuthorityCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/RetractRegistrationAuthorityCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\RevokeOwnRecoveryTokenCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/RevokeOwnRecoveryTokenCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\RevokeOwnSecondFactorCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/RevokeOwnSecondFactorCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\RevokeRegistrantsRecoveryTokenCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/RevokeRegistrantsRecoveryTokenCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\RevokeRegistrantsSecondFactorCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/RevokeRegistrantsSecondFactorCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\SaveVettingTypeHintCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/SaveVettingTypeHintCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\SelfVetSecondFactorCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/SelfVetSecondFactorCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\SendSecondFactorRegistrationEmailCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/SendSecondFactorRegistrationEmailCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\UpdateIdentityCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/UpdateIdentityCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\VerifyEmailCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/VerifyEmailCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Command\\\\VetSecondFactorCommand\\:\\:serialise\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Command/VetSecondFactorCommand.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\AuditLog\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/AuditLog.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\AuditLog\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/AuditLog.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\AuditLogEntry\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/AuditLogEntry.php
+
+		-
+			message: "#^Cannot use array destructuring on mixed\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Identity\\:\\:__unserialize\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Identity\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Identity\\:\\:\\$commonName \\(string\\) does not accept mixed\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Identity\\:\\:\\$email \\(string\\) does not accept mixed\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Identity\\:\\:\\$id \\(string\\|null\\) does not accept mixed\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Identity\\:\\:\\$institution \\(string\\) does not accept mixed\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Identity\\:\\:\\$nameId \\(string\\) does not accept mixed\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Identity\\:\\:\\$preferredLocale \\(string\\) does not accept mixed\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Identity.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\IdentityCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/IdentityCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\IdentityCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/IdentityCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\InstitutionListing\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/InstitutionListing.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\InstitutionListingCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/InstitutionListingCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\InstitutionListingCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/InstitutionListingCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Profile.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\:\\:getRaaInstitutions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Profile.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\:\\:\\$authorizations type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/Profile.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidate\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaCandidate.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidateCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaCandidateCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidateCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaCandidateCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidateInstitution\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaCandidateInstitution.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidateInstitutionCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaCandidateInstitutionCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidateInstitutionCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaCandidateInstitutionCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidateInstitutions\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaCandidateInstitutions.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaListing\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaListing.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaListingCollection\\:\\:createElementFromData\\(\\) has parameter \\$raListing with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaListingCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaListingCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaListingCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaListingCollection\\:\\:isListed\\(\\) has parameter \\$institution with no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaListingCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaSecondFactor\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaSecondFactor.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaSecondFactorCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaSecondFactorCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaSecondFactorCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaSecondFactorCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaSecondFactorExportCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaSecondFactorExportCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaSecondFactorExportCollection\\:\\:getColumnNames\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaSecondFactorExportCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaSecondFactorExportCollection\\:\\:getElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaSecondFactorExportCollection.php
+
+		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaSecondFactorExportCollection\\:\\:\\$elements type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RaSecondFactorExportCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RecoveryTokenCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RecoveryTokenCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RecoveryTokenCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RecoveryTokenCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RegistrationAuthorityCredentials\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RegistrationAuthorityCredentials.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RegistrationAuthorityCredentialsCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RegistrationAuthorityCredentialsCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RegistrationAuthorityCredentialsCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/RegistrationAuthorityCredentialsCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\UnverifiedSecondFactor\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/UnverifiedSecondFactor.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\UnverifiedSecondFactorCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/UnverifiedSecondFactorCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\UnverifiedSecondFactorCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/UnverifiedSecondFactorCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VerifiedSecondFactor\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/VerifiedSecondFactor.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VerifiedSecondFactorCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/VerifiedSecondFactorCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VerifiedSecondFactorCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/VerifiedSecondFactorCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VettedSecondFactor\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/VettedSecondFactor.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VettedSecondFactorCollection\\:\\:createElementFromData\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/VettedSecondFactorCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VettedSecondFactorCollection\\:\\:fromData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Dto/VettedSecondFactorCollection.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Service\\\\RecoveryTokenService\\:\\:findAllFor\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Service/RecoveryTokenService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Service\\\\RecoveryTokenService\\:\\:getAvailableRecoveryTokenTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Service/RecoveryTokenService.php
+
+		-
+			message: "#^Method Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Service\\\\SecondFactorService\\:\\:setLoaOnData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Identity/Service/SecondFactorService.php

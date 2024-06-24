@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -27,21 +29,21 @@ class ProvePhonePossessionCommand extends AbstractCommand
      *
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * The ID of the second factor to create.
      *
      * @var string
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * @var string
      */
-    public $phoneNumber;
+    public string $phoneNumber;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id' => $this->identityId,

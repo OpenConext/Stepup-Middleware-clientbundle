@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -21,36 +23,17 @@ namespace Surfnet\StepupMiddlewareClient\Service;
 class ExecutionResult
 {
     /**
-     * @var string|null
-     */
-    private $uuid;
-
-    /**
-     * @var null|string
-     */
-    private $processedBy;
-
-    /**
-     * @var string[]
-     */
-    private $errors;
-
-    /**
      * @param string|null $uuid Null in case of errors.
      * @param string|null $processedBy Null in case of errors.
-     * @param array $errors
      */
-    public function __construct($uuid, $processedBy, array $errors = [])
+    public function __construct(private ?string $uuid, private ?string $processedBy, private readonly array $errors = [])
     {
-        $this->uuid = $uuid;
-        $this->processedBy = $processedBy;
-        $this->errors = $errors;
     }
 
     /**
      * @return string|null Null in case of errors.
      */
-    public function getUuid()
+    public function getUuid(): ?string
     {
         return $this->uuid;
     }
@@ -58,7 +41,7 @@ class ExecutionResult
     /**
      * @return null|string Null in case of errors.
      */
-    public function getProcessedBy()
+    public function getProcessedBy(): ?string
     {
         return $this->processedBy;
     }
@@ -66,15 +49,15 @@ class ExecutionResult
     /**
      * @return bool False in case of errors.
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
-        return count($this->errors) === 0;
+        return $this->errors === [];
     }
 
     /**
      * @return string[]
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

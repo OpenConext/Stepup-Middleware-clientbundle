@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -25,14 +27,14 @@ class RetractRegistrationAuthorityCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'identity_id' => $this->identityId,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -25,14 +27,8 @@ use Surfnet\StepupMiddlewareClientBundle\Exception\NotFoundException;
 
 class VettingTypeHintService
 {
-    /**
-     * @var LibraryVettingTypeHintService
-     */
-    private $vettingTypeHintService;
-
-    public function __construct(LibraryVettingTypeHintService $recoveryTokenService)
+    public function __construct(private readonly LibraryVettingTypeHintService $vettingTypeHintService)
     {
-        $this->vettingTypeHintService = $recoveryTokenService;
     }
 
     public function findOne(string $institution): VettingTypeHint

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -28,14 +30,14 @@ class VettedSecondFactor implements Dto
      * @Assert\Type(type="string", message="middleware_client.dto.vetted_second_factor.id.must_be_string")
      * @var string
      */
-    public $id;
+    public string $id;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.vetted_second_factor.type.must_not_be_blank")
      * @Assert\Type(type="string", message="middleware_client.dto.vetted_second_factor.type.must_be_string")
      * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.vetted_second_factor.second_factor_identifier.must_not_be_blank")
@@ -45,7 +47,7 @@ class VettedSecondFactor implements Dto
      * )
      * @var string
      */
-    public $secondFactorIdentifier;
+    public string $secondFactorIdentifier;
 
     /**
      * @Assert\NotBlank(message="middleware_client.dto.vetted_second_factor.vetting_typ.must_not_be_blank")
@@ -55,15 +57,15 @@ class VettedSecondFactor implements Dto
      * )
      * @var string
      */
-    public $vettingType;
+    public string $vettingType;
 
     /**
      * The calculated loa level based on vetting type and seconnd factor type
      * @var float
      */
-    public $loaLevel;
+    public float $loaLevel;
 
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $secondFactor = new self();
         $secondFactor->id = $data['id'];

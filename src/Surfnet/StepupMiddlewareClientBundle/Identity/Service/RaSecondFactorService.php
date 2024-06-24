@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -34,35 +36,17 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class RaSecondFactorService
 {
-    /**
-     * @var LibraryRaSecondFactorService
-     */
-    private $service;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
-     * @param LibraryRaSecondFactorService $service
-     * @param ValidatorInterface $validator
-     */
-    public function __construct(LibraryRaSecondFactorService $service, ValidatorInterface $validator)
+    public function __construct(private readonly LibraryRaSecondFactorService $service, private readonly ValidatorInterface $validator)
     {
-        $this->service = $service;
-        $this->validator = $validator;
     }
 
     /**
-     * @param RaSecondFactorSearchQuery $query
-     * @return RaSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function search(RaSecondFactorSearchQuery $query)
+    public function search(RaSecondFactorSearchQuery $query): ?RaSecondFactorCollection
     {
         $data = $this->service->search($query);
 
@@ -83,14 +67,12 @@ class RaSecondFactorService
         return $secondFactors;
     }
     /**
-     * @param RaSecondFactorExportQuery $query
-     * @return RaSecondFactorExportCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchForExport(RaSecondFactorExportQuery $query)
+    public function searchForExport(RaSecondFactorExportQuery $query): ?RaSecondFactorExportCollection
     {
         $data = $this->service->searchForExport($query);
 

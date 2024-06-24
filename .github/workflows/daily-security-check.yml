@@ -1,0 +1,11 @@
+---
+name: Daily security check
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  call-workflow-passing-data:
+    name: Daily security check (Reusable Workflow)
+    uses: openconext/openconext-githubactions/.github/workflows/daily-security-check.yml@main

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,9 +24,12 @@ use DateTime;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\SecondFactorAuditLogSearchQuery;
+use Surfnet\StepupMiddlewareClient\Identity\Service\AuditLogService as LibraryAuditLogService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\AuditLog;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\AuditLogEntry;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\AuditLogService;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuditLogServiceTest extends TestCase
 {
@@ -33,7 +38,7 @@ class AuditLogServiceTest extends TestCase
         m::close();
     }
 
-    private $mockAuditLog = <<<'JSON'
+    private string $mockAuditLog = <<<'JSON'
 {
   "collection":{
     "total_items":7,
@@ -51,6 +56,8 @@ class AuditLogServiceTest extends TestCase
       "second_factor_id":"1d645ab2-e523-4462-b85e-44f194f80bd6",
       "second_factor_type":"yubikey",
       "second_factor_identifier":"ccccvfeghijk",
+      "recovery_token_identifier":"rt-identifier-id-1",
+      "recovery_token_type":"safe-store",
       "action":"email_verified",
       "recorded_on":"2015-03-31T12:07:28+02:00"
     },
@@ -64,6 +71,8 @@ class AuditLogServiceTest extends TestCase
       "second_factor_id":"1d645ab2-e523-4462-b85e-44f194f80bd6",
       "second_factor_type":"yubikey",
       "second_factor_identifier":"ccccvfeghijk",
+      "recovery_token_identifier":"rt-identifier-id-1",
+      "recovery_token_type":"sms",
       "action":"possession_proven",
       "recorded_on":"2015-03-31T12:07:12+02:00"
     }
@@ -73,24 +82,24 @@ class AuditLogServiceTest extends TestCase
 JSON;
 
 
-    public function testItGetsAnIdentity()
+    public function testItGetsAnIdentity(): void
     {
         $query = new SecondFactorAuditLogSearchQuery('Ibuildings bv', '5613875b-410e-407c-91ce-35bf0b5a8d89', 1);
 
-        $libraryService = m::mock('Surfnet\StepupMiddlewareClient\Identity\Service\AuditLogService')
-            ->shouldReceive('searchSecondFactorAuditLog')->with($query)->once()->andReturn(json_decode($this->mockAuditLog, true))
+        $libraryService = m::mock(LibraryAuditLogService::class)
+            ->shouldReceive('searchSecondFactorAuditLog')->with($query)->once()->andReturn(json_decode($this->mockAuditLog, true, 512, JSON_THROW_ON_ERROR))
             ->getMock();
-        $violations = m::mock('Symfony\Component\Validator\ConstraintViolationListInterface')
+        $violations = m::mock(ConstraintViolationListInterface::class)
             ->shouldReceive('count')->once()->andReturn(0)
             ->getMock();
-        $validator = m::mock('Symfony\Component\Validator\Validator\ValidatorInterface')
+        $validator = m::mock(ValidatorInterface::class)
             ->shouldReceive('validate')->once()->andReturn($violations)
             ->getMock();
 
         $service = new AuditLogService($libraryService, $validator);
         $actualAuditLog = $service->searchSecondFactorAuditLog($query);
 
-        $expectedAuditLog = AuditLog::fromData(json_decode($this->mockAuditLog, true));
+        $expectedAuditLog = AuditLog::fromData(json_decode($this->mockAuditLog, true, 512, JSON_THROW_ON_ERROR));
 
         $this->assertEquals($expectedAuditLog, $actualAuditLog);
 

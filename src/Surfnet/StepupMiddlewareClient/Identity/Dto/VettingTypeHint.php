@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -23,7 +25,7 @@ final class VettingTypeHint
     /**
      * @var string
      */
-    public $institution;
+    public string $institution;
 
     /**
      * Keyed on locale, the hints shown to the
@@ -32,14 +34,14 @@ final class VettingTypeHint
      *
      * @var array
      */
-    public $hints;
+    public array $hints;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
-    public static function from(array $apiResult)
+    public static function from(array $apiResult): self
     {
         $vettingTypeHint = new self;
         $vettingTypeHint->institution = $apiResult['institution'];

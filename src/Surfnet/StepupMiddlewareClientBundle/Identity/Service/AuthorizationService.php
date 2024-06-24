@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2022 SURFnet bv
  *
@@ -23,14 +25,8 @@ use Surfnet\StepupMiddlewareClient\Identity\Service\AuthorizationService as Libr
 
 class AuthorizationService
 {
-    /**
-     * @var LibraryAuthorizationService
-     */
-    private $authorizationService;
-
-    public function __construct(LibraryAuthorizationService $authorizationService)
+    public function __construct(private readonly LibraryAuthorizationService $authorizationService)
     {
-        $this->authorizationService = $authorizationService;
     }
 
     public function assertRegistrationOfSelfAssertedTokensIsAllowed(Identity $identity): bool

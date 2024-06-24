@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,61 +25,22 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 final class RaListingSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private $actorId;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $email;
-
-    /**
-     * @var string
-     */
-    private $role;
-
-    /**
-     * @var string
-     */
-    private $raInstitution;
-
-    /**
-     * @var string|null
-     */
-    private $institution;
-
-    /**
-     * @var string|null
-     */
-    private $identityId;
-
-    /**
-     * @var int
-     */
-    private $pageNumber;
-
-    /**
-     * @var string|null
-     */
-    private $orderBy = 'commonName';
-
-    /**
-     * @var string|null
-     */
-    private $orderDirection = 'asc';
+    private string $actorId = '';
+    private string $name = '';
+    private string $email = '';
+    private string $role = '';
+    private string $raInstitution = '';
+    private ?string $institution = null;
+    private ?string $identityId = null;
+    private int $pageNumber = 0;
+    private string $orderBy = 'commonName';
+    private ?string $orderDirection = 'asc';
 
     /**
      * @param string $actorId
      * @param int $pageNumber
      */
-    public function __construct($actorId, $pageNumber)
+    public function __construct(string $actorId, int $pageNumber)
     {
         $this->assertNonEmptyString($actorId, 'actorId');
         Assert\that($pageNumber)
@@ -92,7 +55,7 @@ final class RaListingSearchQuery implements HttpQuery
      * @param string $institution
      * @return $this
      */
-    public function setInstitution($institution)
+    public function setInstitution(string $institution): self
     {
         $this->assertNonEmptyString($institution, 'institution');
 
@@ -105,7 +68,7 @@ final class RaListingSearchQuery implements HttpQuery
      * @param string $identityId
      * @return RaListingSearchQuery
      */
-    public function setIdentityId($identityId)
+    public function setIdentityId(string $identityId): self
     {
         $this->assertNonEmptyString($identityId, 'identityId');
 
@@ -114,11 +77,7 @@ final class RaListingSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $orderBy
-     * @return RaListingSearchQuery
-     */
-    public function setOrderBy($orderBy)
+    public function setOrderBy(string $orderBy): self
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
@@ -131,7 +90,7 @@ final class RaListingSearchQuery implements HttpQuery
      * @param string|null $orderDirection
      * @return RaListingSearchQuery
      */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection(?string $orderDirection): self
     {
         Assert\that($orderDirection)->choice(
             ['asc', 'desc', '', null],
@@ -147,7 +106,7 @@ final class RaListingSearchQuery implements HttpQuery
      * @param string $name
      * @return RaListingSearchQuery
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->assertNonEmptyString($name, 'name');
         $this->name = $name;
@@ -158,7 +117,7 @@ final class RaListingSearchQuery implements HttpQuery
      * @param string $email
      * @return RaListingSearchQuery
      */
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->assertNonEmptyString($email, 'email');
         $this->email = $email;
@@ -169,7 +128,7 @@ final class RaListingSearchQuery implements HttpQuery
      * @param string $role
      * @return RaListingSearchQuery
      */
-    public function setRole($role)
+    public function setRole(string $role): self
     {
         $this->assertNonEmptyString($role, 'role');
         $this->role = $role;
@@ -180,25 +139,25 @@ final class RaListingSearchQuery implements HttpQuery
      * @param string $raInstitution
      * @return RaListingSearchQuery
      */
-    public function setRaInstitution($raInstitution)
+    public function setRaInstitution(string $raInstitution): self
     {
         $this->assertNonEmptyString($raInstitution, 'raInstitution');
         $this->raInstitution = $raInstitution;
         return $this;
     }
 
-    private function assertNonEmptyString($value, $parameterName)
+    private function assertNonEmptyString(string $value, string $parameterName): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $parameterName,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         return '?'.http_build_query(
             array_filter(
@@ -214,9 +173,7 @@ final class RaListingSearchQuery implements HttpQuery
                     'orderDirection' => $this->orderDirection,
                     'p' => $this->pageNumber,
                 ],
-                function ($value) {
-                    return !is_null($value);
-                }
+                fn($value): bool => !is_null($value)
             )
         );
     }

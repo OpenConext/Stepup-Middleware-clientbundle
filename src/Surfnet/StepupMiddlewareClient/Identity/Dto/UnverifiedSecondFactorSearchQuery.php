@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,21 +25,14 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class UnverifiedSecondFactorSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private $identityId;
+    private ?string $identityId = null;
 
     /**
      * @var string|null
      */
-    private $verificationNonce;
+    private ?string $verificationNonce = null;
 
-    /**
-     * @param string $identityId
-     * @return self
-     */
-    public function setIdentityId($identityId)
+    public function setIdentityId(string $identityId): static
     {
         $this->assertNonEmptyString($identityId, 'identityId');
 
@@ -46,11 +41,7 @@ class UnverifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $verificationNonce
-     * @return self
-     */
-    public function setVerificationNonce($verificationNonce)
+    public function setVerificationNonce(string $verificationNonce): static
     {
         $this->assertNonEmptyString($verificationNonce, 'verificationNonce');
 
@@ -59,22 +50,22 @@ class UnverifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         $fields = [];
 
-        if ($this->identityId) {
+        if ($this->identityId !== '' && $this->identityId !== '0') {
             $fields['identityId'] = $this->identityId;
         }
 

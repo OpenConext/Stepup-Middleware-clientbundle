@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,35 +25,13 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class VerifiedSecondFactorSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private $identityId;
+    private string $identityId = '';
+    private string $secondFactorId = '';
+    private string $registrationCode = '';
+    private string $institution = '';
+    private string $actorId = '';
 
-    /**
-     * @var string
-     */
-    private $secondFactorId;
-
-    /**
-     * @var string
-     */
-    private $registrationCode;
-
-    /**
-     * @var string
-     */
-    private $institution;
-    /**
-     * @var string
-     */
-    private $actorId;
-
-    /**
-     * @param string $identityId
-     * @return self
-     */
-    public function setIdentityId($identityId)
+    public function setIdentityId(string $identityId): static
     {
         $this->assertNonEmptyString($identityId, 'identityId');
 
@@ -60,11 +40,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $secondFactorId
-     * @return self
-     */
-    public function setSecondFactorId($secondFactorId)
+    public function setSecondFactorId(string $secondFactorId): static
     {
         $this->assertNonEmptyString($secondFactorId, 'secondFactorId');
 
@@ -73,11 +49,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $registrationCode
-     * @return self
-     */
-    public function setRegistrationCode($registrationCode)
+    public function setRegistrationCode(string $registrationCode): static
     {
         $this->assertNonEmptyString($registrationCode, 'registrationCode');
 
@@ -86,11 +58,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $institution
-     * @return VerifiedSecondFactorSearchQuery
-     */
-    public function setInstitution($institution)
+    public function setInstitution(string $institution): static
     {
         $this->assertNonEmptyString($institution, 'institution');
 
@@ -99,11 +67,7 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @param string $actorId
-     * @return VerifiedSecondFactorSearchQuery
-     */
-    public function setActorId($actorId)
+    public function setActorId(string $actorId): static
     {
         $this->assertNonEmptyString($actorId, 'actorId');
 
@@ -112,36 +76,36 @@ class VerifiedSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
-        Assert\that($value)->string($message)->notEmpty($message);
+        Assert\that($value)->notEmpty($message);
     }
 
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         $fields = [];
 
         $fields['institution'] = $this->institution;
 
-        if ($this->identityId) {
+        if ($this->identityId !== '' && $this->identityId !== '0') {
             $fields['identityId'] = $this->identityId;
         }
 
-        if ($this->secondFactorId) {
+        if ($this->secondFactorId !== '' && $this->secondFactorId !== '0') {
             $fields['secondFactorId'] = $this->secondFactorId;
         }
 
-        if ($this->registrationCode) {
+        if ($this->registrationCode !== '' && $this->registrationCode !== '0') {
             $fields['registrationCode'] = $this->registrationCode;
         }
 
-        if ($this->actorId) {
+        if ($this->actorId !== '' && $this->actorId !== '0') {
             $fields['actorId'] = $this->actorId;
         }
 

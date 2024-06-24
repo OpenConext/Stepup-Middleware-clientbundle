@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -23,34 +25,16 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
 class RaCandidateService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiClient;
-
-    /**
-     * @param ApiService $apiClient
-     */
-    public function __construct(ApiService $apiClient)
+    public function __construct(private readonly ApiService $apiClient)
     {
-        $this->apiClient = $apiClient;
     }
 
-    /**
-     * @param RaCandidateSearchQuery $query
-     * @return array|null
-     */
-    public function search(RaCandidateSearchQuery $query)
+    public function search(RaCandidateSearchQuery $query): ?array
     {
         return $this->apiClient->read('ra-candidate' . $query->toHttpQuery());
     }
 
-    /**
-     * @param string $identityId
-     * @param string $actorId
-     * @return array|null
-     */
-    public function get($identityId, $actorId)
+    public function get(string $identityId, string $actorId): ?array
     {
         return $this->apiClient->read('ra-candidate/%s?actorId=%s', [$identityId, $actorId]);
     }

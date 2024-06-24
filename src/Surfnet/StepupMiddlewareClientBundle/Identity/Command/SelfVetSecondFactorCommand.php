@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2021 SURF bv
  *
@@ -25,40 +27,40 @@ class SelfVetSecondFactorCommand extends AbstractCommand
     /**
      * @var string
      */
-    public $authorityId;
+    public string $authorityId;
 
     /**
      * @var string
      */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @var string
      */
-    public $secondFactorId;
+    public string $secondFactorId;
 
     /**
      * @var string
      */
-    public $registrationCode;
+    public string $registrationCode;
 
     /**
      * @var string
      */
-    public $secondFactorType;
+    public string $secondFactorType;
 
     /**
      * @var string
      */
-    public $secondFactorIdentifier;
+    public string $secondFactorIdentifier;
 
     /**
      * @var string
      */
-    public $authoringSecondFactorIdentifier;
+    public string $authoringSecondFactorIdentifier;
 
 
-    public function serialise()
+    public function serialise(): array
     {
         return [
             'authority_id' => $this->authorityId,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Surfnet\StepupMiddlewareClient\Configuration\Dto;
 
 use Assert;
@@ -7,25 +9,13 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class RaLocationSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private $institution;
+    private readonly string $institution;
 
-    /**
-     * @var string|null
-     */
-    private $orderBy = 'name';
+    private string $orderBy = 'name';
 
-    /**
-     * @var string|null
-     */
-    private $orderDirection = 'asc';
+    private string $orderDirection = 'asc';
 
-    /**
-     * @param string $institution
-     */
-    public function __construct($institution)
+    public function __construct(string $institution)
     {
         $this->assertNonEmptyString($institution, 'institution');
 
@@ -35,16 +25,15 @@ class RaLocationSearchQuery implements HttpQuery
     /**
      * @return string
      */
-    public function getInstitution()
+    public function getInstitution(): string
     {
         return $this->institution;
     }
 
     /**
-     * @param string $orderBy
      * @return $this
      */
-    public function setOrderBy($orderBy)
+    public function setOrderBy(string $orderBy): static
     {
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
@@ -54,14 +43,13 @@ class RaLocationSearchQuery implements HttpQuery
     }
 
     /**
-     * @param string $orderDirection
      * @return $this
      */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection(string $orderDirection): static
     {
         $this->assertNonEmptyString($orderDirection, 'orderDirection');
         Assert\that($orderDirection)->choice(
-            ['asc', 'desc', '', null],
+            ['asc', 'desc'],
             "Invalid order direction, must be one of 'asc', 'desc'"
         );
 
@@ -70,18 +58,18 @@ class RaLocationSearchQuery implements HttpQuery
         return $this;
     }
 
-    private function assertNonEmptyString($value, $name)
+    private function assertNonEmptyString(string $value, string $name): void
     {
         $message = sprintf(
             '"%s" must be a non-empty string, "%s" given',
             $name,
-            (is_object($value) ? get_class($value) : gettype($value))
+            (get_debug_type($value))
         );
 
         Assert\that($value)->string($message)->notEmpty($message);
     }
 
-    public function toHttpQuery()
+    public function toHttpQuery(): string
     {
         return '?institution=' . urlencode($this->institution)
             . '&orderBy=' . urlencode($this->orderBy)

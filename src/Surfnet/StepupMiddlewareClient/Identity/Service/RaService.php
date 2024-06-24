@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,24 +24,15 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
 class RaService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    /**
-     * @param ApiService $apiService
-     */
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     /**
      * @param string $institution
      * @return array|null
      */
-    public function listRas($institution)
+    public function listRas(string $institution): ?array
     {
         return $this->apiService->read('registration-authority?institution=%s', [$institution]);
     }

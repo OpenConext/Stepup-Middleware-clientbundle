@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -43,26 +45,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class SecondFactorService
 {
-    /**
-     * @var LibrarySecondFactorService
-     */
-    private $service;
-
-    private $loaService;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
     public function __construct(
-        LibrarySecondFactorService $service,
-        SecondFactorTypeService $loaService,
-        ValidatorInterface $validator
+        private readonly LibrarySecondFactorService $service,
+        private readonly SecondFactorTypeService $loaService,
+        private readonly ValidatorInterface $validator
     ) {
-        $this->service = $service;
-        $this->validator = $validator;
-        $this->loaService = $loaService;
     }
 
     /**
@@ -73,7 +60,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getUnverified($secondFactorId)
+    public function getUnverified(string $secondFactorId): ?UnverifiedSecondFactor
     {
         $data = $this->service->getUnverified($secondFactorId);
 
@@ -102,7 +89,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getVerified($secondFactorId)
+    public function getVerified(string $secondFactorId): ?VerifiedSecondFactor
     {
         $data = $this->service->getVerified($secondFactorId);
 
@@ -123,19 +110,15 @@ class SecondFactorService
         return $secondFactor;
     }
 
-    /**
-     * @param string $secondFactorId
-     * @return bool|null
-     * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
-     * @throws InvalidResponseException When the API responded with invalid data.
-     * @throws ResourceReadException When the API doesn't respond with the resource.
-     * @throws MalformedResponseException When the API doesn't respond with a proper response.
-     */
-    public function getVerifiedCanSkipProvePossession($secondFactorId)
+    public function getVerifiedCanSkipProvePossession(string $secondFactorId): bool
     {
         $data = $this->service->getVerifiedCanSkipProvePossession($secondFactorId);
 
-        return (bool)$data;
+        if (null === $data) {
+            return false;
+        }
+        
+        return $data[0];
     }
 
     /**
@@ -146,7 +129,7 @@ class SecondFactorService
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function getVetted($secondFactorId)
+    public function getVetted(string $secondFactorId): ?VettedSecondFactor
     {
         $data = $this->service->getVetted($secondFactorId);
 
@@ -170,14 +153,13 @@ class SecondFactorService
     }
 
     /**
-     * @param UnverifiedSecondFactorSearchQuery $query
      * @return UnverifiedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchUnverified(UnverifiedSecondFactorSearchQuery $query)
+    public function searchUnverified(UnverifiedSecondFactorSearchQuery $query): ?UnverifiedSecondFactorCollection
     {
         $data = $this->service->searchUnverified($query);
 
@@ -199,14 +181,12 @@ class SecondFactorService
     }
 
     /**
-     * @param VerifiedSecondFactorSearchQuery $query
-     * @return VerifiedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchVerified(VerifiedSecondFactorSearchQuery $query)
+    public function searchVerified(VerifiedSecondFactorSearchQuery $query): ?VerifiedSecondFactorCollection
     {
         $data = $this->service->searchVerified($query);
 
@@ -228,14 +208,13 @@ class SecondFactorService
     }
 
     /**
-     * @param VerifiedSecondFactorOfIdentitySearchQuery $query
      * @return VerifiedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchOwnVerified(VerifiedSecondFactorOfIdentitySearchQuery $query)
+    public function searchOwnVerified(VerifiedSecondFactorOfIdentitySearchQuery $query): ?VerifiedSecondFactorCollection
     {
         $data = $this->service->searchOwnVerified($query);
 
@@ -257,14 +236,13 @@ class SecondFactorService
     }
 
     /**
-     * @param VettedSecondFactorSearchQuery $query
      * @return VettedSecondFactorCollection
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
      * @throws MalformedResponseException When the API doesn't respond with a proper response.
      */
-    public function searchVetted(VettedSecondFactorSearchQuery $query)
+    public function searchVetted(VettedSecondFactorSearchQuery $query): ?VettedSecondFactorCollection
     {
         $data = $this->service->searchVetted($query);
 

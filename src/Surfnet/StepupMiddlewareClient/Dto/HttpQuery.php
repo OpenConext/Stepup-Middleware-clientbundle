@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -25,5 +27,5 @@ interface HttpQuery
      *
      * @return string
      */
-    public function toHttpQuery();
+    public function toHttpQuery(): string;
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -19,7 +21,6 @@
 namespace Surfnet\StepupMiddlewareClientBundle\Identity\Dto;
 
 use Doctrine\ORM\Mapping as ORM;
-use JsonSerializable;
 use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
 
 /**
@@ -28,67 +29,26 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
  */
 final class RaSecondFactor implements Dto
 {
-    const STATUS_UNVERIFIED = 'unverified';
-    const STATUS_VERIFIED = 'verified';
-    const STATUS_VETTED = 'vetted';
-    const STATUS_REVOKED = 'revoked';
+    public const STATUS_UNVERIFIED = 'unverified';
+    public const STATUS_VERIFIED = 'verified';
+    public const STATUS_VETTED = 'vetted';
+    public const STATUS_REVOKED = 'revoked';
 
-    /**
-     * @var string The second factor's ID (UUID).
-     */
-    public $id;
-
-    /**
-     * @var string
-     */
-    public $type;
-
-    /**
-     * @var string The ID of the specific instance of second factor type (ie. phone number, Yubikey public ID).
-     */
-    public $secondFactorId;
-
-    /**
-     * @var string One of the RaSecondFactor::STATUS_* constants.
-     */
-    public $status;
-
-    /**
-     * @var string
-     */
-    public $identityId;
-
-    /**
-     * @var string
-     */
-    public $institution;
-
-    /**
-     * The name of the registrant.
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * Number of the document that was used in vetting.
-     *
-     * @var string|null
-     */
-    public $documentNumber;
+    public string $id = '';
+    public string $type = '';
+    public string $secondFactorId = '';
+    public string $status = '';
+    public string $identityId = '';
+    public string $institution = '';
+    public string $name = '';
+    public ?string $documentNumber = null;
 
     /**
      * The e-mail of the registrant.
-     *
-     * @var string
      */
-    public $email;
+    public string $email = '';
 
-    /**
-     * @param array $data
-     * @return static
-     */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $secondFactor = new self();
         $secondFactor->id = $data['id'];

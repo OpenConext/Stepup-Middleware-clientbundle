@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -26,17 +28,8 @@ use Surfnet\StepupMiddlewareClient\Service\ApiService;
 
 class RaLocationService
 {
-    /**
-     * @var ApiService
-     */
-    private $apiService;
-
-    /**
-     * @param ApiService $apiService
-     */
-    public function __construct(ApiService $apiService)
+    public function __construct(private readonly ApiService $apiService)
     {
-        $this->apiService = $apiService;
     }
 
     /**
@@ -46,16 +39,12 @@ class RaLocationService
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      */
-    public function get($id)
+    public function get(string $id): ?array
     {
         return $this->apiService->read('ra-location/%s', [$id]);
     }
 
-    /**
-     * @param RaLocationSearchQuery $searchQuery
-     * @return mixed|null
-     */
-    public function search(RaLocationSearchQuery $searchQuery)
+    public function search(RaLocationSearchQuery $searchQuery): ?array
     {
         return $this->apiService->read('ra-location' . $searchQuery->toHttpQuery());
     }

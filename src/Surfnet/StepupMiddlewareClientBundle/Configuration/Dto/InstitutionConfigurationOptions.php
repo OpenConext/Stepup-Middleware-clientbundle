@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2016 SURFnet B.V.
  *
@@ -73,7 +75,7 @@ class InstitutionConfigurationOptions implements Dto
      * @param array $data
      * @return InstitutionConfigurationOptions
      */
-    public static function fromData(array $data)
+    public static function fromData(array $data): self
     {
         $institutionConfigurationOptions                            = new self();
         $institutionConfigurationOptions->useRaLocations            = $data['use_ra_locations'];
