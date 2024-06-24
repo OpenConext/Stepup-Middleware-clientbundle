@@ -24,6 +24,7 @@ use Surfnet\StepupMiddlewareClient\Exception\RuntimeException;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryToken;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryTokenSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Service\RecoveryTokenService as LibraryRecoveryTokenService;
+use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 use Surfnet\StepupMiddlewareClientBundle\Exception\NotFoundException;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RecoveryTokenCollection;
@@ -62,7 +63,7 @@ class RecoveryTokenService
         return ['sms' => 'sms', 'safe-store' => 'safe-store'];
     }
 
-    public function search(RecoveryTokenSearchQuery $query): RecoveryTokenCollection
+    public function search(RecoveryTokenSearchQuery $query): CollectionDto
     {
         $data = $this->recoveryTokenService->search($query);
         if ($data === null) {
