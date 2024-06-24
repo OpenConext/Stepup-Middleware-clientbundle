@@ -116,7 +116,7 @@ class SecondFactorService
 
         if (null === $data) {
             return false;
-        } 
+        }
         
         return $data[0];
     }
