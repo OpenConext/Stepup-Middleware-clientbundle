@@ -67,6 +67,30 @@ class AuthorizationServiceTest extends TestCase
         $this->assertFalse($this->service->assertRegistrationOfRecoveryTokensIsAllowed($identity));
     }
 
+    public function test_self_vetting_of_tokens_authorization_can_be_performed_positive_outcome(): void
+    {
+        $identity = new Identity();
+        $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';
+        $identity->commonName = 'Evangelos Odysseas Papathanassiou';
+        $this->apiService
+            ->shouldReceive('assertSelfVettingOfSelfAssertedTokensIsAllowed')
+            ->with($identity)
+            ->andReturnTrue();
+        $this->assertTrue($this->service->assertSelfVettingOfSelfAssertedTokensIsAllowed($identity));
+    }
+
+    public function test_self_vetting_of_token_authorization_can_be_performed_negative_outcome(): void
+    {
+        $identity = new Identity();
+        $identity->id = 'ff17c086-ebae-11ec-8ea0-0242ac120002';
+        $identity->commonName = 'Evangelos Odysseas Papathanassiou';
+        $this->apiService
+            ->shouldReceive('assertSelfVettingOfSelfAssertedTokensIsAllowed')
+            ->with($identity)
+            ->andReturnFalse();
+        $this->assertFalse($this->service->assertSelfVettingOfSelfAssertedTokensIsAllowed($identity));
+    }
+
     public function test_recovery_token_authorization_can_be_performed_positive_outcome(): void
     {
         $identity = new Identity();

@@ -62,6 +62,25 @@ class AuthorizationService
     }
 
     /**
+     * Is an identity allowed to self vet using a self-asserted token?
+     *
+     * One is allowed to do so when:
+     *  - SAT is allowed for the institution of the identity
+     *  - All the tokens of the identity are vetted using the SAT vetting type
+     *
+     * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
+     * @throws ResourceReadException When the server doesn't respond with the resource.
+     * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
+     */
+    public function assertSelfVettingOfSelfAssertedTokensIsAllowed(Identity $identity): bool
+    {
+        $response = $this->apiService->read(
+            sprintf('/authorization/may-self-vet-using-self-asserted-token/%s', $identity->id)
+        );
+        return $response && array_key_exists('code', $response) && $response['code'] === 200;
+    }
+
+    /**
      * Is the Identity allowed to register a Recovery Token?
      *
      * Based on:
