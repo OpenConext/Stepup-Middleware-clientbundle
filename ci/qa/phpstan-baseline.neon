@@ -281,6 +281,11 @@ parameters:
 			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
 
 		-
+			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$ssoRegistrationBypass has no type specified\\.$#"
+			count: 1
+			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php
+
+		-
 			message: "#^Property Surfnet\\\\StepupMiddlewareClientBundle\\\\Configuration\\\\Dto\\\\InstitutionConfigurationOptions\\:\\:\\$useRa has no type specified\\.$#"
 			count: 1
 			path: ../../src/Surfnet/StepupMiddlewareClientBundle/Configuration/Dto/InstitutionConfigurationOptions.php

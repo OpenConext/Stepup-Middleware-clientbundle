@@ -1,4 +1,14 @@
 # Changelog
+
+## 5.3.0
+- Add SSO registration bypass field to the institution configuration
+- 
+## 5.2.0
+- Add missing self vetting token endpoint
+
+## 5.1.0
+- Add SF6 and PHP8 support
+
 ## 4.1.7
 - Add SSO on 2FA field to the institution configuration
 

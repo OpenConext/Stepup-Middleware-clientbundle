@@ -51,6 +51,11 @@ class InstitutionConfigurationOptions implements Dto
     public $ssoOn2fa;
 
     /**
+     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.sso_registration_bypass.must_be_boolean")
+     */
+    public $ssoRegistrationBypass;
+
+    /**
      * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.allow_self_asserted_tokens.must_be_boolean")
      */
     public $allowSelfAssertedTokens;
@@ -82,6 +87,7 @@ class InstitutionConfigurationOptions implements Dto
         $institutionConfigurationOptions->showRaaContactInformation = $data['show_raa_contact_information'];
         $institutionConfigurationOptions->verifyEmail               = $data['verify_email'];
         $institutionConfigurationOptions->ssoOn2fa                  = $data['sso_on_2fa'];
+        $institutionConfigurationOptions->ssoRegistrationBypass     = $data['sso_registration_bypass'];
         $institutionConfigurationOptions->selfVet                   = $data['self_vet'];
         $institutionConfigurationOptions->allowSelfAssertedTokens = $data['allow_self_asserted_tokens'];
         $institutionConfigurationOptions->allowedSecondFactors      = $data['allowed_second_factors'];
