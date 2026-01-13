@@ -62,7 +62,10 @@ class ApiService
         try {
             $body = $response->getBody()->getContents();
             $data = JsonHelper::decode($body);
-            $errors = isset($data['errors']) && is_array($data['errors']) ? $data['errors'] : [];
+            $errors = [];
+            if (isset($data['errors']) && is_array($data['errors'])) {
+                $errors = array_filter($data['errors'], is_string(...));
+            }
         } catch (RuntimeException) {
             // Malformed JSON body
             throw new MalformedResponseException('Cannot read resource: Middleware returned malformed JSON');

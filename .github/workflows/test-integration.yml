@@ -1,35 +1,29 @@
 name: test-integration
-on: [ push ]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        php-versions: [ '8.2']
-        experimental: [false]
-        include:
-          - php-versions: '8.1'
-            experimental: true
-          - php-versions: '8.3'
-            experimental: true
-          - php-versions: '8.4'
-            experimental: true
+        php-versions: ['8.2', '8.3', '8.4', '8.5']
     timeout-minutes: 30
-    name: PHP ${{ matrix.php-versions }} on Ubuntu latest. Experimental == ${{ matrix.experimental }}
+    name: PHP ${{ matrix.php-versions }} on Ubuntu latest.
     steps:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v6
       - name: Install dependencies
         run: composer install
-        continue-on-error: ${{ matrix.experimental }}
       - name: Run CI tests
-        run: composer check
-        continue-on-error: ${{ matrix.experimental }}
+        run: composer check-ci
       - name: Output log files on failure
         if: failure()
         run: tail -2000 /var/log/syslog
