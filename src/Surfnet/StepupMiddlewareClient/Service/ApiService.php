@@ -97,7 +97,7 @@ class ApiService
      */
     private function buildResourcePath(string $path, array $parameters, ?HttpQuery $httpQuery = null): string
     {
-        $resource = $parameters !== [] ? vsprintf($path, array_map('urlencode', $parameters)) : $path;
+        $resource = $parameters !== [] ? vsprintf($path, array_map(urlencode(...), $parameters)) : $path;
 
         if (empty($resource)) {
             throw new RuntimeException(

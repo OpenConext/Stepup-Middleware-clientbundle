@@ -10,7 +10,7 @@ return RectorConfig::configure()
     ->withPaths([
          __DIR__ . '/../../src',
     ])
-//    ->withPhpSets()
+    ->withPhpSets()
     ->withAttributesSets(all: true)
     ->withComposerBased(twig: true, doctrine: true, phpunit: true, symfony: true)
     ->withSkip([

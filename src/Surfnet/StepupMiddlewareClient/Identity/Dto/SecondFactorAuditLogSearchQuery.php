@@ -28,12 +28,12 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
     /**
      * @var string
      */
-    private string $institution;
+    private readonly string $institution;
 
     /**
      * @var string
      */
-    private string $identityId;
+    private readonly string $identityId;
 
     private string $orderBy = 'recordedOn';
 
@@ -45,7 +45,7 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
     /**
      * @var int
      */
-    private int $pageNumber;
+    private readonly int $pageNumber;
 
     /**
      * @param string $institution
