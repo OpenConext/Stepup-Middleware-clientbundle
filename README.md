@@ -1,7 +1,7 @@
 # Step-up Middleware Client Bundle
 [![Build status](https://github.com/OpenConext/Stepup-Middleware-clientbundle/actions/workflows/test-integration.yml/badge.svg)](https://github.com/OpenConext/Stepup-Middleware-clientbundle/actions/workflows/test-integration.yml)
 
-A Symfony 6 bundle to consume the Step-up Middleware API. See [Stepup-Deploy](https://github.com/OpenConext/Stepup-Deploy) for an overview. 
+A Symfony bundle to consume the Step-up Middleware API. See [Stepup-Deploy](https://github.com/OpenConext/Stepup-Deploy) for an overview. 
 
 ## Requirements
 

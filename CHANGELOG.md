@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.0.0
+- Add support for Symfony 7.4
+- Drop support for Symfony 5.4
+- Minimal PHP version bumped to 8.2
+
 ## 5.3.0
 - Add SSO registration bypass field to the institution configuration
 - 

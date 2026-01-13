@@ -1,6 +1,6 @@
 {
     "name": "surfnet/stepup-middleware-client-bundle",
-    "description": "Symfony 5|6 bundle for consuming the Step-up Middleware API.",
+    "description": "Symfony bundle for consuming the Step-up Middleware API.",
     "license": "Apache-2.0",
     "minimum-stability": "stable",
     "autoload": {
