@@ -2,4 +2,5 @@
 .idea/
 composer.lock
 /cache.properties
-.phpunit.result.cache
+var/cache/
+var/qa/

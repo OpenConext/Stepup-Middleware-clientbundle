@@ -26,11 +26,11 @@ use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurat
 use Surfnet\StepupMiddlewareClientBundle\Exception\InvalidResponseException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class InstitutionConfigurationOptionsService
+final readonly class InstitutionConfigurationOptionsService
 {
     public function __construct(
-        private readonly LibraryInstitutionConfigurationOptionsService $service,
-        private readonly ValidatorInterface $validator
+        private LibraryInstitutionConfigurationOptionsService $service,
+        private ValidatorInterface $validator
     ) {
     }
 
