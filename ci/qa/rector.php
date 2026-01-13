@@ -11,7 +11,7 @@ return RectorConfig::configure()
          __DIR__ . '/../../src',
     ])
 //    ->withPhpSets()
-    ->withAttributesSets(all: false)
+    ->withAttributesSets(all: true)
     ->withComposerBased(twig: true, doctrine: true, phpunit: true, symfony: true)
     ->withSkip([
         ClassPropertyAssignToConstructorPromotionRector::class,

@@ -27,39 +27,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 class VerifiedSecondFactor implements Dto
 {
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.id.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.verified_second_factor.id.must_be_string")
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.verified_second_factor.id.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.verified_second_factor.id.must_be_string')]
     public string $id;
 
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.type.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.verified_second_factor.type.must_be_string")
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.verified_second_factor.type.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.verified_second_factor.type.must_be_string')]
     public string $type;
 
     /**
-     * @Assert\NotBlank(
-     *     message="middleware_client.dto.verified_second_factor.second_factor_identifier.must_not_be_blank"
-     * )
-     * @Assert\Type(
-     *     type="string",
-     *     message="middleware_client.dto.verified_second_factor.second_factor_identifier.must_be_string"
-     * )
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.verified_second_factor.second_factor_identifier.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.verified_second_factor.second_factor_identifier.must_be_string')]
     public string $secondFactorIdentifier;
 
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.registration_code.must_not_be_blank")
-     * @Assert\Type(
-     *     type="string",
-     *     message="middleware_client.dto.verified_second_factor.registration_code.must_be_string"
-     * )
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.verified_second_factor.registration_code.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.verified_second_factor.registration_code.must_be_string')]
     public string $registrationCode;
 
 
@@ -69,33 +61,24 @@ class VerifiedSecondFactor implements Dto
     public DateTime $registrationRequestedAt;
 
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.identity_id.must_not_be_blank")
-     * @Assert\Type(
-     *     type="string",
-     *     message="middleware_client.dto.verified_second_factor.identity_id.must_be_string"
-     * )
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.verified_second_factor.identity_id.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.verified_second_factor.identity_id.must_be_string')]
     public string $identityId;
 
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.institution.must_not_be_blank")
-     * @Assert\Type(
-     *     type="string",
-     *     message="middleware_client.dto.verified_second_factor.institution.must_be_string"
-     * )
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.verified_second_factor.institution.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.verified_second_factor.institution.must_be_string')]
     public string $institution;
 
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.verified_second_factor.common_name.must_not_be_blank")
-     * @Assert\Type(
-     *     type="string",
-     *     message="middleware_client.dto.verified_second_factor.common_name.must_be_string"
-     * )
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.verified_second_factor.common_name.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.verified_second_factor.common_name.must_be_string')]
     public string $commonName;
 
     public static function fromData(array $data): self

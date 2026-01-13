@@ -31,11 +31,11 @@ class ExpressLocalePreferenceCommand extends AbstractCommand
     public string $identityId;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      *
      * @var string
      */
+    #[Assert\NotBlank]
+    #[Assert\Type(type: 'string')]
     public string $preferredLocale;
 
     /**

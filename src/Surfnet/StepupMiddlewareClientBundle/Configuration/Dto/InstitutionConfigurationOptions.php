@@ -25,49 +25,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class InstitutionConfigurationOptions implements Dto
 {
-    /**
-     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.use_ra_locations.must_be_boolean")
-     */
+    #[Assert\Type(type: 'boolean', message: 'middleware_client.dto.configuration.use_ra_locations.must_be_boolean')]
     public $useRaLocations;
 
-    /**
-     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.show_raa_contact_information.must_be_boolean")
-     */
+    #[Assert\Type(type: 'boolean', message: 'middleware_client.dto.configuration.show_raa_contact_information.must_be_boolean')]
     public $showRaaContactInformation;
 
-    /**
-     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.verify_email.must_be_boolean")
-     */
+    #[Assert\Type(type: 'boolean', message: 'middleware_client.dto.configuration.verify_email.must_be_boolean')]
     public $verifyEmail;
 
-    /**
-     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.self_vet.must_be_boolean")
-     */
+    #[Assert\Type(type: 'boolean', message: 'middleware_client.dto.configuration.self_vet.must_be_boolean')]
     public $selfVet;
 
-    /**
-     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.sso_on_2fa.must_be_boolean")
-     */
+    #[Assert\Type(type: 'boolean', message: 'middleware_client.dto.configuration.sso_on_2fa.must_be_boolean')]
     public $ssoOn2fa;
 
-    /**
-     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.sso_registration_bypass.must_be_boolean")
-     */
+    #[Assert\Type(type: 'boolean', message: 'middleware_client.dto.configuration.sso_registration_bypass.must_be_boolean')]
     public $ssoRegistrationBypass;
 
-    /**
-     * @Assert\Type(type="boolean", message="middleware_client.dto.configuration.allow_self_asserted_tokens.must_be_boolean")
-     */
+    #[Assert\Type(type: 'boolean', message: 'middleware_client.dto.configuration.allow_self_asserted_tokens.must_be_boolean')]
     public $allowSelfAssertedTokens;
 
-    /**
-     * @Assert\Type(type="integer", message="middleware_client.dto.configuration.number_of_tokens_per_identity.must_be_integer")
-     */
+    #[Assert\Type(type: 'integer', message: 'middleware_client.dto.configuration.number_of_tokens_per_identity.must_be_integer')]
     public $numberOfTokensPerIdentity;
 
-    /**
-     * @Assert\Type(type="array", message="middleware_client.dto.configuration.allowed_second_factors.must_be_array")
-     */
+    #[Assert\Type(type: 'array', message: 'middleware_client.dto.configuration.allowed_second_factors.must_be_array')]
     public $allowedSecondFactors;
 
     public $useRa;

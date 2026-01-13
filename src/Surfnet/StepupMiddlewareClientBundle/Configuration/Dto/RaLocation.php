@@ -26,42 +26,41 @@ use Symfony\Component\Validator\Constraints as Assert;
 class RaLocation implements Dto
 {
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_location.id.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_location.id.must_be_string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_location.id.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.id.must_be_string')]
     public string $id;
 
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_location.institution.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_location.institution.must_be_string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_location.institution.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.institution.must_be_string')]
     public string $institution;
 
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_location.name.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_location.name.must_be_string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_location.name.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.name.must_be_string')]
     public string $name;
 
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_location.location.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_location.location.must_be_string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_location.location.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.location.must_be_string')]
     public string $location;
 
     /**
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_location.contact_information.must_be_string")
-     *
      * @var string
      */
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.contact_information.must_be_string')]
     public string $contactInformation;
 
     public static function fromData(array $data): self

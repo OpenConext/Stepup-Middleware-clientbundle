@@ -26,65 +26,47 @@ use Symfony\Component\Validator\Constraints as Assert;
 class RegistrationAuthorityCredentials implements Dto
 {
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_credentials.identity_id.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_credentials.identity_id.must_be_string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_credentials.identity_id.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_credentials.identity_id.must_be_string')]
     public string $identityId;
 
     /**
-     * @Assert\Expression(
-     *     "this.assertNullOrString(value)",
-     *     message="middleware_client.dto.ra_credentials.institution.must_be_null_or_string"
-     * )
-     *
      * @var string
      */
+    #[Assert\Expression('this.assertNullOrString(value)', message: 'middleware_client.dto.ra_credentials.institution.must_be_null_or_string')]
     public string $institution;
 
     /**
-     * @Assert\Expression(
-     *     "this.assertNullOrString(value)",
-     *     message="middleware_client.dto.ra_credentials.common_name.must_be_null_or_string"
-     * )
-     *
      * @var string
      */
+    #[Assert\Expression('this.assertNullOrString(value)', message: 'middleware_client.dto.ra_credentials.common_name.must_be_null_or_string')]
     public string $commonName;
 
     /**
-     * @Assert\Expression(
-     *     "this.assertNullOrString(value)",
-     *     message="middleware_client.dto.ra_credentials.location.must_be_null_or_string"
-     * )
-     *
      * @var string
      */
+    #[Assert\Expression('this.assertNullOrString(value)', message: 'middleware_client.dto.ra_credentials.location.must_be_null_or_string')]
     public string $location;
 
     /**
-     * @Assert\Expression(
-     *     "this.assertNullOrString(value)",
-     *     message="middleware_client.dto.ra_credentials.contact_information.must_be_null_or_string"
-     * )
-     *
      * @var string
      */
+    #[Assert\Expression('this.assertNullOrString(value)', message: 'middleware_client.dto.ra_credentials.contact_information.must_be_null_or_string')]
     public string $contactInformation;
 
     /**
-     * @Assert\Type(type="bool", message="middleware_client.dto.ra_credentials.is_raa.must_be_boolean")
-     *
      * @var bool
      */
+    #[Assert\Type(type: 'bool', message: 'middleware_client.dto.ra_credentials.is_raa.must_be_boolean')]
     public bool $isRaa;
 
     /**
-     * @Assert\Type(type="bool", message="middleware_client.dto.ra_credentials.is_sraa.must_be_boolean")
-     *
      * @var bool
      */
+    #[Assert\Type(type: 'bool', message: 'middleware_client.dto.ra_credentials.is_sraa.must_be_boolean')]
     public bool $isSraa;
 
     public static function fromData(array $data): self

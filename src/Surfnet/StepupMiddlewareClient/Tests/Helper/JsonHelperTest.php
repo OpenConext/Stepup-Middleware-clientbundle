@@ -29,8 +29,8 @@ class JsonHelperTest extends TestCase
 {
     /**
      * @test
-     * @group json
      */
+    #[\PHPUnit\Framework\Attributes\Group('json')]
     public function jsonHelperDecodesStringsToArrays(): void
     {
         $expectedDecodedResult = ['hello' => 'world'];
@@ -41,8 +41,8 @@ class JsonHelperTest extends TestCase
 
     /**
      * @test
-     * @group json
      */
+    #[\PHPUnit\Framework\Attributes\Group('json')]
     public function jsonHelperThrowsAnExceptionWhenThereIsASyntaxError(): void
     {
         $this->expectExceptionMessage("Syntax error");

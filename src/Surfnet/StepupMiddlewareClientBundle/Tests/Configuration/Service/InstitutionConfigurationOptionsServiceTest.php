@@ -33,9 +33,7 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         Mockery::close();
     }
 
-    /**
-     * @group institution-configuration
-     */
+    #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     public function testQueriedInstitutionConfigurationOptionsAreConvertedToADtoCorrectly(): void
     {
         $institution = 'surfnet.nl';
@@ -90,11 +88,11 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
     }
 
     /**
-     * @group institution-configuration
      *
      * @dataProvider nonBooleanProvider
      * @param array|string|int|float|stdClass|null $nonBoolean
      */
+    #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid(null|array|string|int|float|stdClass $nonBoolean): void
     {
         $institution = 'surfnet.nl';
@@ -141,11 +139,11 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
     }
 
     /**
-     * @group institution-configuration
      *
      * @dataProvider nonBooleanProvider
      * @param array|string|int|float|stdClass|null $nonBoolean
      */
+    #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid(null|array|string|int|float|stdClass $nonBoolean): void
     {
         $institution = 'surfnet.nl';
@@ -192,11 +190,11 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
     }
 
     /**
-     * @group institution-configuration
      *
      * @dataProvider nonArrayProvider
      * @param bool|string|int|float|stdClass|null $nonArray
      */
+    #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid(null|bool|string|int|float|stdClass $nonArray): void
     {
         $institution = 'surfnet.nl';
@@ -243,11 +241,11 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
     }
 
     /**
-     * @group institution-configuration
      *
      * @dataProvider nonStringProvider
      * @param bool|array|int|float|stdClass|null $nonArray
      */
+    #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid(null|bool|array|int|float|stdClass $nonArray): void
     {
         $institution = 'surfnet.nl';

@@ -26,11 +26,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class RaCandidateInstitution implements Dto
 {
     /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_candidate_institution.institution.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_candidate_institution.institution.must_be_string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_candidate_institution.institution.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_candidate_institution.institution.must_be_string')]
     public string $institution;
 
     public static function fromData(array $data): self
