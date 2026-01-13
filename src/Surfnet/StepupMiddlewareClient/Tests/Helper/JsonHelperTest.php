@@ -27,10 +27,8 @@ use Surfnet\StepupMiddlewareClient\Helper\JsonHelper;
 
 class JsonHelperTest extends TestCase
 {
-    /**
-     * @test
-     */
     #[\PHPUnit\Framework\Attributes\Group('json')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function jsonHelperDecodesStringsToArrays(): void
     {
         $expectedDecodedResult = ['hello' => 'world'];
@@ -39,10 +37,8 @@ class JsonHelperTest extends TestCase
         $this->assertSame($expectedDecodedResult, $actualDecodedResult);
     }
 
-    /**
-     * @test
-     */
     #[\PHPUnit\Framework\Attributes\Group('json')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function jsonHelperThrowsAnExceptionWhenThereIsASyntaxError(): void
     {
         $this->expectExceptionMessage("Syntax error");

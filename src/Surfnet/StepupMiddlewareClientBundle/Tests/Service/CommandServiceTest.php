@@ -39,13 +39,13 @@ class CommandServiceTest extends TestCase
     }
 
     /**
-     * @dataProvider commands
      * @param string $expectedCommandName
      * @param array $expectedPayload
      * @param array $expectedMetadataPayload
      * @param Command $command
      * @param Metadata $metadata
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('commands')]
     public function testItExecutesCommands(
         string $expectedCommandName,
         array $expectedPayload,
@@ -70,7 +70,7 @@ class CommandServiceTest extends TestCase
         $this->assertEquals($sentUuid, $command->getUuid(), 'UUID set doesn\'t match the UUID sent');
     }
 
-    public function commands(): array
+    public static function commands(): array
     {
         return [
             'Non-nested command' => [
