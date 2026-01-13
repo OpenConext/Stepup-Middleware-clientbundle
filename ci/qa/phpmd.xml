@@ -14,6 +14,7 @@
         <exclude name="BooleanArgumentFlag" />
         <exclude name="ElseExpression" />
         <exclude name="StaticAccess" />
+        <exclude name="UnusedPrivateField" />
     </rule>
 
     <rule ref="rulesets/unusedcode.xml">

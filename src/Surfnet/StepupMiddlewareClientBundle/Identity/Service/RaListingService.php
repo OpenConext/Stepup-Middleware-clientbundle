@@ -78,7 +78,7 @@ class RaListingService
      * @param object      $value
      * @param string|null $message
      */
-    private function assertIsValid(mixed $value, string $message = null): void
+    private function assertIsValid(mixed $value, ?string $message = null): void
     {
         $violations = $this->validator->validate($value);
 

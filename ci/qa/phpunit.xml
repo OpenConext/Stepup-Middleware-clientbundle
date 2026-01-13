@@ -5,6 +5,7 @@
          backupGlobals="false"
          colors="true"
          bootstrap="../../vendor/autoload.php"
+         cacheDirectory="../../var/qa/phpunit.cache"
 >
     <php>
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />

@@ -52,7 +52,7 @@ class ApiService
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      * @throws GuzzleException
      */
-    public function read(string $path, array $parameters = [], HttpQuery $httpQuery = null): ?array
+    public function read(string $path, array $parameters = [], ?HttpQuery $httpQuery = null): ?array
     {
         $resource = $this->buildResourcePath($path, $parameters, $httpQuery);
 
@@ -92,7 +92,7 @@ class ApiService
      * @param HttpQuery|null $httpQuery
      * @return string
      */
-    private function buildResourcePath(string $path, array $parameters, HttpQuery $httpQuery = null): string
+    private function buildResourcePath(string $path, array $parameters, ?HttpQuery $httpQuery = null): string
     {
         $resource = $parameters !== [] ? vsprintf($path, array_map('urlencode', $parameters)) : $path;
 
