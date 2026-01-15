@@ -36,8 +36,6 @@ class IdentityService
     }
 
     /**
-     * @param string $id
-     * @return null|array
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws ResourceReadException When the server doesn't respond with the resource.
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
@@ -52,10 +50,6 @@ class IdentityService
         return $this->apiService->read('identity', [], $searchQuery);
     }
 
-    /**
-     * @param string $identityId
-     * @return array|null
-     */
     public function getRegistrationAuthorityCredentials(string $identityId): ?array
     {
         return $this->apiService->read('registration-authority/%s', [$identityId]);

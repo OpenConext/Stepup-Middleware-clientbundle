@@ -25,9 +25,6 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class InvalidResponseException extends RuntimeException
 {
-    /**
-     * @param string $message
-     */
     public static function withViolations(string $message, ConstraintViolationListInterface $violations): self
     {
         $message = sprintf('%s (%s)', $message, self::convertViolationsToString($violations));

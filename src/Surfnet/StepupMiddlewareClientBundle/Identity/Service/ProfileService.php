@@ -31,10 +31,6 @@ class ProfileService
     public function __construct(private readonly LibraryProfileService $service, private readonly ValidatorInterface $validator)
     {
     }
-    /**
-     * @param string $identityId
-     * @return null|Profile
-     */
     public function get(string $identityId): ?Profile
     {
         $query = new ProfileSearchQuery($identityId, $identityId);
@@ -54,7 +50,6 @@ class ProfileService
 
     /**
      * @param object      $value
-     * @param string|null $message
      */
     private function assertIsValid(mixed $value, ?string $message = null): void
     {

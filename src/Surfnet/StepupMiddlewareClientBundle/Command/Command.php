@@ -24,19 +24,12 @@ use Surfnet\StepupMiddlewareClientBundle\Exception\DomainException;
 
 interface Command
 {
-    /**
-     * @return string|null
-     */
     public function getUuid(): ?string;
 
     /**
-     * @param string $uuid
      * @throws DomainException Thrown when UUID is already set.
      */
     public function setUuid(string $uuid);
 
-    /**
-     * @return array
-     */
     public function serialise(): array;
 }

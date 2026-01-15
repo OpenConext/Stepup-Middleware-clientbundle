@@ -25,56 +25,32 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Profile implements Dto
 {
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.identity.id.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.id.must_be_string')]
     public string $id;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.identity.name_id.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.name_id.must_be_string')]
     public string $nameId;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.identity.institution.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.institution.must_be_string')]
     public string $institution;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.identity.email.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.email.must_be_string')]
     public string $email;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.identity.common_name.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.common_name.must_be_string')]
     public string $commonName;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.identity.preferred_locale.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.preferred_locale.must_be_string')]
     public string $preferredLocale;
 
-    /**
-     * @var bool
-     */
     public bool $isSraa;
 
-    /**
-     * @var array
-     */
     public array $authorizations;
 
 

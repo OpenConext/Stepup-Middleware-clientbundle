@@ -65,9 +65,6 @@ abstract class CollectionDto implements Dto
 
     /**
      * Load the element in the collection based on the data given
-     *
-     * @param  array $item
-     * @return mixed
      */
     protected static function createElementFromData(array $item): mixed
     {

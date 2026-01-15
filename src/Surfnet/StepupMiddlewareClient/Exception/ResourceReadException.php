@@ -27,7 +27,6 @@ class ResourceReadException extends RuntimeException implements ApiErrorExceptio
     /**
      * @param string[] $errors
      * @param int $code
-     * @param null|Exception $previous
      */
     public function __construct(string $message, private readonly array $errors, $code = 0, ?Exception $previous = null)
     {

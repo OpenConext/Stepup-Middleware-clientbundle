@@ -26,22 +26,16 @@ class PromiseSafeStoreSecretTokenPossessionCommand extends AbstractCommand
 {
     /**
      * The ID of an existing identity.
-     *
-     * @var string
      */
     public string $identityId;
 
     /**
      * The ID of the recovery code to create.
-     *
-     * @var string
      */
     public string $recoveryTokenId;
 
     /**
      * The unhashed password
-     *
-     * @var string
      */
     public string $secret;
 

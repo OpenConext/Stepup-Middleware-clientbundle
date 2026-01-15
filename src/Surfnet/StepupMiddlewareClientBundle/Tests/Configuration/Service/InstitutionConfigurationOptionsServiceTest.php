@@ -87,10 +87,6 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         $this->assertEquals($expectedInstitutionConfigurationOptions, $actualInstitutionConfigurationOptions);
     }
 
-    /**
-     *
-     * @param array|string|int|float|stdClass|null $nonBoolean
-     */
     #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     #[\PHPUnit\Framework\Attributes\DataProvider('nonBooleanProvider')]
     public function testInstitutionConfigurationOptionsWithANonBooleanUseRaLocationsOptionAreInvalid(null|array|string|int|float|stdClass $nonBoolean): void
@@ -138,10 +134,6 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
-    /**
-     *
-     * @param array|string|int|float|stdClass|null $nonBoolean
-     */
     #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     #[\PHPUnit\Framework\Attributes\DataProvider('nonBooleanProvider')]
     public function testInstitutionConfigurationOptionsWithANonBooleanShowRaaContactInformationOptionAreInvalid(null|array|string|int|float|stdClass $nonBoolean): void
@@ -189,10 +181,6 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
-    /**
-     *
-     * @param bool|string|int|float|stdClass|null $nonArray
-     */
     #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     #[\PHPUnit\Framework\Attributes\DataProvider('nonArrayProvider')]
     public function testInstitutionConfigurationOptionsWithANonArrayAllowedSecondFactorsAreInvalid(null|bool|string|int|float|stdClass $nonArray): void
@@ -240,10 +228,6 @@ class InstitutionConfigurationOptionsServiceTest extends TestCase
         $service->getInstitutionConfigurationOptionsFor($institution);
     }
 
-    /**
-     *
-     * @param bool|array|int|float|stdClass|null $nonArray
-     */
     #[\PHPUnit\Framework\Attributes\Group('institution-configuration')]
     #[\PHPUnit\Framework\Attributes\DataProvider('nonStringProvider')]
     public function testInstitutionConfigurationOptionsWithANonStringsAllowedSecondFactorsAreInvalid(null|bool|array|int|float|stdClass $nonArray): void

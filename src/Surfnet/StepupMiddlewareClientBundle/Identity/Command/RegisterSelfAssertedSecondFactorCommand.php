@@ -24,39 +24,18 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class RegisterSelfAssertedSecondFactorCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $authorityId;
 
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $secondFactorId;
 
-    /**
-     * @var string
-     */
     public string $registrationCode;
 
-    /**
-     * @var string
-     */
     public string $secondFactorType;
 
-    /**
-     * @var string
-     */
     public string $secondFactorIdentifier;
 
-    /**
-     * @var string
-     */
     public string $authoringRecoveryTokenId;
 
     public function serialise(): array

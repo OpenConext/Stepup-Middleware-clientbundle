@@ -25,42 +25,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AddRaLocationCommand extends AbstractCommand
 {
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $id;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $institution;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $name;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $location;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $contactInformation;

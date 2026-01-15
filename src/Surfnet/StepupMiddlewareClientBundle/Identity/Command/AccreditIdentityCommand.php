@@ -25,58 +25,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AccreditIdentityCommand extends AbstractCommand
 {
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $identityId;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $institution;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     #[Assert\Choice(choices: ['ra', 'raa'])]
     public string $role;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $location;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $contactInformation;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $raInstitution;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

@@ -90,11 +90,6 @@ class ApiService
         return $data;
     }
 
-    /**
-     * @param string $path
-     * @param HttpQuery|null $httpQuery
-     * @return string
-     */
     private function buildResourcePath(string $path, array $parameters, ?HttpQuery $httpQuery = null): string
     {
         $resource = $parameters !== [] ? vsprintf($path, array_map(urlencode(...), $parameters)) : $path;

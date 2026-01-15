@@ -24,19 +24,10 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class RevokeOwnRecoveryTokenCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $recoveryTokenId;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

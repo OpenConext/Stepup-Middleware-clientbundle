@@ -26,22 +26,16 @@ class ProveYubikeyPossessionCommand extends AbstractCommand
 {
     /**
      * The ID of an existing identity.
-     *
-     * @var string
      */
     public string $identityId;
 
     /**
      * The ID of the second factor to create.
-     *
-     * @var string
      */
     public string $secondFactorId;
 
     /**
      * The Yubikey's public ID.
-     *
-     * @var string
      */
     public string $yubikeyPublicId;
 

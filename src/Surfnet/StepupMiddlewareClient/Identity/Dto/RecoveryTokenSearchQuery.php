@@ -50,9 +50,6 @@ final class RecoveryTokenSearchQuery implements HttpQuery
 
     private ?string $orderBy = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $orderDirection = null;
 
     public function setActorId(string $actorId): self

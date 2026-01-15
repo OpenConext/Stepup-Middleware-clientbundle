@@ -34,10 +34,6 @@ class RaService
     {
     }
 
-    /**
-     * @param string $institution
-     * @return RegistrationAuthorityCredentialsCollection
-     */
     public function listRas(string $institution): RegistrationAuthorityCredentialsCollection
     {
         $data = $this->service->listRas($institution);
@@ -55,7 +51,6 @@ class RaService
 
     /**
      * @param object      $value
-     * @param string|null $message
      */
     private function assertIsValid(mixed $value, ?string $message = null): void
     {

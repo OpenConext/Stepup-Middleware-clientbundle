@@ -34,9 +34,6 @@ final readonly class InstitutionConfigurationOptionsService
     ) {
     }
 
-    /**
-     * @return null|InstitutionConfigurationOptions
-     */
     public function getInstitutionConfigurationOptionsFor(string $institution): ?InstitutionConfigurationOptions
     {
         $data = $this->service->getInstitutionConfigurationOptionsFor($institution);

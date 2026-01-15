@@ -25,41 +25,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class RaLocation implements Dto
 {
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_location.id.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.id.must_be_string')]
     public string $id;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_location.institution.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.institution.must_be_string')]
     public string $institution;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_location.name.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.name.must_be_string')]
     public string $name;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_location.location.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.location.must_be_string')]
     public string $location;
 
-    /**
-     * @var string
-     */
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_location.contact_information.must_be_string')]
     public string $contactInformation;
 

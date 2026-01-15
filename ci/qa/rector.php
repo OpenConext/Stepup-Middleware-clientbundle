@@ -18,4 +18,5 @@ return RectorConfig::configure()
         RestoreDefaultNullToNullableTypePropertyRector::class,
     ])
     ->withPHPStanConfigs([__DIR__.'/phpstan.neon'])
+    ->withPreparedSets(deadCode: true)
     ;

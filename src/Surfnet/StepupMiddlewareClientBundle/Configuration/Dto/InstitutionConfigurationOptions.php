@@ -58,10 +58,6 @@ class InstitutionConfigurationOptions implements Dto
 
     public $selectRaa;
 
-    /**
-     * @param array $data
-     * @return InstitutionConfigurationOptions
-     */
     public static function fromData(array $data): self
     {
         $institutionConfigurationOptions                            = new self();

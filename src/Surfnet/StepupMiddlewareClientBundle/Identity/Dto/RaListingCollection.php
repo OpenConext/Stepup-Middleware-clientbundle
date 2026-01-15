@@ -48,7 +48,6 @@ class RaListingCollection extends CollectionDto
     /**
      * Checks if a certain institution is listed in the RA listing
      * @param $institution
-     * @return bool
      */
     public function isListed($institution): bool
     {

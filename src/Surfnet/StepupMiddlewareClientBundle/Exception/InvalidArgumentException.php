@@ -26,7 +26,6 @@ class InvalidArgumentException extends \InvalidArgumentException
      * @param string $expected description of expected type
      * @param $parameterName
      * @param mixed $parameter the parameter that is not of the expected type.
-     * @return self
      */
     public static function invalidType(string $expected, $parameterName, mixed $parameter): self
     {

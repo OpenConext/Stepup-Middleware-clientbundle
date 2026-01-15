@@ -25,41 +25,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AmendRegistrationAuthorityInformationCommand extends AbstractCommand
 {
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $identityId;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $location;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $contactInformation;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank]
     #[Assert\Type(type: 'string')]
     public string $raInstitution;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

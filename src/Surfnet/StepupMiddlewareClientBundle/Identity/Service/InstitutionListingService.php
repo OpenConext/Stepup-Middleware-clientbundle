@@ -31,9 +31,6 @@ class InstitutionListingService
     {
     }
 
-    /**
-     * @return InstitutionListingCollection
-     */
     public function getAll(): InstitutionListingCollection
     {
         $data = $this->clientService->getAll();

@@ -24,14 +24,8 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class VerifyEmailCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $verificationNonce;
 
     public function serialise(): array

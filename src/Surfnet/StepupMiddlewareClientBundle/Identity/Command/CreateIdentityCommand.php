@@ -24,34 +24,16 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class CreateIdentityCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $id;
 
-    /**
-     * @var string
-     */
     public string $nameId;
 
-    /**
-     * @var string
-     */
     public string $institution;
 
-    /**
-     * @var string
-     */
     public string $email;
 
-    /**
-     * @var string
-     */
     public string $commonName;
 
-    /**
-     * @var string
-     */
     public string $preferredLocale;
 
     public function serialise(): array

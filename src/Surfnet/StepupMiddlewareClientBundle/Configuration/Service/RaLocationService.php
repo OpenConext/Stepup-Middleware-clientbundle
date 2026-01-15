@@ -36,10 +36,6 @@ class RaLocationService
     {
     }
 
-    /**
-     * @param string $id
-     * @return null|RaLocation
-     */
     public function get(string $id): ?RaLocation
     {
         $data = $this->service->get($id);
@@ -55,9 +51,6 @@ class RaLocationService
         return $raLocation;
     }
 
-    /**
-     * @return RaLocationCollection
-     */
     public function search(RaLocationSearchQuery $searchQuery): RaLocationCollection
     {
         $data = $this->service->search($searchQuery);
@@ -80,7 +73,6 @@ class RaLocationService
 
     /**
      * @param object      $value
-     * @param string|null $message
      */
     private function assertIsValid(mixed $value, ?string $message = null): void
     {

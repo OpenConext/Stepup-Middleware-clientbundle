@@ -24,9 +24,6 @@ use Ramsey\Uuid\Uuid as RamseyUuid;
 
 class Uuid
 {
-    /**
-     * @return string
-     */
     public static function generate(): string
     {
         return (string) RamseyUuid::uuid4();

@@ -25,37 +25,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class VettedSecondFactor implements Dto
 {
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.vetted_second_factor.id.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.vetted_second_factor.id.must_be_string')]
     public string $id;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.vetted_second_factor.type.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.vetted_second_factor.type.must_be_string')]
     public string $type;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.vetted_second_factor.second_factor_identifier.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.vetted_second_factor.second_factor_identifier.must_be_string')]
     public string $secondFactorIdentifier;
 
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.vetted_second_factor.vetting_typ.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.vetted_second_factor.veting_type.must_be_string')]
     public string $vettingType;
 
     /**
      * The calculated loa level based on vetting type and seconnd factor type
-     * @var float
      */
     public float $loaLevel;
 

@@ -24,9 +24,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class RaSecondFactorExportCollection
 {
-    /**
-     * @var array
-     */
     #[Assert\Valid]
     protected array $elements;
 
@@ -61,9 +58,6 @@ class RaSecondFactorExportCollection
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getElements(): array
     {
         return $this->elements;

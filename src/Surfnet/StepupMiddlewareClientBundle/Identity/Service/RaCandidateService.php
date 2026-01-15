@@ -33,9 +33,6 @@ class RaCandidateService
     {
     }
 
-    /**
-     * @return RaCandidateCollection
-     */
     public function search(RaCandidateSearchQuery $query): RaCandidateCollection
     {
         $data = $this->libraryService->search($query);

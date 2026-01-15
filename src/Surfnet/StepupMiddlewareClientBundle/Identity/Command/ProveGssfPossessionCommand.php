@@ -44,9 +44,6 @@ class ProveGssfPossessionCommand extends AbstractCommand
      */
     public string $gssfId;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

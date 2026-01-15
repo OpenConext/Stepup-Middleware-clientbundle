@@ -25,42 +25,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class RaCandidate implements Dto
 {
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_candidate.identity_id.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_candidate.identity_id.must_be_string')]
     public string $identityId;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_candidate.institution.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_candidate.institution.must_be_string')]
     public string $institution;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_candidate.name_id.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_candidate.name_id.must_be_string')]
     public string $nameId;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_candidate.common_name.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_candidate.common_name.must_be_string')]
     public string $commonName;
 
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.ra_candidate.email.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_candidate.email.must_be_string')]
     public string $email;

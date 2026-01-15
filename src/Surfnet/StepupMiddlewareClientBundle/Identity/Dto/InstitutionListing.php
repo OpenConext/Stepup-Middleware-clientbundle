@@ -25,10 +25,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class InstitutionListing implements Dto
 {
-    /**
-     *
-     * @var string
-     */
     #[Assert\NotBlank(message: 'middleware_client.dto.institution_listing.institution.must_not_be_blank')]
     #[Assert\Type(type: 'string', message: 'middleware_client.dto.institution_listing.institution.must_be_string')]
     public string $institution;

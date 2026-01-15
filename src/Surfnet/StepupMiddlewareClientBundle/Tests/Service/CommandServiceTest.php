@@ -38,13 +38,6 @@ class CommandServiceTest extends TestCase
         m::close();
     }
 
-    /**
-     * @param string $expectedCommandName
-     * @param array $expectedPayload
-     * @param array $expectedMetadataPayload
-     * @param Command $command
-     * @param Metadata $metadata
-     */
     #[\PHPUnit\Framework\Attributes\DataProvider('commands')]
     public function testItExecutesCommands(
         string $expectedCommandName,

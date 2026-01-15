@@ -53,8 +53,6 @@ class SecondFactorService
     }
 
     /**
-     * @param string $secondFactorId
-     * @return UnverifiedSecondFactor|null
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
@@ -82,8 +80,6 @@ class SecondFactorService
     }
 
     /**
-     * @param string $secondFactorId
-     * @return VerifiedSecondFactor|null
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.
@@ -122,8 +118,6 @@ class SecondFactorService
     }
 
     /**
-     * @param string $secondFactorId
-     * @return VettedSecondFactor|null
      * @throws AccessDeniedToResourceException When the consumer isn't authorised to access given resource.
      * @throws InvalidResponseException When the API responded with invalid data.
      * @throws ResourceReadException When the API doesn't respond with the resource.

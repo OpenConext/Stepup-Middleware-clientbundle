@@ -25,9 +25,6 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 class VerifiedSecondFactorOfIdentitySearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
     private string $identityId;
 
     public function setIdentityId(string $identityId): self
