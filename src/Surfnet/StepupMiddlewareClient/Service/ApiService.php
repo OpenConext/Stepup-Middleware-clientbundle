@@ -52,7 +52,7 @@ class ApiService
      * @throws MalformedResponseException When the server doesn't respond with (well-formed) JSON.
      * @throws GuzzleException
      */
-    public function read(string $path, array $parameters = [], HttpQuery $httpQuery = null): ?array
+    public function read(string $path, array $parameters = [], ?HttpQuery $httpQuery = null): ?array
     {
         $resource = $this->buildResourcePath($path, $parameters, $httpQuery);
 
@@ -62,7 +62,10 @@ class ApiService
         try {
             $body = $response->getBody()->getContents();
             $data = JsonHelper::decode($body);
-            $errors = isset($data['errors']) && is_array($data['errors']) ? $data['errors'] : [];
+            $errors = [];
+            if (isset($data['errors']) && is_array($data['errors'])) {
+                $errors = array_filter($data['errors'], is_string(...));
+            }
         } catch (RuntimeException) {
             // Malformed JSON body
             throw new MalformedResponseException('Cannot read resource: Middleware returned malformed JSON');
@@ -87,14 +90,9 @@ class ApiService
         return $data;
     }
 
-    /**
-     * @param string $path
-     * @param HttpQuery|null $httpQuery
-     * @return string
-     */
-    private function buildResourcePath(string $path, array $parameters, HttpQuery $httpQuery = null): string
+    private function buildResourcePath(string $path, array $parameters, ?HttpQuery $httpQuery = null): string
     {
-        $resource = $parameters !== [] ? vsprintf($path, array_map('urlencode', $parameters)) : $path;
+        $resource = $parameters !== [] ? vsprintf($path, array_map(urlencode(...), $parameters)) : $path;
 
         if (empty($resource)) {
             throw new RuntimeException(

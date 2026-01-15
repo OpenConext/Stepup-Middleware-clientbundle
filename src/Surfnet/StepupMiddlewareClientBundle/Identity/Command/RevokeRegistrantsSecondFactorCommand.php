@@ -24,24 +24,12 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class RevokeRegistrantsSecondFactorCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $authorityId;
 
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $secondFactorId;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

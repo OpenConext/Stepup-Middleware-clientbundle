@@ -22,23 +22,15 @@ namespace Surfnet\StepupMiddlewareClient\Identity\Dto;
 
 final class VettingTypeHint
 {
-    /**
-     * @var string
-     */
     public string $institution;
 
     /**
      * Keyed on locale, the hints shown to the
      * Self Service user to determine what vetting
      * type it should use.
-     *
-     * @var array
      */
     public array $hints;
 
-    /**
-     * @var string
-     */
     public string $identityId;
 
     public static function from(array $apiResult): self

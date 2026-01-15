@@ -24,14 +24,8 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
 
 class RaCandidateInstitutions implements Dto
 {
-    /**
-     * @var RaCandidate
-     */
     public RaCandidate $raCandidate;
 
-    /**
-     * @var RaCandidateInstitutionCollection
-     */
     public RaCandidateInstitutionCollection $institutions;
 
     public static function fromData(array $data): self

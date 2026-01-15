@@ -28,10 +28,6 @@ class RaService
     {
     }
 
-    /**
-     * @param string $institution
-     * @return array|null
-     */
     public function listRas(string $institution): ?array
     {
         return $this->apiService->read('registration-authority?institution=%s', [$institution]);

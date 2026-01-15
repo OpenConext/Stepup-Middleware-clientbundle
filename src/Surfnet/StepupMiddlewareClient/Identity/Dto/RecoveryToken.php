@@ -22,44 +22,20 @@ namespace Surfnet\StepupMiddlewareClient\Identity\Dto;
 
 final class RecoveryToken
 {
-    /**
-     * @var string
-     */
     public string $recoveryTokenId;
 
-    /**
-     * @var string
-     */
     public string $type;
 
-    /**
-     * @var string
-     */
     public string $identifier;
 
-    /**
-     * @var string
-     */
     public string $status;
 
-    /**
-     * @var string
-     */
     public string $name;
 
-    /**
-     * @var string
-     */
     public string $institution;
 
-    /**
-     * @var string
-     */
     public string $email;
 
-    /**
-     * @var string
-     */
     public string $identityId;
 
     public static function from(array $apiResult): self

@@ -25,68 +25,36 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class RaListing implements Dto
 {
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_listing.id.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_listing.id.must_be_string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_listing.id.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_listing.id.must_be_string')]
     public string $identityId;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_listing.institution.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_listing.institution.must_be_string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_listing.institution.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_listing.institution.must_be_string')]
     public string $institution;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_listing.institution.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_listing.institution.must_be_string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_listing.institution.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_listing.institution.must_be_string')]
     public string $raInstitution;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_listing.common_name.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_listing.common_name.must_be_string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_listing.common_name.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_listing.common_name.must_be_string')]
     public string $commonName;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_listing.email.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_listing.email.must_be_string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_listing.email.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_listing.email.must_be_string')]
     public string $email;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_listing.role.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_listing.role.must_be_string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_listing.role.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_listing.role.must_be_string')]
     public string $role;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_listing.location.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_listing.location.must_be_string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_listing.location.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_listing.location.must_be_string')]
     public string $location;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.ra_listing.contact_information.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.ra_listing.contact_information.must_be_string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.ra_listing.contact_information.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.ra_listing.contact_information.must_be_string')]
     public string $contactInformation;
 
     public static function fromData(array $data): self

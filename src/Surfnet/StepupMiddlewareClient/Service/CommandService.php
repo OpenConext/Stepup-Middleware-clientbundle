@@ -38,13 +38,6 @@ class CommandService
      */
     public function __construct(private readonly Client $guzzleClient, string $username, string $password)
     {
-        if (!is_string($username)) {
-            throw InvalidArgumentException::invalidType('string', 'username', $username);
-        }
-
-        if (!is_string($password)) {
-            throw InvalidArgumentException::invalidType('string', 'password', $password);
-        }
         $this->username = $username;
         $this->password = $password;
     }

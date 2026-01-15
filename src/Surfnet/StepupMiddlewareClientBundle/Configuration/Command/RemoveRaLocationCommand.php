@@ -24,19 +24,10 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class RemoveRaLocationCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $institution;
 
-    /**
-     * @var string
-     */
     public string $raLocationId;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

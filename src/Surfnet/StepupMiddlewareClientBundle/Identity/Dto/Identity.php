@@ -28,45 +28,28 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Identity implements Dto, Serializable, Stringable
 {
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.identity.id.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.identity.id.must_be_string")
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.identity.id.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.id.must_be_string')]
     public ?string $id = null;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.identity.name_id.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.identity.name_id.must_be_string")
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.identity.name_id.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.name_id.must_be_string')]
     public string $nameId;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.identity.institution.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.identity.institution.must_be_string")
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.identity.institution.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.institution.must_be_string')]
     public string $institution;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.identity.email.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.identity.email.must_be_string")
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.identity.email.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.email.must_be_string')]
     public string $email;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.identity.common_name.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.identity.common_name.must_be_string")
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.identity.common_name.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.common_name.must_be_string')]
     public string $commonName;
 
-    /**
-     * @Assert\NotBlank(message="middleware_client.dto.identity.preferred_locale.must_not_be_blank")
-     * @Assert\Type(type="string", message="middleware_client.dto.identity.preferred_locale.must_be_string")
-     * @var string
-     */
+    #[Assert\NotBlank(message: 'middleware_client.dto.identity.preferred_locale.must_not_be_blank')]
+    #[Assert\Type(type: 'string', message: 'middleware_client.dto.identity.preferred_locale.must_be_string')]
     public string $preferredLocale;
 
     public static function fromData(array $data): self
@@ -112,8 +95,6 @@ class Identity implements Dto, Serializable, Stringable
     /**
      * This is a requirement to be able to set the identity as user in the TokenInterface.
      * (so we can use it as user in SF)
-     *
-     * @return string
      */
     public function __toString(): string
     {

@@ -24,20 +24,10 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class UpdateIdentityCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $email;
 
-    /**
-     * @var string
-     */
     public string $commonName;
 
-    /**
-     * @param string $id
-     * @param string $institution
-     */
     public function __construct(public string $id, public string $institution)
     {
     }

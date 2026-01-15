@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 /**
- * Copyright 2022 SURF bv
+ * Copyright 2022 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,8 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class SaveVettingTypeHintCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $institution;
 
     /**

@@ -39,10 +39,6 @@ final class RaSecondFactorSearchQuery implements HttpQuery
     private ?string $orderBy = null;
     private ?string $orderDirection = null;
 
-    /**
-     * @param int $pageNumber
-     * @param string $actorId
-     */
     public function __construct(private int $pageNumber, private string $actorId)
     {
         Assert\that($pageNumber)
@@ -60,9 +56,6 @@ final class RaSecondFactorSearchQuery implements HttpQuery
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getName(): ?string
     {
         return $this->name;
@@ -73,9 +66,6 @@ final class RaSecondFactorSearchQuery implements HttpQuery
         $this->name = $name;
     }
 
-    /**
-     * @return null|string
-     */
     public function getType(): ?string
     {
         return $this->type;
@@ -96,9 +86,6 @@ final class RaSecondFactorSearchQuery implements HttpQuery
         $this->secondFactorId = $secondFactorId;
     }
 
-    /**
-     * @return null|string
-     */
     public function getEmail(): ?string
     {
         return $this->email;
@@ -110,9 +97,6 @@ final class RaSecondFactorSearchQuery implements HttpQuery
         $this->email = $email;
     }
 
-    /**
-     * @return null|string
-     */
     public function getStatus(): ?string
     {
         return $this->status;
@@ -128,9 +112,6 @@ final class RaSecondFactorSearchQuery implements HttpQuery
         $this->status = $status ?: null;
     }
 
-    /**
-     * @return null|string
-     */
     public function getInstitution(): ?string
     {
         return $this->institution;
@@ -171,8 +152,6 @@ final class RaSecondFactorSearchQuery implements HttpQuery
 
     /**
      * Return the Http Query string as should be used, MUST include the '?' prefix.
-     *
-     * @return string
      */
     public function toHttpQuery(): string
     {

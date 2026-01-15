@@ -26,22 +26,16 @@ class ProveU2fDevicePossessionCommand extends AbstractCommand
 {
     /**
      * The ID of an existing identity.
-     *
-     * @var string
      */
     public string $identityId;
 
     /**
      * The ID of the second factor to create.
-     *
-     * @var string
      */
     public string $secondFactorId;
 
     /**
      * The key handle issued by the U2F device.
-     *
-     * @var string
      */
     public string $keyHandle;
 

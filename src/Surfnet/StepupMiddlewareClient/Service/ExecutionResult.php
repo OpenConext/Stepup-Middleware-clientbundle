@@ -26,7 +26,7 @@ class ExecutionResult
      * @param string|null $uuid Null in case of errors.
      * @param string|null $processedBy Null in case of errors.
      */
-    public function __construct(private ?string $uuid, private ?string $processedBy, private readonly array $errors = [])
+    public function __construct(private readonly ?string $uuid, private readonly ?string $processedBy, private readonly array $errors = [])
     {
     }
 

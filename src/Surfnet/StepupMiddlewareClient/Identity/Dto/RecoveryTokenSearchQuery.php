@@ -50,9 +50,6 @@ final class RecoveryTokenSearchQuery implements HttpQuery
 
     private ?string $orderBy = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $orderDirection = null;
 
     public function setActorId(string $actorId): self
@@ -117,8 +114,8 @@ final class RecoveryTokenSearchQuery implements HttpQuery
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity")
+     * @SuppressWarnings("PHPMD.NPathComplexity")
      */
     public function toHttpQuery(): string
     {

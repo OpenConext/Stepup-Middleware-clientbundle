@@ -35,9 +35,7 @@ class CommandServiceTest extends TestCase
         m::close();
     }
 
-    /**
-     * @dataProvider commandMetadata
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('commandMetadata')]
     public function testItExecutesCommands(bool $shouldHaveMeta, array $metadata): void
     {
         $uuid = 'uu-id';
@@ -78,7 +76,7 @@ class CommandServiceTest extends TestCase
         $this->assertEquals($command->getProcessedBy(), $processedBy);
     }
 
-    public function commandMetadata(): array
+    public static function commandMetadata(): array
     {
         return [
             'No metadata' => [false, []],
@@ -145,9 +143,7 @@ class CommandServiceTest extends TestCase
         $service->execute($commandName, $uuid, $payload);
     }
 
-    /**
-     * @dataProvider invalidResponses
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('invalidResponses')]
     public function testItThrowsWhenInvalidResponseIsReturned(int $statusCode, array $response): void
     {
         $json = json_encode($response, JSON_THROW_ON_ERROR);
@@ -170,7 +166,7 @@ class CommandServiceTest extends TestCase
         $service->execute($commandName, $uuid, $payload);
     }
 
-    public function invalidResponses(): array
+    public static function invalidResponses(): array
     {
         return [
             '200, missing command' => [200, ['processed_by' => 'server-3']],

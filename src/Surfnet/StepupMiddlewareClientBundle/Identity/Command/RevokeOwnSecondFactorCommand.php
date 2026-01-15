@@ -24,19 +24,10 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class RevokeOwnSecondFactorCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $secondFactorId;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

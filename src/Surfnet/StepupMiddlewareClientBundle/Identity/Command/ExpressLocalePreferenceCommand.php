@@ -25,22 +25,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ExpressLocalePreferenceCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     *
-     * @var string
-     */
+    #[Assert\NotBlank]
+    #[Assert\Type(type: 'string')]
     public string $preferredLocale;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

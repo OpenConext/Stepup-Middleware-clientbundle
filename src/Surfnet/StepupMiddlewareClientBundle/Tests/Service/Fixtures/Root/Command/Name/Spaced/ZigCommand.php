@@ -24,9 +24,6 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class ZigCommand extends AbstractCommand
 {
-    /**
-     * @var array
-     */
     public array $payload;
 
     public function __construct(array $payload)

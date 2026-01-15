@@ -24,14 +24,8 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class RetractRegistrationAuthorityCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $institution;
 
     public function serialise(): array

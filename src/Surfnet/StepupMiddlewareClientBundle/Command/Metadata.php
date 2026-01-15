@@ -34,9 +34,6 @@ final class Metadata
         $this->actorInstitution = $actorInstitution;
     }
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

@@ -26,21 +26,14 @@ class ProvePhoneRecoveryTokenPossessionCommand extends AbstractCommand
 {
     /**
      * The ID of an existing identity.
-     *
-     * @var string
      */
     public string $identityId;
 
     /**
      * The ID of the Recovery Token to create.
-     *
-     * @var string
      */
     public string $recoveryTokenId;
 
-    /**
-     * @var string
-     */
     public string $phoneNumber;
 
     public function serialise(): array

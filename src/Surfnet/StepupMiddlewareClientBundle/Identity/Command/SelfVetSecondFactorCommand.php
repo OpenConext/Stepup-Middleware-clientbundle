@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 /**
- * Copyright 2021 SURF bv
+ * Copyright 2021 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,39 +24,18 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class SelfVetSecondFactorCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $authorityId;
 
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $secondFactorId;
 
-    /**
-     * @var string
-     */
     public string $registrationCode;
 
-    /**
-     * @var string
-     */
     public string $secondFactorType;
 
-    /**
-     * @var string
-     */
     public string $secondFactorIdentifier;
 
-    /**
-     * @var string
-     */
     public string $authoringSecondFactorIdentifier;
 
 

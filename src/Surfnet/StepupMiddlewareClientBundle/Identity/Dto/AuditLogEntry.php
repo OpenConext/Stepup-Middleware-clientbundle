@@ -25,69 +25,30 @@ use Surfnet\StepupMiddlewareClientBundle\Dto\Dto;
 
 final class AuditLogEntry implements Dto
 {
-    /**
-     * @var string|null
-     */
     public ?string $actorId;
 
-    /**
-     * @var string|null
-     */
     public ?string $actorInstitution;
 
-    /**
-     * @var string|null
-     */
     public ?string $raInstitution;
 
-    /**
-     * @var string
-     */
     public string $actorCommonName;
 
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $identityInstitution;
 
-    /**
-     * @var string|null
-     */
     public ?string $secondFactorId;
 
-    /**
-     * @var string|null
-     */
     public ?string $secondFactorType;
 
-    /**
-     * @var string
-     */
     public ?string $secondFactorIdentifier;
 
-    /**
-     * @var string
-     */
     public ?string $recoveryTokenIdentifier;
 
-    /**
-     * @var string
-     */
     public ?string $recoveryTokenType;
 
-    /**
-     * @var string
-     */
     public string $action;
 
-    /**
-     * @var DateTime
-     */
     public DateTime $recordedOn;
 
     public static function fromData(array $data): self

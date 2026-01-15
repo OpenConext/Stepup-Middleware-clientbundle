@@ -24,19 +24,10 @@ use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
 
 class AppointRoleCommand extends AbstractCommand
 {
-    /**
-     * @var string
-     */
     public string $identityId;
 
-    /**
-     * @var string
-     */
     public string $role;
 
-    /**
-     * @return array
-     */
     public function serialise(): array
     {
         return [

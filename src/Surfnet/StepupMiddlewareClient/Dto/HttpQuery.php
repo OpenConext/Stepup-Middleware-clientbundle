@@ -24,8 +24,6 @@ interface HttpQuery
 {
     /**
      * Return the Http Query string as should be used, MUST include the '?' prefix.
-     *
-     * @return string
      */
     public function toHttpQuery(): string;
 }

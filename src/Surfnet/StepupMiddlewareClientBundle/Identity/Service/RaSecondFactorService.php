@@ -32,7 +32,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaSecondFactorExportCollec
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
  */
 class RaSecondFactorService
 {

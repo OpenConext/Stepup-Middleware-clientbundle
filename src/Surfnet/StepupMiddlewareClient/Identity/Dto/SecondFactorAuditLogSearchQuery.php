@@ -25,33 +25,16 @@ use Surfnet\StepupMiddlewareClient\Dto\HttpQuery;
 
 final class SecondFactorAuditLogSearchQuery implements HttpQuery
 {
-    /**
-     * @var string
-     */
-    private string $institution;
+    private readonly string $institution;
 
-    /**
-     * @var string
-     */
-    private string $identityId;
+    private readonly string $identityId;
 
     private string $orderBy = 'recordedOn';
 
-    /**
-     * @var string|null
-     */
     private ?string $orderDirection = 'desc';
 
-    /**
-     * @var int
-     */
-    private int $pageNumber;
+    private readonly int $pageNumber;
 
-    /**
-     * @param string $institution
-     * @param string $identityId
-     * @param int $pageNumber
-     */
     public function __construct(string $institution, string $identityId, int $pageNumber)
     {
         $this->assertNonEmptyString($institution, 'institution');
@@ -72,9 +55,6 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
         $this->orderBy = $orderBy;
     }
 
-    /**
-     * @param string|null $orderDirection
-     */
     public function setOrderDirection(?string $orderDirection): void
     {
         Assert\that($orderDirection)->choice(
@@ -98,8 +78,6 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
 
     /**
      * Return the Http Query string as should be used, MUST include the '?' prefix.
-     *
-     * @return string
      */
     public function toHttpQuery(): string
     {

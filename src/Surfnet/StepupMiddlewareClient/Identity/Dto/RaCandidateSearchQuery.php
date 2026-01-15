@@ -139,7 +139,7 @@ class RaCandidateSearchQuery implements HttpQuery
         );
     }
 
-    private function assertNonEmptyString(string $value, string $parameterName, string $message = null): void
+    private function assertNonEmptyString(string $value, string $parameterName, ?string $message = null): void
     {
         $message = sprintf(
             $message ?: '"%s" must be a non-empty string, "%s" given',

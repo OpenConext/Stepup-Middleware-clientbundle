@@ -1,9 +1,5 @@
-<?php
-
-declare(strict_types = 1);
-
 /**
- * Copyright 2022 SURFnet bv
+ * Copyright %regexp:\d{4}% SURFnet %regexp:(B.V.|bv)%
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,22 +13,3 @@ declare(strict_types = 1);
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-namespace Surfnet\StepupMiddlewareClientBundle\Identity\Command;
-
-use Surfnet\StepupMiddlewareClientBundle\Command\AbstractCommand;
-
-class RevokeOwnRecoveryTokenCommand extends AbstractCommand
-{
-    public string $identityId;
-
-    public string $recoveryTokenId;
-
-    public function serialise(): array
-    {
-        return [
-            'identity_id'      => $this->identityId,
-            'recovery_token_id' => $this->recoveryTokenId
-        ];
-    }
-}

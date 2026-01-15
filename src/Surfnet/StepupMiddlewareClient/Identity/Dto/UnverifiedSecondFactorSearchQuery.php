@@ -27,9 +27,6 @@ class UnverifiedSecondFactorSearchQuery implements HttpQuery
 {
     private ?string $identityId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $verificationNonce = null;
 
     public function setIdentityId(string $identityId): static
