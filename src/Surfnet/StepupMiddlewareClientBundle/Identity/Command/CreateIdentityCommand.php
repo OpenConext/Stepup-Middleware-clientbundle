@@ -44,7 +44,7 @@ class CreateIdentityCommand extends AbstractCommand
             'institution'       => $this->institution,
             'email'             => $this->email,
             'common_name'       => $this->commonName,
-            'preferred_locale ' => $this->preferredLocale,
+            'preferred_locale' => $this->preferredLocale,
         ];
     }
 }
