@@ -35,6 +35,8 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
 
     private readonly int $pageNumber;
 
+    private ?string $actorId = null;
+
     public function __construct(string $institution, string $identityId, int $pageNumber)
     {
         $this->assertNonEmptyString($institution, 'institution');
@@ -53,6 +55,16 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
         $this->assertNonEmptyString($orderBy, 'orderBy');
 
         $this->orderBy = $orderBy;
+    }
+
+    /**
+     * Optional: when set, the Middleware restricts the results to the institutions the actor is authorized for.
+     */
+    public function setActorId(string $actorId): void
+    {
+        $this->assertNonEmptyString($actorId, 'actorId');
+
+        $this->actorId = $actorId;
     }
 
     public function setOrderDirection(?string $orderDirection): void
@@ -81,14 +93,18 @@ final class SecondFactorAuditLogSearchQuery implements HttpQuery
      */
     public function toHttpQuery(): string
     {
-        return '?' . http_build_query(
-            [
-                'institution'    => $this->institution,
-                'identityId'     => $this->identityId,
-                'orderBy'        => $this->orderBy,
-                'orderDirection' => $this->orderDirection,
-                'p'              => $this->pageNumber,
-            ]
-        );
+        $parameters = [
+            'institution'    => $this->institution,
+            'identityId'     => $this->identityId,
+            'orderBy'        => $this->orderBy,
+            'orderDirection' => $this->orderDirection,
+            'p'              => $this->pageNumber,
+        ];
+
+        if ($this->actorId !== null) {
+            $parameters['actorId'] = $this->actorId;
+        }
+
+        return '?' . http_build_query($parameters);
     }
 }
