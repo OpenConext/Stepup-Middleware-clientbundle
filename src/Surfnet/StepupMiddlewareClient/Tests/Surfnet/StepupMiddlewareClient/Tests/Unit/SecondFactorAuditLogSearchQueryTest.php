@@ -41,4 +41,12 @@ class SecondFactorAuditLogSearchQueryTest extends TestCase
         $expected = '?institution=institution-a.example.com&identityId=identity-id-123&orderBy=recordedOn&orderDirection=desc&p=1&actorId=actor-id-456';
         $this->assertEquals($expected, $query->toHttpQuery());
     }
+
+    public function test_it_rejects_an_empty_actor_id(): void
+    {
+        $query = new SecondFactorAuditLogSearchQuery('institution-a.example.com', 'identity-id-123', 1);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $query->setActorId('');
+    }
 }

@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Add optional actorId to SecondFactorAuditLogSearchQuery
+
 ## 6.0.0
 - Add support for Symfony 7.4
 - Drop support for Symfony 5.4
