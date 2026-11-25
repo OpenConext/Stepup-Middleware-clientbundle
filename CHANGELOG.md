@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 6.0.1
 - Add optional actorId to SecondFactorAuditLogSearchQuery
 
 ## 6.0.0
